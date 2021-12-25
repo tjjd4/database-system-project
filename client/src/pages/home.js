@@ -1,7 +1,8 @@
 import './home.css';
 import NavBar from '../components/navbar';
+import OwnRouter from '../components/OwnRouter';
 import React from 'react';
-import { Col, Image } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import specialtyMap from '../image/specialtyMap.png';
 
 class Home extends React.Component {

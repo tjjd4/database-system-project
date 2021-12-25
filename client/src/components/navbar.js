@@ -5,6 +5,7 @@ import Shopee from '../image/shopee.png';
 
 
 const NavBar = () => {
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -29,6 +30,7 @@ const NavBar = () => {
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">聊天室</NavDropdown.Item>
             </NavDropdown>
+            <Nav.Link href="/pages/login">登入/註冊</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
