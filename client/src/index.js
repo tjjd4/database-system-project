@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import reportWebVitals from './reportWebVitals';
 import './index.css';
 import Home from './pages/home.js';
-import reportWebVitals from './reportWebVitals';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import OwnRouter from './components/OwnRouter';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+    <OwnRouter />
   </React.StrictMode>,
   document.getElementById('root')
 );
