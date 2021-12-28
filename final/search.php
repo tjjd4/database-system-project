@@ -3,17 +3,16 @@
   header("Content-type: text/html; charset=utf-8");
   
   //取得表單資料
-  $account = $_POST["account"]; 
-  $email = $_POST["email"];
+  $Username = $_POST["account"]; 
+  $Email = $_POST["email"];
   $show_method = $_POST["show_method"]; 
 
   //建立資料連接
   $link = create_connection();
 			
   //檢查查詢的帳號是否存在
-  $sql = "SELECT password FROM info WHERE 
-          account = '$account' AND email = '$email'";
-  $result = execute_sql($link, "holomember", $sql);
+  $sql = "SELECT Member_password, Member_name FROM Member WHERE Username = '$Username' AND Email = '$Email'";
+  $result = execute_sql($link, "DBS_project", $sql);
 
   //如果帳號不存在
   if (mysqli_num_rows($result) == 0)
@@ -26,8 +25,9 @@
   }
   else  //如果帳號存在
   {
-    $row = mysqli_fetch_object($result);
-    $password = $row->password;
+    $row = mysqli_fetch_assoc($result);
+    $password = $row["Member_password"];
+    $NickName = $row["Member_name"];
     $msg2="<!DOCTYPE html>
     <html lang='en'>
     <head>
@@ -202,8 +202,8 @@
         <div class='container pt-3 pb-3 mt-5'>
             <div class='row'>
                 <div class='col-12 col-md12 '>
-                    <p align-middle>$account 您好，您的帳號資料如下：<br><br>
-                        　　帳號：$account<br>
+                    <p align-middle>$NickName 您好，您的帳號資料如下：<br><br>
+                        　　帳號：$Username<br>
                         　　密碼：$password<br><br>
                           <a href='http://localhost/Final/login.html'>按此登入本站</a></p>
                 </div>

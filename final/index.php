@@ -6,6 +6,7 @@
     else
     {
         $id = $_COOKIE["id"];
+        $NickName = $_COOKIE["NickName"];
     }
     $id = $_COOKIE["id"];	
     if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
@@ -94,7 +95,7 @@
                             }
                             else
                             {
-                                echo"$id 你好";
+                                echo"$NickName 你好";
                                 echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
                             }
                     ?>

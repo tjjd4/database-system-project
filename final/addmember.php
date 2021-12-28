@@ -2,16 +2,18 @@
   require_once("dbtools.inc.php");
   
   //取得表單資料
-  $account = $_POST["account"];
-  $password = $_POST["password"];  
-  $email = $_POST["email"]; 
+  $Username = $_POST["account"];
+  $Member_password = $_POST["password"];  
+  $Email = $_POST["email"]; 
+  $Phone = $_POST["Phone"]; 
+  $Member_name = $_POST["NickName"];
 
   //建立資料連接
   $link = create_connection();
 			
   //檢查帳號是否有人申請
-  $sql = "SELECT * FROM info Where account = '$account'";
-  $result = execute_sql($link, "holomember", $sql);
+  $sql = "SELECT * FROM `Member` Where Username = '$Username'";
+  $result = execute_sql($link, "DBS_project", $sql);
 
   //如果帳號已經有人使用
   if (mysqli_num_rows($result) != 0)
@@ -33,8 +35,9 @@
     mysqli_free_result($result);
 		
     //執行 SQL 命令，新增此帳號
-    $sql = "INSERT INTO info (account, password, email) VALUES ('$account', '$password', '$email')";
-    $result = execute_sql($link, "holomember", $sql);
+
+    $sql = "INSERT INTO Member (Username,Member_password,Email,Phone,Member_name) VALUES ('$Username', '$Member_password', '$Email', '$Phone', '$Member_name')";
+    $result = execute_sql($link, "DBS_project", $sql);
   }
 	
   //關閉資料連接	
@@ -108,9 +111,9 @@
                 <div href="#" class="card mb-3">
                     <img class="card-img-top f1001" src="./images/chibiame.gif" alt="LTG-BY-0001">
                     <div class="card-body">
-                        <h4 class="card-title"><?php echo $account ?>你好</h4>
-                        <p class="card-text">id:<font color="#FF0000"><?php echo $account?></font></p>
-                        <p class="card-text">password:<font color="#FF0000"><?php echo $password?></font></p>
+                        <h4 class="card-title"><?php echo $Member_name ?>你好</h4>
+                        <!-- <p class="card-text">id:<font color="#FF0000"><?php echo $account?></font></p>
+                        <p class="card-text">password:<font color="#FF0000"><?php echo $password?></font></p> -->
                     </div>
                 </div>
             </div>

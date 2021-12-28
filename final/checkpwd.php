@@ -10,8 +10,8 @@
   $link = create_connection();
 					
   //檢查帳號密碼是否正確
-  $sql = "SELECT * FROM info Where account = '$account' AND password = '$password'";
-  $result = execute_sql($link, "holomember", $sql);
+  $sql = "SELECT * FROM `Member` Where (Username = '$account' OR Email = '$account') AND Member_password = '$password'";
+  $result = execute_sql($link, "DBS_project", $sql);
 
   //如果帳號密碼錯誤
   if (mysqli_num_rows($result) == 0)
@@ -33,8 +33,8 @@
   else
   {
     //取得 id 欄位
-    $id = mysqli_fetch_object($result)->id;
-	
+    $data = mysqli_fetch_assoc($result);
+    
     //釋放 $result 佔用的記憶體	
     mysqli_free_result($result);
 		
@@ -42,8 +42,9 @@
     mysqli_close($link);
 
     //將使用者資料加入 cookies
-    setcookie("id", $account);
-    setcookie("passed", "TRUE");		
+    setcookie("id", $data["Member_ID"]);
+    setcookie("passed", "TRUE");	
+    setcookie("NickName", $data["Member_name"]);
     header("location:main.php");		
   }
 ?>

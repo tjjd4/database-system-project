@@ -1,7 +1,9 @@
 <?php
   //檢查 cookie 中的 passed 變數是否等於 TRUE
   $passed = $_COOKIE["passed"];
-	$id = $_COOKIE["id"];
+  $id = $_COOKIE["id"]; 
+  $NickName = $_COOKIE["NickName"]; 
+
   /*  如果 cookie 中的 passed 變數不等於 TRUE
       表示尚未登入網站，將使用者導向首頁 index.php	*/
   if ($passed != "TRUE")
@@ -58,7 +60,7 @@
                     </li>
                 </ul>
                 <div class="ml-auto">
-                    <a href="login.html" class="btn btn-outline-info text-info my-2 my-sm-0">登入</a>
+                    <a href="logout.php" class="btn btn-outline-info text-info my-2 my-sm-0">登出</a>
                     <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
                     <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
                 </div>
@@ -70,7 +72,7 @@
     <div class="container pt-3 pb-3 mt-5">
         <div class="row">
             <div class="col-12 col-md12 ">
-                <p align-middle><?php echo $id?>你好 歡迎來到會員中心</p>
+                <p align-middle><?php echo $NickName?>你好 歡迎來到會員中心</p>
             </div>
         </div>
         <div class="row ">
