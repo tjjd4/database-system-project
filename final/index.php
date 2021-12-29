@@ -88,7 +88,7 @@
                 
                 <div class="ml-auto">
                     <?php
-                            if (empty($_COOKIE["id"]))
+                            if ($id == "guest")
                             {
                               echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
                             }
