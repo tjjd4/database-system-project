@@ -1,7 +1,7 @@
 <?php
 	if (empty($_COOKIE["id"]))
     {
-      setcookie("id", "guest");	
+      setcookie("id", "guest");
     }
     else
     {
@@ -18,11 +18,11 @@
     <link rel="shortcut icon" type="image/png" href="./images/logo.png"/>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/color.css">
-    <link rel="stylesheet" href="./css/about.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@1,700&display=swap" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/about.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="./js/bootstrap.bundle.min.js"></script>
 </head>
@@ -39,20 +39,17 @@
             </button>
             <div class="collapse navbar-collapse " id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="index.php">首頁</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="about.php">HOLOLIVE</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.php">關於我們</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="shop.php">HOLO商城</a>
+                        <a class="nav-link" href="shop.php">買名產囉</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="job.php">人物介紹</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://schedule.hololive.tv/">直播時間與連結</a>
+                        <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
                     </li>
                 </ul>
                 <div class="ml-auto">
@@ -78,53 +75,65 @@
             <div class="row">
                 <div class="col-0 col-md-2"></div>
                 <div class="col-12 col-md-8">
-                    <img  id="holopic" src="images/hololivebkg.jpg">
-                </div>
-                <div class="col-0 col-md-2"></div>
-            </div>
-            <div class="row">
-                <div class="col-0 col-md-2"></div>
-                <div class="col-12 col-md-8">
                     <p id="aboutus">ABOUT US</p>
                 </div>
                 <div class="col-0 col-md-2"></div>
             </div>
-            <div class="row c">
+            <div class="row">
                 <div class="col-0 col-md-2"></div>
                 <div class="col-12 col-md-8">
-                    
-                    <img id="holologo" src="images/hololivelogo.png">
-                    
+                    <img  id="holopic" src="images/school.jpg">
+                </div>
+                <div class="col-0 col-md-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-0 col-md-2"></div>
+                <div class="col-12 col-md-8"> 
+                    <p id="aboutus">台北科技大學 資工系</p>
                 </div>
                 <div class="col-0 col-md-2"></div>
             </div>
             <div class="row">
                 <div class="col-0 col-md-2"></div>
                 <div class="col-12 col-md-8">
-                    <p id="introduction">hololive production（日語：ホロライブプロダクション Hororaibu Purodakushon）是日本科技公司COVER株式會社旗下的經紀公司品牌，以經營虛擬YouTuber為其主要業務，除了在日本外，也在其他地區擁有並經營VTuber。hololive production起初稱為hololive，名稱取自於同公司於2017年12月21日發行的同名行動應用程式，後來於2019年12月2日將hololive與其餘的兩個品牌holostars和INNK Music合併，並統一使用現名。</p>
+                    <p id="introduction">國立臺北科技大學資訊工程系課程設計以「語言與軟體」、「數學與演算」與「計算機系統」等三大基礎領域為主軸，規劃「軟體系統」、「多媒體系統」及「網路系統」等三個專業領域，提供基礎理論與實作應用兼備的訓練與發展環境，並以此三大特色研究領域為核心，發展兼具實用性與前瞻性的資訊科技，以培養能直接投入資訊產業的務實科技人才為教育目標。</p>
                 </div>
                 <div class="col-0 col-md-2"></div>
             </div>
             <div class="row">
                 <div class="col-0 col-md-2"></div>
                 <div class="col-12 col-md-8">
-                    <p id="aboutus">CEO</p>
-                </div>
-                <div class="col-0 col-md-2"></div>
-            </div>
-            <div class="row c">
-                <div class="col-0 col-md-2"></div>
-                <div class="col-12 col-md-8">
-                    <img id="yagoo" class="c" src="images/yagoo.jpg">
+                    <p id="aboutus">Team member</p>
                 </div>
                 <div class="col-0 col-md-2"></div>
             </div>
             <div class="row">
                 <div class="col-0 col-md-2"></div>
-                <div class="col-12 col-md-8">
-                    <p id="introduction">谷鄉元昭（谷郷（たにごう）元昭（もとあき），Tanigou Motoaki）是日本COVER株式會社的董事長兼總經理（代表取締役社長）、VTuber組織Hololive Production的管理者。</p>
+                <div class="col-12 col-md-2">
+                    <span class="h2">洪子翔</span>
+                </div>
+                <div class="col-12 col-md-2">
+                    <span class="h2">洪德易</span>
+                </div>
+                <div class="col-12 col-md-2">
+                    <span class="h2">單綿恆</span>
+                </div>
+                <div class="col-12 col-md-2">
+                    <span class="h2">賀國成</span>
                 </div>
                 <div class="col-0 col-md-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-0 col-md-2"></div>
+                <div class="col-12 col-md-2">
+                    <span class="h2">賀國成</span>
+                </div>
+                <div class="col-12 col-md-2">
+                    <span class="h2">賀國成</span>
+                </div>
+                <div class="col-12 col-md-2">
+                    <span class="h2">賀國成</span>
+                </div>
             </div>
             <div class="row">
                 <div class="col-0 col-md-2"></div>

@@ -8,16 +8,6 @@
     color: #BBD8F2;
 }
 
-#yagoo{
-    width: 75%;
-    height: auto;
-}
-
-#holologo{
-    width: 30%;
-    height: auto;
-}
-
 .c{
     text-align: center;
 }
@@ -36,5 +26,11 @@
     #aboutus{
         font-size: 72px;
     }
+}
+
+#name{
+    font-size: 100px;
+    font-weight: bold
+    !important;
 }
 
