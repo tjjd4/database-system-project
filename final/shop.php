@@ -363,7 +363,7 @@
                                 <a href="cart.php" class="btn btn-primary btn-block text-white" role="button">查看購物車</a>
                             </div>
                             <div class="d-block mt-1 mb-3">
-                                <a href="checkout.php" class="btn btn-secondary btn-block text-white" role="button">結帳</a>
+                                <a href="checkout.php" class="btn btn-secondary btn-block text-white <?php echo(($sum > 0) ? "enabled" : "disabled"); ?>" role="button">結帳</a>
                             </div>
                             <div class="d-block">
                                 <form method="post" name="myForm" action="clear.php">                                        

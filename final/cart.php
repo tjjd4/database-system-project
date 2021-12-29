@@ -201,7 +201,7 @@
                             <tfoot>
                                 <tr>
                                     <td colspan="2">
-                                        <a href="checkout.php" class="btn btn-outline-info btn-lg float-right">前往結帳</a>
+                                        <a href="checkout.php" class="btn btn-outline-info btn-lg float-right <?php echo(($sum > 0) ? "enabled" : "disabled"); ?>">前往結帳</a>
                                     </td>
                                 </tr>
                                 <tr>
