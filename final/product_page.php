@@ -3,7 +3,6 @@
     $Product_ID = $_POST["currentProductID"];
     include("function.php");
     $data = getProuctFomId('1');
-
 ?>
 
 
@@ -77,11 +76,11 @@
                         <!-- 商品照片/end -->
                         <!-- 商品介紹/start -->
                         <div class="col-12 col-md-6">
-                            <h4 class="mb-3 title-color">台中太陽堂 太陽餅</h4>
+                            <h4 class="mb-3 title-color"><?= $data["Product_name"]?></h4>
                             <h5 class="text-danger">
-                                NT$&nbsp;750
+                                NT$&nbsp;<?=$data["Price"]?>
                             </h5>
-                            <p class="mt-4">台中太陽堂傳統太陽餅 30入</p>
+                            <!-- <p class="mt-4">台中太陽堂傳統太陽餅 30入</p> -->
                             <div class="d-block mb-3">
                                 <p class="mb-0 d-inline-block">數量</p>
                                 <form action="" class="d-inline-block">
@@ -114,7 +113,9 @@
                                 
                                 <div class="tab-pane fade" id="specification" role="tabpanel" aria-labelledby="specification-tab">
                                     <p class="p-2">
-                                        品 名:太陽堂-太陽餅<br>
+                                        <?=$data["Product_standerd"]?>
+                                        </p>
+                                        <!-- 品 名:太陽堂-太陽餅<br>
                                         成 份: 高級麵粉、糖、酥油、麥芽、奶粉、蜂蜜<br>
                                         淨 重:200g/盒X6盒<br>
                                         保存期限:2個月<br>
@@ -122,7 +123,7 @@
                                         廠商名稱:太禓創意行銷有限公司<br>
                                         廠商地址：新北市汐止區忠孝東路487-1號1樓<br>
                                         投保產品責任險字號：0527第20AML0000061<br>
-                                        食品業者登錄字號：F-145917082-00001-0</p>
+                                        食品業者登錄字號：F-145917082-00001-0</p> -->
                                 </div>
                             </div>
                         </div>

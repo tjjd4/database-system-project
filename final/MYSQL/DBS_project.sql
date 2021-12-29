@@ -63,10 +63,11 @@ create table Product_Image(
 
 
 -- insert into Product_Image(Product_ID, Image_path) values(1,"./images/product2/9.jpg");
+alter table `Product_Image` AUTO_INCREMENT = 1;
 select * From Product_Image;
 -- delete from Product_Image where Image_ID;
 
-SELECT * FROM `Product` as P,`Product_Image` as PI Where Product_ID = $id and P.Product_ID = PI.Product_ID;
+SELECT * FROM `Product` as P,`Product_Image` as PI Where P.Product_ID = 1 and P.Product_ID = PI.Product_ID;
 
 create table Coupon(
 	Coupon_ID int not null AUTO_INCREMENT,
