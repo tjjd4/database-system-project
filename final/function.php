@@ -12,14 +12,14 @@
 
     function createProductBox($id){
         $link = create_connection();
-        $sql = "SELECT * FROM `Product` Where Product_ID = $id";
+        $sql = "SELECT * FROM `Product` as P,`Product_Image` as PI Where P.Product_ID = $id and P.Product_ID = PI.Product_ID and PI.Image_ID = 1;";
         $result = execute_sql($link, "DBS_project", $sql);
         $data = mysqli_fetch_array($result);
         mysqli_free_result($result);
         $txt = '<div class="col-12 col-sm-6 col-md-3">
                 <div href="#" class="card mb-3">
-                    <!-- <img class="card-img-top" src="./images/product/eva_9.png" alt="LTG-BY-0001"> -->
-                    <img class="card-img-top" src="./images/product2/9.jpg" alt="LTG-BY-0001">
+                    <!-- <img class="card-img-top" src='.$data["Image_path"].' alt="LTG-BY-0001"> -->
+                    <img class="card-img-top" src='.$data["Image_path"].' alt="LTG-BY-0001">
                     <div class="card-body">
                         <h4 class="card-title">'.$data["Product_name"].'</h4>
                         <p class="card-text">'.$data["Product_descripition"].'</p>
