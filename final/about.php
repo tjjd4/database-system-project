@@ -110,10 +110,10 @@
             <div class="row">
                 <div class="col-0 col-md-2"></div>
                 <div class="col-12 col-md-2">
-                    <span class="h2">洪子翔</span>
+                    <span class="h2">洪德易</span>
                 </div>
                 <div class="col-12 col-md-2">
-                    <span class="h2">洪德易</span>
+                    <span class="h2">洪子翔</span>
                 </div>
                 <div class="col-12 col-md-2">
                     <span class="h2">單綿恆</span>
@@ -122,47 +122,49 @@
                     <span class="h2">賀國成</span>
                 </div>
                 <div class="col-0 col-md-2"></div>
+                <div class="col-0 col-md-2"></div>
+                <div class="col-12 col-md-2">
+                    <span class="h4 text-muted">電資三</span>
+                </div>
+                <div class="col-12 col-md-2">
+                    <span class="h4 text-muted">電資三</span>
+                </div>
+                <div class="col-12 col-md-2">
+                    <span class="h4 text-muted">電資三</span>
+                </div>
+                <div class="col-12 col-md-2">
+                    <span class="h4 text-muted">電資三</span>
+                </div>
+                <div class="col-0 col-md-2"></div>
             </div>
+            <br/>
             <div class="row">
                 <div class="col-0 col-md-2"></div>
                 <div class="col-12 col-md-2">
-                    <span class="h2">賀國成</span>
+                    <span class="h2">李以謙</span>
                 </div>
                 <div class="col-12 col-md-2">
-                    <span class="h2">賀國成</span>
+                    <span class="h2">陳韋堯</span>
                 </div>
                 <div class="col-12 col-md-2">
-                    <span class="h2">賀國成</span>
+                    <span class="h2">方文昊</span>
                 </div>
-            </div>
-            <div class="row">
+                <div class="col-0 col-md-4"></div>
                 <div class="col-0 col-md-2"></div>
-                <div class="col-12 col-md-8">
-                    <p id="aboutus">ACTIVITY</p>
+                <div class="col-12 col-md-2">
+                    <span class="h4 text-muted">電資三</span>
                 </div>
-                <div class="col-0 col-md-2"></div>
-            </div>
-            <div class="row c">
-                <div class="col-0 col-md-2"></div>
-                <div class="col-12 col-md-4">
-                    <iframe class="iframeview" src="https://www.youtube.com/embed/Kn066hDKjx4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="col-12 col-md-2">
+                    <span class="h4 text-muted">資工三</span>
                 </div>
-                <div class="col-12 col-md-4">
-                    <iframe class="iframeview" src="https://www.youtube.com/embed/A9HY4DsRTCg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <div class="col-0 col-md-2"></div>
-            </div>
-            <div class="row c">
-                <div class="col-0 col-md-2"></div>
-                <div class="col-12 col-md-4">
-                    <iframe class="iframeview" src="https://www.youtube.com/embed/pFgUluV_00s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <div class="col-12 col-md-4">
-                    <iframe class="iframeview" src="https://www.youtube.com/embed/qTwHCC4stu8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="col-12 col-md-2">
+                    <span class="h4 text-muted">資工三</span>
                 </div>
                 <div class="col-0 col-md-2"></div>
             </div>
         </div>
+        <br/>
+        <br/>
     </section>
     <!-- 關於岡南/end -->
     <!-- 頁腳/start -->
@@ -173,28 +175,24 @@
                 <div class="col-12 col-md-6 mb-3">
                     <ul class="footer-menu">
                         <li><a href="index.php">首頁</a></li>
-                        <li><a href="about.php">HOLOLIVE</a></li>
-                        <li><a href="shop.php">HOLO商城</a></li>
-                        <li><a href="job.php">成員簡介</a></li>
-                        <li><a href="https://schedule.hololive.tv/">直播時間</a></li>
-                        <li><a href="login.html">登入</a></li>
-                        <li><a href="cart.php">購物車</a></li>
-                        <li><a href="checkout.php">結帳</a></li>
+                        <li><a href="#">客服中心</a></li>
+                        <li><a href="#">常見問題</a></li>
+                        <li><a href="#">隱私條款聲明</a></li>
                     </ul>
                 </div>
                 <!-- 選單連結/end -->
                 <!-- 訂閱/start -->
-                <div class="col-12 col-md-6 mb-3">
+                <!-- <div class="col-12 col-md-6 mb-3">
                     <h6 class="text-white">留下 E-mail，訂閱hololive，可搶先獲得最新的資訊喔！</h6>
                     <form action="addemail.php" method="post" name="myForm">
                         <input name="email" type="email" class="form-control mt-2 mb-2" placeholder="請輸入e-mail">
                         <button type="submit" class="btn btn-primary float-right send-btn">傳送</button>
                     </form>
-                </div>
+                </div> -->
                 <!-- 訂閱/end -->
                 <!-- 版權所有/start -->
                 <div class="col-12 mt-3">
-                    <p class="text-white text-center">© Copyright 2021 hololive </p>
+                    <p class="text-white text-center">© Copyright 2021 NTUT </p>
                 </div>
                 <!-- 版權所有/end -->
             </div>
