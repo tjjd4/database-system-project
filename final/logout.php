@@ -16,7 +16,8 @@
   else
   {
     $id = $_COOKIE["id"];
-    setcookie("id", "guest");	
+    setcookie("id", "guest");
+    setcookie("NickName", "guest");
     setcookie("passed", "");
   }
 ?>

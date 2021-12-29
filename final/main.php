@@ -60,7 +60,7 @@
                     </li>
                 </ul>
                 <div class="ml-auto">
-                    <a href="logout.php" class="btn btn-outline-info text-info my-2 my-sm-0">登出</a>
+                    <a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>
                     <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
                     <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
                 </div>

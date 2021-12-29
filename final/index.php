@@ -1,14 +1,16 @@
 <?php
-	if (empty($_COOKIE["id"]))
+	if(empty($_COOKIE["id"]))
     {
       setcookie("id", "guest");	
+      $id = "guest";
+      setcookie("NickName", "guest");
+      $NickName = "guest";
     }
-    else
-    {
-        $id = $_COOKIE["id"];
-        $NickName = $_COOKIE["NickName"];
+    else{
+      $id = $_COOKIE["id"];
+      $NickName = $_COOKIE["NickName"];
     }
-    $id = $_COOKIE["id"];	
+
     if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
     {
       setcookie("num_list", "");
@@ -89,14 +91,14 @@
                 
                 <div class="ml-auto">
                     <?php
-                            if ($_COOKIE["id"]=="guest")
+                            if($id == "guest")
                             {
                               echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
                             }
                             else
                             {
-                                echo"$NickName 你好";
-                                echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
+                              echo"$NickName 你好";
+                              echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
                             }
                     ?>
                     
