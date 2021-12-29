@@ -200,23 +200,14 @@
             <div class="col-12 mb-2">
                 <h2>熱門產品</h2>
             </div>
-            <div class="col-12 col-sm-6 col-md-3">
-                <div href="#" class="card mb-3">
-                    <!-- <img class="card-img-top" src="./images/product/eva_9.png" alt="LTG-BY-0001"> -->
-                    <img class="card-img-top" src="./images/product2/9.jpg" alt="LTG-BY-0001">
-                    <div class="card-body">
-                        <h4 class="card-title">台中太陽堂 太陽餅</h4>
-                        <p class="card-text">台中太陽堂傳統太陽餅 30入</p>
-                        <h5 class="card-text text-danger">
-                            NT$&nbsp;750
-                        </h5>
-                        <a href="z9.html" class="btn btn-outline-secondary btn-block">查看商品</a>
-                        <form method="post" name="myForm">
-                            <input class="btn btn-outline-primary btn-block mt-2" type='submit' value='加入購物車'>
-                        </form>
-                    </div>
-                </div>
-            </div>
+
+            <?php
+            include_once("function.php");
+            $data = createProductBox('1');
+            ?>
+
+            
+
             <div class="col-12 col-sm-6 col-md-3">
                 <div href="#" class="card mb-3">
                     <img class="card-img-top" src="./images/product2/5.jpg" alt="TG-B-0001">

@@ -3,7 +3,7 @@
   
   //取得表單資料
  
-  $email = $_POST["email"]; 
+  $email = $_POST["Email"]; 
   //建立資料連接
   $link = create_connection();
 			

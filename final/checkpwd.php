@@ -33,7 +33,7 @@
   else
   {
     //取得 id 欄位
-    $data = mysqli_fetch_assoc($result);
+    $data = mysqli_fetch_array($result);
     
     //釋放 $result 佔用的記憶體	
     mysqli_free_result($result);
