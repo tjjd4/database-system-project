@@ -20,30 +20,47 @@ create table `Member`(
 create table Product(
 	Product_ID int not null AUTO_INCREMENT,
 	Product_name VARCHAR(50) not null,
+    Product_descripition varchar(50) not null,
 	Price INT not null,
-	`Status` INT not null,
+	Stock INT not null,
 	Publish_date DATETIME not null,
 	Modified_date DATETIME,
-    Product_descripition VARCHAR(2000),
+    Product_detail VARCHAR(2000),
     Product_standerd VARCHAR(2000),
 	primary key (Product_ID)
 );
+drop table Product;
+insert into Product(Product_name, Product_descripition, Price, stock, Publish_date, Product_detail, Product_standerd)
+values("佳德糕餅 - 鳳梨酥","原味鳳梨酥禮盒(12入)","750", 100, '2021-12-29',"詳細資訊","standerd"),
+("佳德糕餅 - 蔥軋餅","蔥軋餅(24片)禮盒","750", 100, '2021-12-29',"詳細資訊","standerd"),
+("佳德糕餅 - 太陽餅","太陽餅(12入)","416", 100, '2021-12-29',"詳細資訊","standerd"),
+("阿聰師 - 阿聰師的小芋仔","阿聰師的小芋仔(6入) (蛋奶素)","430", 100, '2021-12-29',"詳細資訊","standerd"),
+("阿聰師 - 大甲芋頭Q禮盒","大甲芋頭Q禮盒(麻糬)(9入)","352", 100, '2021-12-29',"詳細資訊","standerd"),
+("阿聰師 - 大甲芋頭酥綜合禮盒","大甲芋頭酥綜合禮盒(9入)(蛋奶素)","7660", 100, '2021-12-29',"詳細資訊","standerd"),
+("海邊走走 - 花生愛餡蛋捲","花生愛餡蛋捲(2盒一組)","460", 100, '2021-12-29',"詳細資訊","standerd"),
+("海邊走走 - 鐵觀音茶蛋捲","鐵觀音茶蛋捲(2盒一組)","590", 100, '2021-12-29',"詳細資訊","standerd"),
+("海邊走走 - 2022新春限定","HiNUTS海拿滋 大蒜滋腰果袋裝(4包)","346", 100, '2021-12-29',"詳細資訊","standerd"),
+("老媽拌麵 - 蔥油開洋拌麵","蔥油開洋拌麵(一袋4包)","987", 100, '2021-12-29',"詳細資訊","standerd"),
+("老媽拌麵 - 四川麻辣拌麵","四川麻辣拌麵","234", 100, '2021-12-29',"詳細資訊","standerd"),
+("老媽拌麵 - 老成都擔擔拌麵","老成都擔擔拌麵(一袋4包)","436", 100, '2021-12-29',"詳細資訊","standerd"),
+("老媽拌麵 - 麻辣芝士蘇打餅","麻辣芝士蘇打餅(190g/盒)","645", 100, '2021-12-29',"詳細資訊","standerd"),
 
-insert into Product(Product_name, Price, `status`, Publish_date, Product_descripition, Product_standerd)
-values("台中太陽餅30入裝", "750", 100, '2021-12-29',"好吃的太陽餅",
-"品 名:太陽堂-太陽餅
-成 份: 高級麵粉、糖、酥油、麥芽、奶粉、蜂蜜
-淨 重:200g/盒X6盒
-保存期限:2個月
-保存溫度:請置於陰涼處，勿冰存以保風味
-廠商名稱:太禓創意行銷有限公司
-廠商地址：新北市汐止區忠孝東路487-1號1樓
-投保產品責任險字號：0527第20AML0000061
-食品業者登錄字號：F-145917082-00001-0");
+("吾穀茶糧 SIID CHA - 四季擂茶(夏果)","四季擂茶(夏果) - 莓果東方美人茶","270", 100, '2021-12-29',"詳細資訊","standerd"),
+("吾穀茶糧 SIID CHA - 四季擂茶(春果)","四季擂茶(春果) - 蕎麥碧 螺春","270", 100, '2021-12-29',"詳細資訊","standerd"),
+("吾穀茶糧 SIID CHA - 四季擂茶(秋果)","四季擂茶(秋果) - 玫瑰紅玉紅茶","1250", 100, '2021-12-29',"詳細資訊","standerd"),
+("小茶栽堂 - 紅雙禮盒","紅雙禮盒(古典罐2入-黑烏龍茶X古早味紅茶)","1300", 100, '2021-12-29',"詳細資訊","standerd"),
+("小茶栽堂 - 小茶紅禮盒","小茶紅禮盒(古典罐2入-黑烏龍茶X黃梔烏龍茶)","870", 100, '2021-12-29',"詳細資訊","standerd"),
+("小茶栽堂 - 清香烏龍茶","清雅藏香罐-清香烏龍茶","600", 100, '2021-12-29',"詳細資訊","standerd"),
+("小茶栽堂 - 黃梔烏龍茶","古典罐-黃梔烏龍茶","810", 100, '2021-12-29',"詳細資訊","standerd"),
+("小茶栽堂 - 輕巧盒(袋茶)","四入組-窨花(黃梔烏龍茶+烏龍茶+桂花綠茶+桂香金萱茶)","750", 100, '2021-12-29',"詳細資訊","standerd"),
 
--- delete from `Product` where Product_ID; -- 清空
--- alter table `Product` AUTO_INCREMENT = 1; -- 重設id為1開始
--- select * from Product;
+("客廳裝飾品 玄關擺飾 招財鹿 歐式擺件","貨品需等15至20天","1230", 100, '2021-12-29',"詳細資訊","standerd"),
+("聖誕發光擺件 聖誕節裝飾品","現貨","450", 100, '2021-12-29',"詳細資訊","standerd"),
+
+("老爸的開心農場 新鮮芭樂","新鮮芭樂(自產自銷 新鮮採收寄出)","40", 100, '2021-12-29',"詳細資訊","standerd"),
+("金煌芒果 大粒香甜黃金寶","金煌芒果(果農新鮮現採 產地直送)","480", 100, '2021-12-29',"詳細資訊","standerd"),
+("苗栗大湖草莓","草莓新鮮現採出貨/盒","700", 100, '2021-12-29',"詳細資訊","standerd"),
+("九如檸檬 大斤數含運組合","檸檬(新鮮現採 當日直送)/盒","800", 100, '2021-12-29',"詳細資訊","standerd");
 
 create table Category(
 	Product_ID int not null,
@@ -51,7 +68,37 @@ create table Category(
 	primary key (Product_ID) ,
 	foreign key (Product_ID) references Product(Product_ID) on update cascade on delete cascade
 );
+insert into Category(Product_ID, Category_name)
+values(1,"food_dessert"),
+(2,"food_dessert"),
+(3,"food_dessert"),
+(4,"food_dessert"),
+(5,"food_dessert"),
+(6,"food_dessert"),
+(7,"food_dessert"),
+(8,"food_dessert"),
+(9,"food_dessert"),
+(10,"food_dessert"),
+(11,"food_dessert"),
+(12,"food_dessert"),
+(13,"food_dessert"),
 
+(14,"tea_drink"),
+(15,"tea_drink"),
+(16,"tea_drink"),
+(17,"tea_drink"),
+(18,"tea_drink"),
+(19,"tea_drink"),
+(20,"tea_drink"),
+(21,"tea_drink"),
+
+(22,"acc"),
+(23,"acc"),
+
+(24,"fruit"),
+(25,"fruit"),
+(26,"fruit"),
+(27,"fruit");
 create table Product_Image(
 	Image_ID int not null AUTO_INCREMENT,
 	Product_ID int not null,
@@ -59,15 +106,37 @@ create table Product_Image(
 	primary key (Image_ID, Product_ID),
 	foreign key (Product_ID) references Product(Product_ID) on update cascade on delete cascade
 );
+insert into Product_Image(Product_ID, Image_path)
+value(1,"./images/food_dessert_images/1.jpg"),
+(2,"./images/food_dessert_images/2.jpg"),
+(3,"./images/food_dessert_images/3.jpg"),
+(4,"./images/food_dessert_images/4.jpg"),
+(5,"./images/food_dessert_images/5.jpg"),
+(6,"./images/food_dessert_images/6.jpg"),
+(7,"./images/food_dessert_images/7.jpg"),
+(8,"./images/food_dessert_images/8.jpg"),
+(9,"./images/food_dessert_images/9.jpg"),
+(10,"./images/food_dessert_images/10.jpg"),
+(11,"./images/food_dessert_images/11.jpg"),
+(12,"./images/food_dessert_images/12.jpg"),
+(13,"./images/food_dessert_images/13.jpg"),
 
+(14,"./images/tea_drink_images/1.jpg"),
+(15,"./images/tea_drink_images/2.jpg"),
+(16,"./images/tea_drink_images/3.jpg"),
+(17,"./images/tea_drink_images/4.jpg"),
+(18,"./images/tea_drink_images/5.jpg"),
+(19,"./images/tea_drink_images/6.jpg"),
+(20,"./images/tea_drink_images/7.jpg"),
+(21,"./images/tea_drink_images/8.jpg"),
 
+(22,"./images/acc/1.jpg"),
+(23,"./images/acc/2.jpg"),
 
--- insert into Product_Image(Product_ID, Image_path) values(1,"./images/product2/9.jpg");
-alter table `Product_Image` AUTO_INCREMENT = 1;
-select * From Product_Image;
--- delete from Product_Image where Image_ID;
-
-SELECT * FROM `Product` as P,`Product_Image` as PI Where P.Product_ID = 1 and P.Product_ID = PI.Product_ID;
+(24,"./images/fruit/1.jpg"),
+(25,"./images/fruit/2.jpg"),
+(26,"./images/fruit/3.jpg"),
+(27,"./images/fruit/4.jpg");
 
 create table Coupon(
 	Coupon_ID int not null AUTO_INCREMENT,

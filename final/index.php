@@ -163,28 +163,28 @@
             </div>
             <div class="col-12">
                 <div class="card-deck mt-2 product-categories">
-                    <a href="tagset.html" class="card">
+                    <a href="food_dessert.php" class="card">
                         <!-- <img class="card-img-top" src="./images/slider_1.png" alt="套組"> -->
                         <img class="card-img-top" src="./images/product_class/3.jpg" alt="食物">
                         <div class="card-body bg-dark">
                             <h4 class="card-title text-white text-center">食品/點心類</h4>
                         </div>
                     </a>
-                    <a href="taggarment.html" class="card">
+                    <a href="tea_drink.php" class="card">
                         <!-- <img class="card-img-top" src="./images/service_2.png" alt="卡套"> -->
                         <img class="card-img-top" src="./images/product_class/2.jpg" alt="飲料">
                         <div class="card-body bg-dark">
                             <h4 class="card-title text-white text-center">茶葉/飲品類</h4>
                         </div>
                     </a>
-                    <a href="tagbrochore.html" class="card">
+                    <a href="acc.php" class="card">
                         <!-- <img class="card-img-top" src="./images/service_3.png" alt="衣服"> -->
                         <img class="card-img-top" src="./images/product_class/4.jpg" alt="裝飾">
                         <div class="card-body bg-dark">
                             <h4 class="card-title text-white text-center">裝飾/飾品類</h4>
                         </div>
                     </a>
-                    <a href="tagothers.html" class="card">
+                    <a href="fruit.php" class="card">
                         <!-- <img class="card-img-top" src="./images/service_4.png" alt="滑鼠墊"> -->
                         <img class="card-img-top" src="./images/product_class/1.jpg" alt="水果">
                         <div class="card-body bg-dark">
@@ -208,125 +208,24 @@
             $data = createProductBox('1');
             ?>
 
-            
+            <?php
+            include_once("function.php");
+            $data = createProductBox('2');
+            ?>
 
-            <div class="col-12 col-sm-6 col-md-3">
-                <div href="#" class="card mb-3">
-                    <img class="card-img-top" src="./images/product2/5.jpg" alt="TG-B-0001">
-                    <div class="card-body">
-                        <h4 class="card-title">琅茶 Wolf Tea 窗花茶香・倆入禮盒</h4>
-                        <p class="card-text">【  阿里山  】野香烏龍 50g 【 坪林 】桂香包種 40g </p>
-                        <h5 class="card-text text-danger">NT$&nbsp;1280</h5>
-                        <a href="z5.html" class="btn btn-outline-secondary btn-block">查看商品</a>
-                        <a href="cart.php" class="btn btn-outline-primary btn-block">加入購物車</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-3">
-                <div href="#" class="card mb-3">
-                    <img class="card-img-top" src="./images/product2/7.jpg" alt="LTG-B-0001">
-                    <div class="card-body">
-                        <h4 class="card-title">梨山 水蜜桃禮盒(10粒裝)</h4>
-                        <p class="card-text">水蜜桃禮盒(10粒裝)</p>
-                        <h5 class="card-text text-danger">NT$850&nbsp;</h5>
-                        <a href="z7.html" class="btn btn-outline-secondary btn-block">查看商品</a>
-                        <a href="cart.php" class="btn btn-outline-primary btn-block">加入購物車</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-3">
-                <div href="#" class="card mb-3">
-                    <img class="card-img-top" src="./images/product2/10.jpg" alt="G-B-0001">
-                    <div class="card-body">
-                        <h4 class="card-title">原住民特色鑰匙圈</h4>
-                        <p class="card-text">原住民特色鑰匙圈</p>
-                        <h5 class="card-text text-danger">NT$&nbsp;140</h5>
-                        <a href="z10.html" class="btn btn-outline-secondary btn-block">查看商品</a>
-                        <a href="cart.php" class="btn btn-outline-primary btn-block">加入購物車</a>
-                    </div>
-                </div>
-            </div>
-            <!-- <div class="col-12 col-sm-6 col-md-3">
-                <div href="#" class="card mb-3">
-                    <img class="card-img-top" src="./images/product/eva_15.png" alt="G-B-0002">
-                    <div class="card-body">
-                        <h4 class="card-title">Hololive 赤井心 2020 誕生日紀念組</h4>
-                        <p class="card-text">生日套組 赤井心 </p>
-                        <h5 class="card-text text-danger">NT$&nbsp;3700</h5>
-                        <a href="z15.html" class="btn btn-outline-secondary btn-block">查看商品</a>
-                        <a href="cart.php" class="btn btn-outline-primary btn-block">加入購物車</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-3">
-                <div href="#" class="card mb-3">
-                    <img class="card-img-top" src="./images/product/eva_18.png" alt="TU-BY-0001">
-                    <div class="card-body">
-                        <h4 class="card-title">Hololive 天音かなた 週年紀念套組</h4>
-                        <p class="card-text">週年紀念套組 天音かなた</p>
-                        <h5 class="card-text text-danger">NT$&nbsp;5250</h5>
-                        <a href="z18.html" class="btn btn-outline-secondary btn-block">查看商品</a>
-                        <a href="cart.php" class="btn btn-outline-primary btn-block">加入購物車</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-3">
-                <div href="#" class="card mb-3">
-                    <img class="card-img-top" src="./images/product/eva_21.png" alt="MG-GO-0002">
-                    <div class="card-body">
-                        <h4 class="card-title">Hololive 湊阿庫婭 2020誕生日記念 全套組</h4>
-                        <p class="card-text">生日套組 湊阿庫婭</p>
-                        <h5 class="card-text text-danger">NT$&nbsp;4500</h5>
-                        <a href="z21.html" class="btn btn-outline-secondary btn-block">查看商品</a>
-                        <a href="cart.php" class="btn btn-outline-primary btn-block">加入購物車</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-3">
-                <div href="#" class="card mb-3">
-                    <img class="card-img-top" src="./images/product/eva_24.png" alt="LG-GP-0001">
-                    <div class="card-body">
-                        <h4 class="card-title">Hololive 角卷綿芽 生日聲音全套</h4>
-                        <p class="card-text">生日套組 角卷綿芽</p>
-                        <h5 class="card-text text-danger">NT$&nbsp;3560</h5>
-                        <a href="z24.html" class="btn btn-outline-secondary btn-block">查看商品</a>
-                        <a href="cart.php" class="btn btn-outline-primary btn-block">加入購物車</a>
-                    </div>
-                </div>
-            </div> -->
+            <?php
+            include_once("function.php");
+            $data = createProductBox('3');
+            ?>
+
+            <?php
+            include_once("function.php");
+            $data = createProductBox('4');
+            ?>
+
+            
         </div>
     </section>
-    
-    <!-- <section class="container mt-5">
-        <div class="row">
-            <div class="col-12">
-                <h2>介紹影片</h2>
-            </div>
-            <div class="col-12">
-                <iframe class="iframe1"src="https://www.youtube.com/embed/mZ0sJQC8qkE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </div>
-    </section> -->
-
-    <!-- <section class="container mt-5">
-        <div class="col-12">
-            <h2>官方網站</h2>
-        </div>
-    </section> -->
-
-    <!-- <div class="row mt-5">
-        <div class="col-1 col-md-2"></div>
-        <div class="col-3">
-           <a href="https://twitter.com/hololivetv"> <img class="c f75"src="images/tw2.png"></a>
-        </div>
-        <div class="col-3">
-            <a href="https://www.youtube.com/channel/UCJFZiqLMntJufDCHc6bQixg"> <img class="c f75"src="images/yt2.png"></a>
-        </div>
-        <div class="col-3">
-            <a href="https://www.hololive.tv/"> <img class="c f75"src="images/holologo.png"></a>
-        </div>
-        <div class="col-2 col-md-1"></div>
-    </div> -->
     
     <section class="container mt-5">
         <div class="row">
@@ -360,15 +259,6 @@
                     </ul>
                 </div>
                 <!-- 選單連結/end -->
-                <!-- 訂閱/start -->
-                <!-- <div class="col-12 col-md-6 mb-3">
-                    <h6 class="text-white">留下 E-mail，訂閱hololive，可搶先獲得最新的資訊喔！</h6>
-                    <form action="addemail.php" method="post" name="myForm">
-                        <input name="email" type="email" class="form-control mt-2 mb-2" placeholder="請輸入e-mail">
-                        <button type="submit" class="btn btn-primary float-right send-btn">傳送</button>
-                    </form>
-                </div> -->
-                <!-- 訂閱/end -->
                 <!-- 版權所有/start -->
                 <div class="col-12 mt-3">
                     <p class="text-white text-center">© Copyright 2021 NTUT </p>
