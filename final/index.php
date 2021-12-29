@@ -1,14 +1,16 @@
 <?php
 	if (empty($_COOKIE["id"]))
     {
-      setcookie("id", "guest");	
+        setcookie("id", "guest");
+        setcookie("NickName", "guest");
+        $id = "guest";
+        $NickName = "guest";
     }
     else
     {
         $id = $_COOKIE["id"];
         $NickName = $_COOKIE["NickName"];
     }
-    $id = $_COOKIE["id"];	
     if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
     {
       setcookie("num_list", "");
@@ -71,25 +73,22 @@
                         <a class="nav-link" href="index.php">首頁</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="about.php">關於我們</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.php">買名產囉</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
+                    </li>
+                    <li class="nav-item">
                         <input name="search_product" type="text" class="form-control" id="search_product" placeholder="搜尋...">
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="about.php">HOLOLIVE</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="shop.php">HOLO商城</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="job.php">人物介紹</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://schedule.hololive.tv/">直播時間與連結</a>
-                    </li> -->
                 </ul>
                 
                 <div class="ml-auto">
                     <?php
-                            if ($_COOKIE["id"]=="guest")
+                            if (empty($_COOKIE["id"]))
                             {
                               echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
                             }
