@@ -14,6 +14,8 @@
       setcookie("name_list", "");
       setcookie("price_list", "");
       setcookie("quantity_list", "");
+      $sum=0;
+      $namelen=0;
     }
     else
     {	
