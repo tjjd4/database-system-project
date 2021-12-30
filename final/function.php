@@ -11,7 +11,7 @@
     }
 
     function createProductBox($id){
-        $link = create_connection();
+        $link = create_connection(); 
         $sql = "SELECT * 
                 FROM `Product`as P, `Product_Image`as PI 
                 Where P.Product_ID = $id and P.Product_ID = PI.Product_ID and PI.Image_ID = $id;";
@@ -41,8 +41,8 @@
         echo $txt;
     }
 
-    function createProductBoxForProductPage($id){
-        $link = create_connection();
+    function createProductBoxForProductPage($id){ 
+        $link = create_connection();  
         $sql = "SELECT * 
                 FROM `Product`as P, `Product_Image`as PI 
                 Where P.Product_ID = $id and P.Product_ID = PI.Product_ID ;";
@@ -70,8 +70,8 @@
                 </div>';
         echo $txt;
     }
-    function getSameCategoryProduct($category){
-        $link = create_connection();
+    function getSameCategoryProduct($category){ 
+        $link = create_connection();  
         $sql = 'SELECT C.Product_ID
                 FROM `Category` as C 
                 Where C.Category_name = "'.$category.'";';
