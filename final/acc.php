@@ -136,7 +136,7 @@
                         <!-- 商品/start -->
                         <?php
                         include_once("function.php");
-                        $data = getSameCategoryProduct("acc");
+                        $data = getSameCategoryProduct("acc");//get all products which category == acc
                         ?>                 
                         <!-- 商品/end -->
                         <!-- 分頁/start -->

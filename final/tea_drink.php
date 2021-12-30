@@ -136,7 +136,7 @@
                         <!-- 商品/start -->
                         <?php
                         include_once("function.php");
-                        $data = getSameCategoryProduct("tea_drink");
+                        $data = getSameCategoryProduct("tea_drink"); //get all products which category == tea_drink
                         ?>                 
                         <!-- 商品/end -->
                         <!-- 分頁/start -->
