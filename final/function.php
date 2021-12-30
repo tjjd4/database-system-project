@@ -91,4 +91,27 @@
         return $txt;
     }
     
+    function getSortedProductByPriceASC($page){ 
+        $link = create_connection();  
+        $sql = 'SELECT P.Product_ID
+                FROM `Product` as P 
+                order by P.Price ASC;';
+        $result = execute_sql($link, "DBS_project", $sql);
+        $full_data = array();
+        while($single_data = mysqli_fetch_array($result)) {
+            //will output all data on each loop.
+            array_push($full_data, $single_data); 
+        };
+        $num = count($full_data);
+        $txt = "";
+        $product_num_each_page = 9;
+        $first_index = ($page-1)*$product_num_each_page;
+        $last_index = $first_index + $product_num_each_page;
+        mysqli_free_result($result);
+        for($i = $first_index;$i < $last_index;$i++){
+            $txt .= createProductBoxForProductPage($full_data[$i][0]);
+        };
+
+        return $txt;
+    }
 ?>

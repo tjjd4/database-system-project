@@ -1,3 +1,47 @@
+<?php
+	if (empty($_COOKIE["id"]))
+    {
+        setcookie("id", "guest");
+        setcookie("NickName", "guest");
+        $id = "guest";
+        $NickName = "guest";
+    }
+    else
+    {
+        $id = $_COOKIE["id"];
+        $NickName = $_COOKIE["NickName"];
+    }
+    if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
+    {
+      setcookie("num_list", "");
+      setcookie("name_list", "");
+      setcookie("price_list", "");
+      setcookie("quantity_list", "");
+      $sum=0;
+      $namelen=0;
+    }
+    else
+    {	
+        $quantity= $_COOKIE["quantity_list"];
+        $num = $_COOKIE["num_list"];
+        $name= $_COOKIE["name_list"];
+        $price= $_COOKIE["price_list"];	
+        if(empty($_COOKIE["num_list"])){
+            $namelen=0;
+        }
+        else{
+            $namearray = explode(",",$name);
+            $namelen=count($namearray);
+        }
+       
+        $pricearray = explode(",",$price);	
+        $sum=0;
+        for($i=0;$i<$namelen;$i++)
+        {
+            $sum=$sum+$pricearray[$i];
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +65,7 @@
     <header class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <a class="navbar-brand" href="index.php">
-                <img src="./images/logo.png" alt="logo">
+                <img id="logo1" src="./images/logo.png" alt="logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -29,24 +73,36 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="index.php">首頁</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="about.php">HOLOLIVE</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.php">關於我們</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="shop.php">HOLO商城</a>
+                        <a class="nav-link" href="shop.php">買名產囉</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="job.php">人物介紹</a>
+                        <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://schedule.hololive.tv/">直播時間與連結</a>
+                        <input name="search_product" type="text" class="form-control" id="search_product" placeholder="搜尋...">
                     </li>
                 </ul>
+                
                 <div class="ml-auto">
-                    <a href="login.html" class="btn btn-outline-info text-info my-2 my-sm-0">登入</a>
+                    <?php
+                            if ($id == "guest")
+                            {
+                              echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
+                            }
+                            else
+                            {
+                                echo"$NickName 你好";
+                                echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
+                            }
+                    ?>
+                    
                     <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
                     <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
                 </div>
@@ -62,11 +118,11 @@
                 <div class="col-12 col-md-9">
                     <div class="row">
                         <div class="col-12 mb-3">
-                            <img src="./images/holobg.png" alt="Shop Banner" class="img-fluid">
+                            <img src="./images/shop.jpg" alt="Shop Banner" class="img-fluid">
                         </div>
                         <!-- 排序/start -->
                         <div class="col-12 mt-3 mb-3">
-                            <p class="d-inline-block">顯示 27 筆結果中的 10-18 筆</p>
+                            <p class="d-inline-block">顯示 27 筆結果中的 1–9 筆</p>
                             <form action="" class="d-inline-block float-right">
                                 <select id="ProductSelect" class="form-control">
                                     <option>依上架時間</option>
@@ -78,169 +134,14 @@
                         </div>
                         <!-- 排序/end -->
                         <!-- 商品/start -->
-                        <div class="col-12 col-sm-6 col-md-4 mb-3">
-                            <div class="card">
-                                <img class="card-img-top" src="./images/product/eva_10.png" alt="eva10">
-                                <div class="card-body">
-                                    <h4 class="card-title">Hololive 角卷綿芽週年套組 </h4>
-                                    <p class="card-text">附特典</p>
-                                    <h5 class="card-text text-danger">NT$&nbsp;3470</h5>
-                                    <a href="z10.html" class="btn btn-outline-secondary btn-block">查看商品</a>
-                                    <form method="post" name="myForm" action="add_to_car.php">                                        
-                                        <input type="hidden" name="quantity" value="1">
-                                        <input type="hidden" name="name" value="watame birthday set">
-                                        <input type="hidden" name="price" value="3470">
-                                        <input type="hidden" name="num" value="z9">
-                                        <input class="btn btn-outline-primary btn-block mt-2" type='submit' value='加入購物車'>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 mb-3">
-                            <div class="card">
-                                <img class="card-img-top" src="./images/product/eva_11.png" alt="eva11">
-                                <div class="card-body">
-                                    <h4 class="card-title">Hololive EN Watson Amelia 生日紀念套組</h4>
-                                    <p class="card-text" >附特典</p>
-                                    <h5 class="card-text text-danger">NT$&nbsp;2999</h5>
-                                    <a href="z11.html" class="btn btn-outline-secondary btn-block">查看商品</a>
-                                    <form method="post" name="myForm" action="add_to_car.php">                                        
-                                        <input type="hidden" name="quantity" value="1">
-                                        <input type="hidden" name="name" value="ame birthday set">
-                                        <input type="hidden" name="price" value="4490">
-                                        <input type="hidden" name="num" value="z9">
-                                        <input class="btn btn-outline-primary btn-block mt-2" type='submit' value='加入購物車'>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 mb-3">
-                            <div class="card">
-                                <img class="card-img-top" src="./images/product/eva_12.png" alt="eva12">
-                                <div class="card-body">
-                                    <h4 class="card-title">Hololive 獅白牡丹 3D化記念商品</h4>
-                                    <p class="card-text">2款分售</p>
-                                    <h5 class="card-text text-danger">NT$&nbsp;1420</h5>
-                                    <a href="z12.html" class="btn btn-outline-secondary btn-block">查看商品</a>
-                                    <form method="post" name="myForm" action="add_to_car.php">                                        
-                                        <input type="hidden" name="quantity" value="1">
-                                        <input type="hidden" name="name" value="botan 3d commondity">
-                                        <input type="hidden" name="price" value="4490">
-                                        <input type="hidden" name="num" value="z9">
-                                        <input class="btn btn-outline-primary btn-block mt-2" type='submit' value='加入購物車'>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 mb-3">
-                            <div class="card">
-                                <img class="card-img-top" src="./images/product/eva_13.png" alt="eva13">
-                                <div class="card-body">
-                                    <h4 class="card-title">Hololive「赤井心 HAACHAMA」T恤黑</h4>
-                                    <p class="card-text">可選尺寸</p>
-                                    <h5 class="card-text text-danger">NT$&nbsp;1280</h5>
-                                    <a href="z13.html" class="btn btn-outline-secondary btn-block">查看商品</a>
-                                    <form method="post" name="myForm" action="add_to_car.php">                                        
-                                        <input type="hidden" name="quantity" value="1">
-                                        <input type="hidden" name="name" value="rusia birthday set">
-                                        <input type="hidden" name="price" value="4490">
-                                        <input type="hidden" name="num" value="z9">
-                                        <input class="btn btn-outline-primary btn-block mt-2" type='submit' value='加入購物車'>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 mb-3">
-                            <div class="card">
-                                <img class="card-img-top" src="./images/product/eva_14.png" alt="eva14">
-                                <div class="card-body">
-                                    <h4 class="card-title">Hololive「赤井心 HAACHAMA」T恤白</h4>
-                                    <p class="card-text">可選尺寸</p>
-                                    <h5 class="card-text text-danger">NT$&nbsp;1280</h5>
-                                    <a href="z14.html" class="btn btn-outline-secondary btn-block">查看商品</a>
-                                    <form method="post" name="myForm" action="add_to_car.php">                                        
-                                        <input type="hidden" name="quantity" value="1">
-                                        <input type="hidden" name="name" value="rusia birthday set">
-                                        <input type="hidden" name="price" value="4490">
-                                        <input type="hidden" name="num" value="z9">
-                                        <input class="btn btn-outline-primary btn-block mt-2" type='submit' value='加入購物車'>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 mb-3">
-                            <div class="card">
-                                <img class="card-img-top" src="./images/product/eva_15.png" alt="eva15">
-                                <div class="card-body">
-                                    <h4 class="card-title">Hololive 赤井心 2020 誕生日紀念組 </h4>
-                                    <p class="card-text">附特典</p>
-                                    <h5 class="card-text text-danger">NT$&nbsp;3700</h5>
-                                    <a href="z15.html" class="btn btn-outline-secondary btn-block">查看商品</a>
-                                    <form method="post" name="myForm" action="add_to_car.php">                                        
-                                        <input type="hidden" name="quantity" value="1">
-                                        <input type="hidden" name="name" value="rusia birthday set">
-                                        <input type="hidden" name="price" value="4490">
-                                        <input type="hidden" name="num" value="z9">
-                                        <input class="btn btn-outline-primary btn-block mt-2" type='submit' value='加入購物車'>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 mb-3">
-                            <div class="card">
-                                <img class="card-img-top" src="./images/product/eva_16.png" alt="eva16">
-                                <div class="card-body">
-                                    <h4 class="card-title">Hololive Gawr Gura Bath Towels</h4>
-                                    <p class="card-text">70*140CM</p>
-                                    <h5 class="card-text text-danger">NT$&nbsp;860</h5>
-                                    <a href="z16.html" class="btn btn-outline-secondary btn-block">查看商品</a>
-                                    <form method="post" name="myForm" action="add_to_car.php">                                        
-                                        <input type="hidden" name="quantity" value="1">
-                                        <input type="hidden" name="name" value="rusia birthday set">
-                                        <input type="hidden" name="price" value="4490">
-                                        <input type="hidden" name="num" value="z9">
-                                        <input class="btn btn-outline-primary btn-block mt-2" type='submit' value='加入購物車'>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 mb-3">
-                            <div class="card">
-                                <img class="card-img-top" src="./images/product/eva_17.png" alt="eva17">
-                                <div class="card-body">
-                                    <h4 class="card-title">Hololive Gawr Gura 手機殼 </h4>
-                                    <p class="card-text">限iphone</p>
-                                    <h5 class="card-text text-danger">NT$&nbsp;1200</h5>
-                                    <a href="z17.html" class="btn btn-outline-secondary btn-block">查看商品</a>
-                                    <form method="post" name="myForm" action="add_to_car.php">                                        
-                                        <input type="hidden" name="quantity" value="1">
-                                        <input type="hidden" name="name" value="rusia birthday set">
-                                        <input type="hidden" name="price" value="4490">
-                                        <input type="hidden" name="num" value="z9">
-                                        <input class="btn btn-outline-primary btn-block mt-2" type='submit' value='加入購物車'>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 mb-3">
-                            <div class="card">
-                                <img class="card-img-top" src="./images/product/eva_18.png" alt="eva18">
-                                <div class="card-body">
-                                    <h4 class="card-title">Hololive 天音かなた 週年紀念套組</h4>
-                                    <p class="card-text">附特典</p>
-                                    <h5 class="card-text text-danger">NT$&nbsp;5250</h5>
-                                    <a href="z18.html" class="btn btn-outline-secondary btn-block">查看商品</a>
-                                    <form method="post" name="myForm" action="add_to_car.php">                                        
-                                        <input type="hidden" name="quantity" value="1">
-                                        <input type="hidden" name="name" value="rusia birthday set">
-                                        <input type="hidden" name="price" value="4490">
-                                        <input type="hidden" name="num" value="z9">
-                                        <input class="btn btn-outline-primary btn-block mt-2" type='submit' value='加入購物車'>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                        <?php
+                        include_once("function.php");
+                        for($i=0;$i<9;$i++){
+
+                        }
+                        $dataone = getSortedProductByPriceASC(2);//get all products which category == fruit
                         
+                        ?>      
                         <!-- 商品/end -->
                         <!-- 分頁/start -->
                         <div class="col-12 mt-3 mb-5">
@@ -256,10 +157,10 @@
                                         <a class="page-link" href="shop.php">1</a>
                                     </li>
                                     <li class="page-item">
-                                        <a class="page-link" href="#">2</a>
+                                        <a class="page-link" href="page2.php">2</a>
                                     </li>
                                     <li class="page-item">
-                                        <a class="page-link" href="page3.html">3</a>
+                                        <a class="page-link" href="page3.php">3</a>
                                     </li>
                                     <li class="page-item">
                                         <a class="page-link" href="#" aria-label="Next">
@@ -323,16 +224,16 @@
                             <h4 class="title-color">產品分類</h4>
                             <ul class="sidebar-product-category">
                                 <li>
-                                    <a href="tagset.html">套組</a>
+                                    <a href="food_dessert.php">食品/點心類</a>
                                 </li>
                                 <li>
-                                    <a href="taggarment.html">衣服</a>
+                                    <a href="tea_drink.php">茶葉/飲品類</a>
                                 </li>
                                 <li>
-                                    <a href="tagbrochore.html">畫冊</a>
+                                    <a href="acc.php">裝飾/飾品類</a>
                                 </li>
                                 <li>
-                                    <a href="tagothers.html">其他</a>
+                                    <a href="fruit.php">水果類</a>
                                 </li>
                             </ul>
                         </div>
@@ -352,28 +253,15 @@
                 <div class="col-12 col-md-6 mb-3">
                     <ul class="footer-menu">
                         <li><a href="index.php">首頁</a></li>
-                        <li><a href="about.php">HOLOLIVE</a></li>
-                        <li><a href="shop.php">HOLO商城</a></li>
-                        <li><a href="job.php">成員簡介</a></li>
-                        <li><a href="https://schedule.hololive.tv/">直播時間</a></li>
-                        <li><a href="login.html">登入</a></li>
-                        <li><a href="cart.php">購物車</a></li>
-                        <li><a href="checkout.php">結帳</a></li>
+                        <li><a href="#">客服中心</a></li>
+                        <li><a href="#">常見問題</a></li>
+                        <li><a href="#">隱私條款聲明</a></li>
                     </ul>
                 </div>
                 <!-- 選單連結/end -->
-                <!-- 訂閱/start -->
-                <div class="col-12 col-md-6 mb-3">
-                    <h6 class="text-white">留下 E-mail，訂閱hololive，可搶先獲得最新的資訊喔！</h6>
-                    <form action="addemail.php" method="post" name="myForm">
-                        <input name="email" type="email" class="form-control mt-2 mb-2" placeholder="請輸入e-mail">
-                        <button type="submit" class="btn btn-primary float-right send-btn">傳送</button>
-                    </form>
-                </div>
-                <!-- 訂閱/end -->
                 <!-- 版權所有/start -->
                 <div class="col-12 mt-3">
-                    <p class="text-white text-center">© Copyright 2021 hololive</p>
+                    <p class="text-white text-center">© Copyright 2021 NTUT </p>
                 </div>
                 <!-- 版權所有/end -->
             </div>
