@@ -1,6 +1,6 @@
 <?php
     require_once("dbtools.inc.php");
-    function getProuctFomId($id){
+    function getProuctFromId($id){
         //建立資料連接
         $link = create_connection();
         $sql = "SELECT * FROM `Product` Where Product_ID = $id";
@@ -9,6 +9,18 @@
         mysqli_free_result($result);
         return $data;
     }
+
+    function getImagesFromProductId($id){
+        $link = create_connection();
+        $sql = "SELECT * FROM `Product_Image` Where Product_ID = $id";
+        $result = execute_sql($link, "DBS_project", $sql);
+        $data = array();
+        while ($rs = mysqli_fetch_array($result)){
+            array_push($data, $rs["Image_path"]);
+        }
+        return $data;
+    }
+
 
     function createProductBox($id){
         $link = create_connection(); 

@@ -2,7 +2,9 @@
 
     $Product_ID = $_POST["currentProductID"];
     include("function.php");
-    $data = getProuctFomId('1');
+    $data = getProuctFromId($Product_ID);
+    $images = getImagesFromProductId($Product_ID);
+    $img_num = count($images);
 ?>
 
 
@@ -71,7 +73,7 @@
                     <div class="row">
                         <!-- 商品照片/start -->
                         <div class="col-12 col-md-6">
-                            <img src="./images/product2/9.jpg" alt="eva1" class="img-fluid w-100">
+                            <img src=<?= $images[0] ?> alt="eva1" class="img-fluid w-100">
                         </div>
                         <!-- 商品照片/end -->
                         <!-- 商品介紹/start -->
@@ -106,9 +108,11 @@
                             </ul>
                             <div class="tab-content" id="ProductTabContent">
                                 <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-                                    <img class="productpic" src="./images/product2/9_1.jpg">
-                                    <img class="productpic" src="./images/product2/9_2.jpg">
-                                    <img class="productpic" src="./images/product2/9_3.jpg">
+                                    <?php 
+                                    for($i = 0; $i < $img_num; $i++){
+                                        echo '<img class="productpic" src='.$images[$i].'>';
+                                    }
+                                    ?>
                                 </div>
                                 
                                 <div class="tab-pane fade" id="specification" role="tabpanel" aria-labelledby="specification-tab">

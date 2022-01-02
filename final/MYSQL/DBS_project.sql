@@ -1,5 +1,5 @@
-create database DBS_project;
-use DBS_project;
+-- create database DBS_project;
+-- use DBS_project;
 -- drop database DBS_project;
 
 create table `Member`(
@@ -15,7 +15,7 @@ create table `Member`(
 -- describe `Member`;
 -- delete from `Member` where member_ID; -- 清空
 -- alter table `Member` AUTO_INCREMENT = 1; -- 重設id為1開始
--- select * from `Member`; -- 查詢 
+select * from `Member`; -- 查詢 
 
 create table Product(
 	Product_ID int not null AUTO_INCREMENT,
@@ -29,10 +29,10 @@ create table Product(
     Product_standerd VARCHAR(2000),
 	primary key (Product_ID)
 );
-drop table Product;
+-- drop table Product;
 insert into Product(Product_name, Product_descripition, Price, stock, Publish_date, Product_detail, Product_standerd)
-values("佳德糕餅 - 鳳梨酥","原味鳳梨酥禮盒(12入)","750", 100, '2021-12-29',"詳細資訊","standerd"),
-("佳德糕餅 - 蔥軋餅","蔥軋餅(24片)禮盒","750", 100, '2021-12-29',"詳細資訊","standerd"),
+values("佳德糕餅 - 鳳梨酥","原味鳳梨酥禮盒(12入)","750", 100, '2021-12-29',"詳細資訊","我是好吃的鳳梨酥"),
+("佳德糕餅 - 蔥軋餅","蔥軋餅(24片)禮盒","750", 100, '2021-12-29',"詳細資訊","我是好吃的蔥軋餅"),
 ("佳德糕餅 - 太陽餅","太陽餅(12入)","416", 100, '2021-12-29',"詳細資訊","standerd"),
 ("阿聰師 - 阿聰師的小芋仔","阿聰師的小芋仔(6入) (蛋奶素)","430", 100, '2021-12-29',"詳細資訊","standerd"),
 ("阿聰師 - 大甲芋頭Q禮盒","大甲芋頭Q禮盒(麻糬)(9入)","352", 100, '2021-12-29',"詳細資訊","standerd"),
@@ -61,6 +61,12 @@ values("佳德糕餅 - 鳳梨酥","原味鳳梨酥禮盒(12入)","750", 100, '20
 ("金煌芒果 大粒香甜黃金寶","金煌芒果(果農新鮮現採 產地直送)","480", 100, '2021-12-29',"詳細資訊","standerd"),
 ("苗栗大湖草莓","草莓新鮮現採出貨/盒","700", 100, '2021-12-29',"詳細資訊","standerd"),
 ("九如檸檬 大斤數含運組合","檸檬(新鮮現採 當日直送)/盒","800", 100, '2021-12-29',"詳細資訊","standerd");
+
+-- delete from `Product` where Product_ID;
+-- alter table `Product` AUTO_INCREMENT = 1;
+
+select * from Product;
+
 
 create table Category(
 	Product_ID int not null,
@@ -106,6 +112,8 @@ create table Product_Image(
 	primary key (Image_ID, Product_ID),
 	foreign key (Product_ID) references Product(Product_ID) on update cascade on delete cascade
 );
+
+
 insert into Product_Image(Product_ID, Image_path)
 value(1,"./images/food_dessert_images/1.jpg"),
 (2,"./images/food_dessert_images/2.jpg"),
@@ -137,6 +145,11 @@ value(1,"./images/food_dessert_images/1.jpg"),
 (25,"./images/fruit/2.jpg"),
 (26,"./images/fruit/3.jpg"),
 (27,"./images/fruit/4.jpg");
+
+select * from Product_image;
+-- delete from `Product_image` where Product_ID;
+-- alter table `Product_image` AUTO_INCREMENT = 1;
+
 
 create table Coupon(
 	Coupon_ID int not null AUTO_INCREMENT,
