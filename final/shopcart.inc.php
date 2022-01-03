@@ -2,7 +2,7 @@
 
     function check_login()
     {
-        require("dbtools.inc.ph");
+        require("dbtools.inc.php");
         if (empty($_COOKIE["passed"] || empty($_COOKIE["id"])))
         {
             echo "<script type='text/javascript'>";
@@ -14,21 +14,22 @@
         {
             $id = (int) $_COOKIE["id"];
         }
+        return $id;
     }
 
     function store_shopping_cart()
     {
-        check_login();
+        $id = check_login();
         $link = create_connection();
 
         $product_id_array = array_map('intval', explode(',', $_COOKIE["num_list"]));
-        $product_ammount_array = array_map('intval', explode(',', $_COOKIE["quantity_list"]));
+        $product_amount_array = array_map('intval', explode(',', $_COOKIE["quantity_list"]));
 
         for ($i = 0; $i < count($product_id_array); $i++)
         {
             $product_id = $product_id_array[$i];
-            $product_ammount = $product_ammount_array[$i];
-            $sql = "UPDATE `shoppingcart` SET Product_ammount = '$product_ammount' WHERE (Product_ID = '$product_id' AND Member_ID = '$id');";
+            $product_amount = $product_amount_array[$i];
+            $sql = "UPDATE `shoppingcart` SET Product_amount = '$product_amount' WHERE (Product_ID = '$product_id' AND Member_ID = '$id');";
             $result = execute_sql($link, "DBS_project", $sql);
             if ($result)
             {
@@ -37,7 +38,7 @@
             else
             {
                 mysqli_free_result($result);
-                $sql = "INSERT INTO `shoppingcart` VALUES ('$id', '$product_id', '$product_ammount');";
+                $sql = "INSERT INTO `shoppingcart` VALUES ('$id', '$product_id', '$product_amount');";
                 $result = execute_sql($link, "DBS_project", $sql);
                 if ($result)
                 {
@@ -57,14 +58,15 @@
 
     function retrieve_shopping_cart() {
         
-        check_login();
+        $id = check_login();
         
         $link = create_connection();
-        $sql = "SELECT Product_ID, Product_ammount FROM `shoppingcart` WHERE (Member_ID = '$id');";
+        $sql = "SELECT Product_ID, Product_amount FROM `shoppingcart` WHERE (Member_ID = '$id');";
         $result = execute_sql($link, "DBS_project", $sql);
     
+        echo(mysqli_num_rows($result));
         //  購物車沒有東西
-        if (mysqli_num_rows($result) == 0)
+        if (mysqli_num_rows($result) === 0)
         {
             setcookie("num_list", "");
             setcookie("name_list", "");
@@ -75,11 +77,11 @@
         else
         {
             $product_id_array = array();
-            $product_ammount_array = arrays();
+            $product_amount_array = arrays();
             while ($data = mysqli_fetch_array($result,MYSQLI_NUM))
             {
                 $product_id_array[] = $data['Product_ID'];
-                $product_ammount_array[] = $data['Product_ammount'];
+                $product_amount_array[] = $data['Product_amount'];
             }
             mysqli_free_result($result);
 
@@ -95,7 +97,7 @@
                 mysqli_free_result($result);
             }
             setcookie("num_list", implode(",", $product_id_array));
-            setcookie("quantity_list", implode(",", $product_ammount_array));
+            setcookie("quantity_list", implode(",", $product_amount_array));
             setcookie("name_list", implode(",", $product_name_array));
             setcookie("price_list", implode(",", $product_price_array));
         }

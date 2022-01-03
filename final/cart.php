@@ -31,7 +31,7 @@
             $namelen=count($namearray);
         }
        
-        $pricearray = explode(",",$price);
+        $pricearray = array_map('intval', explode(",",$price));
         $numarray=explode(",",$num);	
         $sum=0;
         for($i=0;$i<$namelen;$i++)
