@@ -179,14 +179,14 @@
                 <div class="col-12 col-md-3">
                     <div class="row">
                         <!-- 搜尋/start -->
-                        <div class="col-12 mb-5">
+                        <!-- <div class="col-12 mb-5">
                             <form action="">
                                 <input type="test" class="form-control" id="PorductSearch" placeholder="搜尋...">
                             </form>
-                        </div>
+                        </div> -->
                         <!-- 搜尋/end -->
                         <!-- 購物清單/start -->
-                        <div class="col-12 mb-5">
+                        <!-- <div class="col-12 mb-5">
                             <h4 class="title-color">購物車</h4>
                             <div class="d-block sidebar-product-list">
                                 <a class="text-white remove" data-toggle="tooltip" data-placement="top" title="是否確定要移除">X</a>
@@ -217,7 +217,7 @@
                             <div class="d-block mt-1 mb-3">
                                 <a href="checkout.php" class="btn btn-secondary btn-block text-white" role="button">結帳</a>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- 購物清單/end -->
                         <!-- 產品分類/start -->
                         <div class="col-12 mb-5">

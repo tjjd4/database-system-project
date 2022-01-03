@@ -1,5 +1,16 @@
-<?php
-
+<?php 
+    if (empty($_COOKIE["id"]))
+    {
+        setcookie("id", "guest");
+        setcookie("NickName", "guest");
+        $id = "guest";
+        $NickName = "guest";
+    }
+    else
+    {
+        $id = $_COOKIE["id"];
+        $NickName = $_COOKIE["NickName"];
+    }
     $Product_ID = $_POST["currentProductID"];
     include("function.php");
     $data = getProuctFromId($Product_ID);
@@ -31,7 +42,7 @@
     <header class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <a class="navbar-brand" href="index.php">
-                <img src="./images/logo.png" alt="logo">
+                <img id="logo1" src="./images/logo.png" alt="logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -43,20 +54,32 @@
                         <a class="nav-link" href="index.php">首頁</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.php">HOLOLIVE</a>
+                        <a class="nav-link" href="about.php">關於我們</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="shop.php">HOLO商城</a>
+                        <a class="nav-link" href="shop.php">買名產囉</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="job.php">人物介紹</a>
+                        <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://schedule.hololive.tv/">直播時間與連結</a>
+                        <input name="search_product" type="text" class="form-control" id="search_product" placeholder="搜尋...">
                     </li>
                 </ul>
+                
                 <div class="ml-auto">
-                    <a href="login.html" class="btn btn-outline-info text-info my-2 my-sm-0">登入</a>
+                    <?php
+                            if ($id == "guest")
+                            {
+                              echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
+                            }
+                            else
+                            {
+                                echo"$NickName 你好";
+                                echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
+                            }
+                    ?>
+                    
                     <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
                     <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
                 </div>
@@ -137,16 +160,16 @@
                 <!-- 產品說明/end -->
                 <!-- 側邊欄/start -->
                 <div class="col-12 col-md-3">
-                    <div class="rpw">
+                    <div class="row">
                         <!-- 搜尋/start -->
-                        <div class="col-12 mb-5">
+                        <!-- <div class="col-12 mb-5">
                             <form action="">
                                 <input type="test" class="form-control" id="PorductSearch" placeholder="搜尋...">
                             </form>
-                        </div>
+                        </div> -->
                         <!-- 搜尋/end -->
                         <!-- 購物清單/start -->
-                        <div class="col-12 mb-5">
+                        <!-- <div class="col-12 mb-5">
                             <h4 class="title-color">購物車</h4>
                             <div class="d-block sidebar-product-list">
                                 <a class="text-white remove" data-toggle="tooltip" data-placement="top" title="是否確定要移除">X</a>
@@ -177,17 +200,23 @@
                             <div class="d-block mt-1 mb-3">
                                 <a href="checkout.php" class="btn btn-secondary btn-block text-white" role="button">結帳</a>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- 購物清單/end -->
                         <!-- 產品分類/start -->
                         <div class="col-12 mb-5">
                             <h4 class="title-color">產品分類</h4>
                             <ul class="sidebar-product-category">
                                 <li>
-                                    <a href="#">生日套組</a>
+                                    <a href="food_dessert.php">食品/點心類</a>
                                 </li>
                                 <li>
-                                    <a href="#">兔田佩克拉</a>
+                                    <a href="tea_drink.php">茶葉/飲品類</a>
+                                </li>
+                                <li>
+                                    <a href="acc.php">裝飾/飾品類</a>
+                                </li>
+                                <li>
+                                    <a href="fruit.php">水果類</a>
                                 </li>
                             </ul>
                         </div>
@@ -207,28 +236,24 @@
                 <div class="col-12 col-md-6 mb-3">
                     <ul class="footer-menu">
                         <li><a href="index.php">首頁</a></li>
-                        <li><a href="about.php">HOLOLIVE</a></li>
-                        <li><a href="shop.php">HOLO商城</a></li>
-                        <li><a href="job.php">成員簡介</a></li>
-                        <li><a href="https://schedule.hololive.tv/">直播時間</a></li>
-                        <li><a href="login.html">登入</a></li>
-                        <li><a href="cart.php">購物車</a></li>
-                        <li><a href="checkout.php">結帳</a></li>
+                        <li><a href="#">客服中心</a></li>
+                        <li><a href="#">常見問題</a></li>
+                        <li><a href="#">隱私條款聲明</a></li>
                     </ul>
                 </div>
                 <!-- 選單連結/end -->
                 <!-- 訂閱/start -->
-                <div class="col-12 col-md-6 mb-3">
+                <!-- <div class="col-12 col-md-6 mb-3">
                     <h6 class="text-white">留下 E-mail，訂閱hololive，可搶先獲得最新的資訊喔！</h6>
                     <form action="addemail.php" method="post" name="myForm">
                         <input name="email" type="email" class="form-control mt-2 mb-2" placeholder="請輸入e-mail">
                         <button type="submit" class="btn btn-primary float-right send-btn">傳送</button>
                     </form>
-                </div>
+                </div> -->
                 <!-- 訂閱/end -->
                 <!-- 版權所有/start -->
                 <div class="col-12 mt-3">
-                    <p class="text-white text-center">© Copyright 2021 hololive</p>
+                    <p class="text-white text-center">© Copyright 2021 NTUT </p>
                 </div>
                 <!-- 版權所有/end -->
             </div>

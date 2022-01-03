@@ -22,8 +22,8 @@
     $link = create_connection();
 				
     //刪除帳號
-    $sql = "DELETE FROM info Where account = '$id'";
-    $result = execute_sql($link, "holomember", $sql);
+    $sql = "DELETE FROM member Where Member_id = '$id'";
+    $result = execute_sql($link, "dbs_project", $sql);
 		
     //關閉資料連接
     mysqli_close($link);
