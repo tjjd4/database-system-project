@@ -6,6 +6,7 @@
     else
     {
         $id = $_COOKIE["id"];
+        $NickName = $_COOKIE["NickName"]; 
     }
 ?>
 <!DOCTYPE html>
@@ -60,7 +61,7 @@
                             }
                             else
                             {
-                                echo"$id 你好";
+                                echo"<a href='main.php'>$NickName</a> 你好";
                                 echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
                             }
                     ?>

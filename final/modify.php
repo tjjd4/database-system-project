@@ -1,7 +1,6 @@
 <?php
   //檢查 cookie 中的 passed 變數是否等於 TRUE 
-  $passed = $_COOKIE{"passed"};
-	
+  $passed = $_COOKIE["passed"];
   //如果 cookie 中的 passed 變數不等於 TRUE
   //表示尚未登入網站，將使用者導向首頁 index.php
   if ($passed != "TRUE")
@@ -16,17 +15,18 @@
   {
     require_once("dbtools.inc.php");
 		
-    $id = $_COOKIE{"id"};
-		
+    $id = $_COOKIE["id"];
+    // print($id);
     //建立資料連接
     $link = create_connection();
 				
     //執行 SELECT 陳述式取得使用者資料
-    $sql = "SELECT * FROM info Where account = '$id'";
-    $result = execute_sql($link, "holomember", $sql);
+    $sql = "SELECT * FROM member Where Member_id = '$id'";
+    $result = execute_sql($link, "dbs_project", $sql);
 		
     $row = mysqli_fetch_assoc($result);  
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

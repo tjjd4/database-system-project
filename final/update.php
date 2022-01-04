@@ -25,8 +25,8 @@
     $link = create_connection();
 				
     //執行 UPDATE 陳述式來更新使用者資料
-    $sql = "UPDATE info SET password = '$password',email = '$email' WHERE account ='$id'";
-    $result = execute_sql($link, "holomember", $sql);
+    $sql = "UPDATE Member SET Member_password = '$password',Email = '$email' WHERE Member_ID ='$id'";
+    $result = execute_sql($link, "dbs_project", $sql);
 		
     //關閉資料連接
     mysqli_close($link);
