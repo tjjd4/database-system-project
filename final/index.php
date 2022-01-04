@@ -1,4 +1,5 @@
 <?php
+    include("shopcart.inc.php");
 	if (empty($_COOKIE["id"]))
     {
         setcookie("id", "guest");
