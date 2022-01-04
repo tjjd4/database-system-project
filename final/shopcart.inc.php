@@ -56,7 +56,8 @@
     }
 
 
-    function retrieve_shopping_cart() {
+    function retrieve_shopping_cart()
+    {
         
         $id = check_login();
         
