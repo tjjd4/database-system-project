@@ -1,5 +1,7 @@
 <?php
 
+    // TODO: add a function that removes items from the cart, both from cookies and DB.
+
     // Update the cart when an item is added.
     function update_shopping_cart($product_id, $product_amount)
     {
@@ -37,6 +39,12 @@
 
         for ($i = 0; $i < count($product_id_array); $i++)
         {
+            if ($product_id_array[$i] == 0)
+            {
+                array_splice($product_id_array, $i, 1);
+                array_splice($product_amount_array, $i, 1);
+            }
+
             if ($product_id_array[$i] == $product_id)
             {
                 $product_amount_array[$i] = $product_amount;
@@ -73,32 +81,33 @@
     // Dumps a single item that into the DB.
     function store_shopping_cart_individually($link, $id, $product_id, $product_amount)
     {
-        $sql = "SELECT Product_ammount FROM `shoppingcart` WHERE (Product_ID = $product_id AND Member_ID = $id);";
-        $result = execute_sql($link, "DBS_project", $sql);
-        $data = mysqli_fetch_arrays($result);
-        if ($data['Product_ammount'] !== $product_amount)
+        $sql = "SELECT Product_amount FROM `shoppingcart` WHERE (Product_ID = $product_id AND Member_ID = $id);";
+        $result_select = execute_sql($link, "DBS_project", $sql);
+        $data = mysqli_fetch_array($result_select);
+        if(mysqli_num_rows($result_select) === 0)
+        {
+            $sql = "INSERT INTO `shoppingcart` VALUES ($id, $product_id, $product_amount);";
+            $result_insert = execute_sql($link, "DBS_project", $sql);
+            // if ($result_insert)
+            // {
+            // }
+            // // 有問題發現
+            // else
+            // {
+            // }
+        }
+        mysqli_free_result($result_select);
+
+        if ($data['Product_amount'] !== $product_amount)
         {
             $sql = "UPDATE `shoppingcart` SET Product_amount = $product_amount WHERE (Product_ID = $product_id AND Member_ID = $id);";
-            $result = execute_sql($link, "DBS_project", $sql);
-            if ($result)
-            {
-                mysqli_free_result($result);
-            }
-            else
-            {
-                mysqli_free_result($result);
-                $sql = "INSERT INTO `shoppingcart` VALUES ($id, $product_id, $product_amount);";
-                $result = execute_sql($link, "DBS_project", $sql);
-                if ($result)
-                {
-                    mysqli_free_result($result);
-                }
-                // 有問題發現
-                else
-                {
-
-                }
-            }
+            $result_update = execute_sql($link, "DBS_project", $sql);
+            // if ($result)
+            // {   
+            // }
+            // else
+            // {                
+            // }
         }
     }
 
@@ -112,7 +121,6 @@
         $sql = "SELECT Product_ID, Product_amount FROM `shoppingcart` WHERE (Member_ID = '$id');";
         $result = execute_sql($link, "DBS_project", $sql);
     
-        echo(mysqli_num_rows($result));
         //  購物車沒有東西
         if (mysqli_num_rows($result) === 0)
         {
@@ -154,7 +162,7 @@
     // Checks login to give $id.
     function check_login()
     {
-        require("dbtools.inc.php");
+        require_once("dbtools.inc.php");
         if (empty($_COOKIE["passed"] || empty($_COOKIE["id"])))
         {
             echo "<script type='text/javascript'>";
@@ -169,3 +177,28 @@
         return $id;
     }
     
+    function retrieve_image_path_from_db($product_id)
+    {
+        if (empty($_COOKIE["id"]))
+        {
+            echo "<script type='text/javascript'>";
+            echo "alert('請登入');";
+            echo "location.replace('login.html');  ";
+            echo "</script>";
+        }
+        else
+        {
+            $id = (int) $_COOKIE["id"];
+        }
+
+        require_once("dbtools.inc.php");
+        $link = create_connection();
+        $sql = "SELECT Image_path FROM `product_image` WHERE (Product_id = '$product_id') ORDER BY Image_ID ASC LIMIT 1;";
+        $result = execute_sql($link, "DBS_project", $sql);
+        if (mysqli_num_rows($result) === 0)
+        {
+            return "./images/product/".$product_id.".png";
+        }
+        $data = mysqli_fetch_array($result);
+        return $data['Image_path'];
+    }

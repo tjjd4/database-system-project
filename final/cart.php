@@ -7,7 +7,8 @@
     {
         $id = $_COOKIE["id"];
     }
-    $id = $_COOKIE["id"];	
+    $id = $_COOKIE["id"];
+
     if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
     {
       setcookie("num_list", "");
@@ -38,6 +39,13 @@
         {
             $sum=$sum+$pricearray[$i];
         }
+
+        // TODO: remove bugfixing echo method.
+        echo('$_COOKIE["num_list"] = '.$_COOKIE["num_list"]);
+        echo('$_COOKIE["name_list"] = '.$_COOKIE["name_list"]);
+        echo('($_COOKIE["price_list"] = '.$_COOKIE["price_list"]);
+        echo('$_COOKIE["quantity_list"] = '.$_COOKIE["quantity_list"]);
+
     }
 ?>
 <!DOCTYPE html>
@@ -128,6 +136,8 @@
                                 <?php
                                     for($i=0;$i<$namelen;$i++)
                                     {
+                                        require_once("shopcart.inc.php");
+                                        $image_path = retrieve_image_path_from_db($numarray[$i]);
                                         echo"
                                         <tr>
                                             <td class='product-remove'>
@@ -135,7 +145,7 @@
                                             </td>
                                             <td class='product-thumbnail'>
                                                 <a href='$numarray[$i].html'>
-                                                    <img src='./images/product/$numarray[$i].png' alt='$numarray[$i]' class='img-fluid'>
+                                                    <img src='$image_path' alt='$numarray[$i]' class='img-fluid'>
                                                 </a>
                                             </td>
                                             <td class='product-name'>

@@ -1,5 +1,4 @@
 <?php
-    include("shopcart.inc.php");
 	if (empty($_COOKIE["id"]))
     {
         setcookie("id", "guest");
@@ -42,6 +41,15 @@
             $sum=$sum+$pricearray[$i];
         }
     }
+            include("shopcart.inc.php");
+            if ($_POST['add_shopping_cart'] && $_POST['currentProductID'])
+            {
+                if($_POST['add_shopping_cart'] == '加入購物車')
+                {
+                    $productId = $_POST['currentProductID'];
+                    update_shopping_cart($productId, 1);
+                }
+            }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -223,7 +231,6 @@
             include_once("function.php");
             $data = createProductBox('4');
             ?>
-
             
         </div>
     </section>
