@@ -1,6 +1,5 @@
 <?php
 
-    // TODO: add a function that removes items from the cart, both from cookies and DB.
     function remove_item_from_shopping_cart($product_id)
     {
         $id = check_login();
@@ -243,7 +242,7 @@
     }
 
     // Retrieves the shopping cart from the DB and stores it in Cookies
-    function retrieve_shopping_cart() // bug
+    function retrieve_shopping_cart()
     {
         
         $id = check_login();

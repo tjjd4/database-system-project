@@ -36,25 +36,33 @@
         }
        
         $pricearray = array_map('intval', explode(",",$price));
-        $numarray=explode(",",$num);	
-        $sum=0;
-        for($i=0;$i<$namelen;$i++)
-        {
-            $sum=$sum+$pricearray[$i];
-        }
+        $numarray=explode(",",$num);
+        $quantityarray=explode(",", $quantity);
     }
+    $total = array(0);
 
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
-        if ($_POST['remove_from_shopping_cart'] && $_POST['currentProductID'])
+        if ((isset($_POST['remove_from_shopping_cart']) || (isset($_POST['modify_from_shopping_cart']) && isset($_POST['quantity']))) && isset($_POST['currentProductID']))
         {
-            if($_POST['remove_from_shopping_cart'] == 'X')
+            $productId = $_POST['currentProductID'];
+            if(isset($_POST['remove_from_shopping_cart']))
             {
-                $productId = $_POST['currentProductID'];
-                remove_item_from_shopping_cart($productId, 1);
-                header("Refresh:0");
+                remove_item_from_shopping_cart($productId);
             }
-        }
+            if((isset($_POST['modify_from_shopping_cart']) && isset($_POST['quantity'])))
+            {
+                if ($_POST['quantity'] == 0)
+                {
+                    remove_item_from_shopping_cart($productId);
+                }
+                else
+                {
+                    $new_quantity = $_POST['quantity'];
+                    update_shopping_cart($productId, $new_quantity);
+                }
+            }
+        }   header("Refresh:0");
     }
 ?>
 <!DOCTYPE html>
@@ -147,27 +155,30 @@
                                     {
                                         require_once("shopcart.inc.php");
                                         $image_path = retrieve_image_path_from_db($numarray[$i]);
+                                        $subTotal = $pricearray[$i] * $quantityarray[$i];
+                                        array_push($total, $subTotal);
                                         echo"
                                         <tr>
-                                            <td class='product-remove' method='post'>
-                                                <form method='post' name='remove_from_shopping_cart'>
-                                                    <input class='remove text-white' type='submit' data-toggle='tooltip' data-placement='top' name='remove_from_shopping_cart' title='是否確定要移除' value='X'>
+                                        <form method='post' name='remove_from_shopping_cart'>
+                                                <td class='product-remove'>
+                                                    <input class='btn btn-success pull-left' type='submit' data-toggle='tooltip' data-placement='top' name='modify_from_shopping_cart' title='是否確定要改訂單' value='O'>
+                                                    <input class='btn btn-danger pull-right' type='submit' data-toggle='tooltip' data-placement='top' name='remove_from_shopping_cart' title='是否確定要移除' value='x'>
                                                     <input type='hidden' name='currentProductID' value='$numarray[$i]'>
-                                                </form>
-                                            </td>
-                                            <td class='product-thumbnail'>
-                                                <a href='$numarray[$i].html'>
-                                                    <img src='$image_path' alt='$numarray[$i]' class='img-fluid'>
-                                                </a>
-                                            </td>
-                                            <td class='product-name'>
-                                                <a href='$numarray[$i].html'>$namearray[$i]</a>
-                                            </td>
-                                            <td class='product-price'>NT$&nbsp;$pricearray[$i]</td>
-                                            <td class='product-quantity'>
-                                                <input type='number' value='$quantity[$i]'>
-                                            </td>
-                                            <td class='product-subtotal'>NT$&nbsp;$pricearray[$i]</td>
+                                                </td>
+                                                <td class='product-thumbnail'>
+                                                    <a href='$numarray[$i].html'>
+                                                        <img src='$image_path' alt='$numarray[$i]' class='img-fluid'>
+                                                    </a>
+                                                </td>
+                                                <td class='product-name'>
+                                                    <a href='$numarray[$i].html'>$namearray[$i]</a>
+                                                </td>
+                                                <td class='product-price'>NT$&nbsp;$pricearray[$i]</td>
+                                                <td class='product-quantity'>
+                                                    <input type='number' min='0' name='quantity'value='$quantityarray[$i]'>
+                                                </td>
+                                                <td class='product-subtotal'>NT$&nbsp;$subTotal</td>
+                                            </form>
                                         </tr>
                                         ";
                                     }
@@ -217,13 +228,13 @@
                             <tbody>
                                 <tr class="bg-info">
                                     <td>總計</td>
-                                    <td>NT$&nbsp;<?php echo"$sum" ?></td>
+                                    <td>NT$&nbsp;<?php echo (array_sum($total)) ?></td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <td colspan="2">
-                                        <a href="checkout.php" class="btn btn-outline-info btn-lg float-right <?php echo(($sum > 0) ? "enabled" : "disabled"); ?>">前往結帳</a>
+                                        <a href="checkout.php" class="btn btn-outline-info btn-lg float-right <?php echo(((array_sum($total)) > 0) ? "enabled" : "disabled"); ?>">前往結帳</a>
                                     </td>
                                 </tr>
                                 <tr>

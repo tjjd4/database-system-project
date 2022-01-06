@@ -12,29 +12,11 @@
         $NickName = $_COOKIE["NickName"];
     }
     $Product_ID = $_POST["currentProductID"];
+    unset($_POST);
     include("function.php");
     $data = getProuctFromId($Product_ID);
     $images = getImagesFromProductId($Product_ID);
     $img_num = count($images);
-
-    $Product_ID = $_REQUEST['currentProductID'];
-    $Quantity = $_REQUEST['product_quantity']; // null
-    include("shopcart.inc.php");
-    if ($_SERVER["REQUEST_METHOD"] == "POST")
-    {
-        if ($Product_ID != Null && $Quantity != Null)
-        {
-            add_shopping_cart($Product_ID, $Quantity);
-            // if($_REQUEST['checkout']) // problem
-            // {
-            //     header("Location: checkout.php");
-            // }
-            // if($_REQUEST['add_shopping_cart']) // problem
-            // {
-            //     header("Location: cart.php");
-            // }
-        }
-    }
 ?>
 
 
@@ -121,24 +103,23 @@
                         <!-- 商品介紹/start -->
                         <div class="col-12 col-md-6">
                             <h4 class="mb-3 title-color"><?= $data["Product_name"]?></h4>
+                            <h6 class="text-warning"><?=$data["Product_descripition"] ?></h6>
                             <h5 class="text-danger">
                                 NT$&nbsp;<?=$data["Price"]?>
                             </h5>
                             <!-- <p class="mt-4">台中太陽堂傳統太陽餅 30入</p> -->
+                            <form method="post" action="product_page_transition.php" class="d-inline-block">
                             <div class="d-block mb-3">
                                 <p class="mb-0 d-inline-block">數量</p>
-                                <form method="post" class="d-inline-block">
-                                    <input type="number" class="form-control w-25" name="product_quantity" id="product_quantity"  min="1" value="1">
-                                    <input type="hidden" name="currentProductID" value="<?php echo $Product_ID?>">
-                                </form>
+                                    <input type="number" class="form-control w-25" name="quantity"  min="1" value="1">
                             </div>
-                            <div class="mb-3">
-                                <form> 
-                                    <!--  method="" action="test.php" -->
-                                    <a href="cart.php" class="btn btn-primary text-white mr-1">加入購物車</a>
-                                    <a href="checkout.php" class="btn btn-secondary text-white">直接結帳</a>
-                                </form>
+                            <div class="mb-3"> 
+                                    <input type="submit" class="btn btn-primary text-white mr-1" name="shopping_cart" value="加入購物車">
+                                    <input type="submit" class="btn btn-secondary text-white" name="checkout" value="直接結帳">
+                                    <input type="hidden" name="currentProductID" value="<?php echo($Product_ID)?>">
+                                
                             </div>
+                            </form>
                             <p class="d-block text-secondary">產品分類：<span>食品/點心類</span></p>
                         </div>
                         <!-- 商品介紹/end -->
