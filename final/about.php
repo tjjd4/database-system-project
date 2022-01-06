@@ -156,7 +156,7 @@
                     <span class="h4 text-muted">電資三</span>
                 </div>
                 <div class="col-12 col-md-2">
-                    <span class="h4 text-muted">資工三</span>
+                    <span class="h4 text-muted">資財四乙</span>
                 </div>
                 <div class="col-12 col-md-2">
                     <span class="h4 text-muted">資工三</span>
