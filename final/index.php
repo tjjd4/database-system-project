@@ -49,7 +49,7 @@
                 if($_POST['add_shopping_cart'] == '加入購物車')
                 {
                     $productId = $_POST['currentProductID'];
-                    update_shopping_cart($productId, 1);
+                    add_shopping_cart($productId, 1);
                 }
             }
     }

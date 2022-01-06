@@ -1,4 +1,7 @@
 <?php
+    include("shopcart.inc.php");
+    retrieve_shopping_cart();
+
 	if (empty($_COOKIE["id"]))
     {
       setcookie("id", "guest");	
@@ -41,8 +44,6 @@
         }
     }
 
-    include("shopcart.inc.php");
-    retrieve_shopping_cart();
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
         if ($_POST['remove_from_shopping_cart'] && $_POST['currentProductID'])
@@ -164,7 +165,7 @@
                                             </td>
                                             <td class='product-price'>NT$&nbsp;$pricearray[$i]</td>
                                             <td class='product-quantity'>
-                                                <input type='number' value='1'>
+                                                <input type='number' value='$quantity[$i]'>
                                             </td>
                                             <td class='product-subtotal'>NT$&nbsp;$pricearray[$i]</td>
                                         </tr>

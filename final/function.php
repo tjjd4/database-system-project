@@ -76,7 +76,7 @@
                             <input class="btn btn-outline-secondary btn-block" type="submit" value="查看商品">
                         </form>
                         <form method="post" name="myForm">
-                            <input class="btn btn-outline-primary btn-block mt-2" type="submit" onclick="update_shopping_cart($id, 1)" value="加入購物車">
+                            <input class="btn btn-outline-primary btn-block mt-2" type="submit" onclick="add_shopping_cart($id, 1)" value="加入購物車">
                         </form>
                     </div>
                     </div>
