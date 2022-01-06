@@ -65,13 +65,13 @@
     <header class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <a class="navbar-brand" href="index.php">
-                <img id="logo1" src="./images/logo.png" alt="logo">
+                <img src="./images/logo.png" alt="logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse " id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
                         <a class="nav-link" href="index.php">首頁</a>
@@ -85,24 +85,19 @@
                     <li class="nav-item">
                         <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
                     </li>
-                    <li class="nav-item">
-                        <input name="search_product" type="text" class="form-control" id="search_product" placeholder="搜尋...">
-                    </li>
                 </ul>
-                
                 <div class="ml-auto">
                     <?php
-                            if ($id == "guest")
+                            if ($_COOKIE["id"]=="guest")
                             {
                               echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
                             }
                             else
                             {
-                                echo"$NickName 你好";
+                                echo"<a href='main.php'>$NickName</a> 你好";
                                 echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
                             }
                     ?>
-                    
                     <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
                     <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
                 </div>
