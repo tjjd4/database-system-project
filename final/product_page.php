@@ -16,6 +16,15 @@
     $data = getProuctFromId($Product_ID);
     $images = getImagesFromProductId($Product_ID);
     $img_num = count($images);
+
+    // $_POST['add_shopping_cart'] = 0;
+    // $_REQUEST['checkout'] = 0;
+    // $_POST['product_quantity'] = 0;
+
+    
+                                    
+
+
 ?>
 
 
@@ -108,13 +117,16 @@
                             <!-- <p class="mt-4">台中太陽堂傳統太陽餅 30入</p> -->
                             <div class="d-block mb-3">
                                 <p class="mb-0 d-inline-block">數量</p>
-                                <form action="" class="d-inline-block">
-                                    <input type="number" class="form-control w-25" id="quantity" value="1">
+                                <form method="post" class="d-inline-block" action="product_page.php">
+                                    <input type="number" class="form-control w-25" name="product_quantity" id="product_quantity"  min="1" value="1">
                                 </form>
                             </div>
                             <div class="mb-3">
-                                <a href="cart.php" class="btn btn-primary text-white mr-1">加入購物車</a>
-                                <a href="checkout.php" class="btn btn-secondary text-white">直接結帳</a>
+                                <form method="post" action="product_page.php">
+                                    <input class="btn btn-primary text-white mr-1" type="submit" name="add_shopping_cart" value="加入購物車">
+                                    <input class="btn btn-secondary text-white" type="submit" name="checkout" value="直接結帳">
+                                    <input type="hidden" name="currentProductID" value="<?php echo $Product_ID?>">
+                                </form>
                             </div>
                             <p class="d-block text-secondary">產品分類：<span>食品/點心類</span></p>
                         </div>

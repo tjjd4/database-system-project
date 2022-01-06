@@ -13,10 +13,10 @@
     }
     if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
     {
-      setcookie("num_list", "");
-      setcookie("name_list", "");
-      setcookie("price_list", "");
-      setcookie("quantity_list", "");
+        setcookie("num_list", "0");
+        setcookie("name_list", "0");
+        setcookie("price_list", "0");
+        setcookie("quantity_list", "0");
       $sum=0;
       $namelen=0;
     }

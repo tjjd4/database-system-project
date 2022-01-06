@@ -1,12 +1,62 @@
 <?php
 
     // TODO: add a function that removes items from the cart, both from cookies and DB.
+    function remove_item_from_shopping_cart($product_id)
+    {
+        echo("ㄨㄟ");
+        $id = check_login();
+        $link = create_connection();
+        $product_id = (int) $product_id;
+        echo($product_id);
+        
+        remove_item_from_shopping_cart_in_cookies($product_id);
+        remove_item_from_shopping_cart_in_db($link, $id, $product_id);
+    }
+
+    function remove_item_from_shopping_cart_in_cookies($product_id)
+    {
+        $product_id_array = array_map('intval', explode(',', $_COOKIE["num_list"]));
+        $product_amount_array = array_map('intval', explode(',', $_COOKIE["quantity_list"]));
+        $product_name_array = explode(',', $_COOKIE["name_list"]);
+        $product_price_array = array_map('intval', explode(',', $_COOKIE["price_list"]));
+
+        for ($i = 0; $i < count($product_id_array); $i++)
+        {
+            if ($product_id_array[$i] == $product_id)
+            {
+                $product_id_array = \array_diff($product_id_array, [$product_id_array[$i]]);
+                $product_amount_array =  \array_diff($product_amount_array, [$product_amount_array[$i]]);
+                $product_name_array =  \array_diff($product_name_array, [$product_name_array[$i]]);
+                $product_price_array =  \array_diff($product_price_array, [$product_price_array[$i]]);
+            }
+        }
+
+        setcookie("num_list", implode(",", $product_id_array));
+        setcookie("quantity_list", implode(",", $product_amount_array));
+        setcookie("name_list", implode(",", $product_name_array));
+        setcookie("price_list", implode(",", $product_price_array));
+    }
+
+    function remove_item_from_shopping_cart_in_db($link, $id, $product_id)
+    {
+        $sql = "DELETE FROM `shoppingcart` WHERE (Product_ID = $product_id AND Member_ID = $id);";
+        $result = execute_sql($link, "DBS_project", $sql);
+        // if ($result_insert)
+        // {
+        // }
+        // // 有問題發現
+        // else
+        // {
+        // }
+    }
 
     // Update the cart when an item is added.
     function update_shopping_cart($product_id, $product_amount)
     {
         $id = check_login();
         $link = create_connection();
+        $product_id = (int) $product_id;
+        $product_amount = (int) $product_amount;
 
         update_shopping_cart_cookies($link, $id, $product_id, $product_amount);
         store_shopping_cart_individually($link, $id, $product_id, $product_amount);
@@ -39,10 +89,10 @@
 
         for ($i = 0; $i < count($product_id_array); $i++)
         {
-            if ($product_id_array[$i] == 0)
+            if ($product_id_array[$i] === 0)
             {
-                array_splice($product_id_array, $i, 1);
-                array_splice($product_amount_array, $i, 1);
+                $product_id_array = \array_diff($product_id_array, [$product_id_array[$i]]);
+                $product_amount_array =  \array_diff($product_amount_array, [$product_amount_array[$i]]);
             }
 
             if ($product_id_array[$i] == $product_id)
@@ -56,8 +106,6 @@
 
         if (!$isInCookies)
         {
-            $id = check_login();
-            $link = create_connection();
             $sql = "SELECT Product_name, Price FROM `product` WHERE (Product_ID = '$product_id');";
             $result = execute_sql($link, "DBS_project", $sql);
             $data = mysqli_fetch_array($result);
@@ -65,10 +113,10 @@
             $product_name_array = explode(',', $_COOKIE["name_list"]);
             $product_price_array = array_map('intval', explode(',', $_COOKIE["price_list"]));
 
-            $product_id_array[] = $product_id;
-            $product_amount_array[] = $product_amount;
-            $product_name_array[] = $data['Product_name'];
-            $product_price_array[] = $data['Price'];
+            array_push($product_id_array, $product_id);
+            array_push($product_amount_array, $product_amount);
+            array_push($product_name_array, $data['Product_name']);
+            array_push($product_price_array, $data['Price']);
 
             setcookie("num_list", implode(",", $product_id_array));
             setcookie("quantity_list", implode(",", $product_amount_array));
@@ -96,7 +144,6 @@
             // {
             // }
         }
-        mysqli_free_result($result_select);
 
         if ($data['Product_amount'] !== $product_amount)
         {
@@ -124,39 +171,38 @@
         //  購物車沒有東西
         if (mysqli_num_rows($result) === 0)
         {
-            setcookie("num_list", "");
-            setcookie("name_list", "");
-            setcookie("price_list", "");
-            setcookie("quantity_list", "");
+            setcookie("num_list", "0");
+            setcookie("name_list", "0");
+            setcookie("price_list", "0");
+            setcookie("quantity_list", "0");
+            return 0;
         }
 
-        else
+        
+        $product_id_array = array( );
+        $product_amount_array = array( );
+        while ($row = mysqli_fetch_row($result)) 
         {
-            $product_id_array = array();
-            $product_amount_array = arrays();
-            while ($data = mysqli_fetch_array($result,MYSQLI_NUM))
-            {
-                $product_id_array[] = $data['Product_ID'];
-                $product_amount_array[] = $data['Product_amount'];
-            }
-            mysqli_free_result($result);
-
-            $product_name_array = array();
-            $product_price_array = array();
-            foreach($product_id_array as &$product_id)
-            {
-                $sql = "SELECT Product_name, Price FROM `product` WHERE (Product_ID = '$product_id');";
-                $result = execute_sql($link, "DBS_project", $sql);
-                $data = mysqli_fetch_array($result);
-                $product_name_array[] = $data['Product_name'];
-                $product_price_array[] = $data['Price'];
-                mysqli_free_result($result);
-            }
-            setcookie("num_list", implode(",", $product_id_array));
-            setcookie("quantity_list", implode(",", $product_amount_array));
-            setcookie("name_list", implode(",", $product_name_array));
-            setcookie("price_list", implode(",", $product_price_array));
+            array_push($product_id_array, $row[0]); // Undefined array key "Product_ID"
+            array_push($product_amount_array, $row[1]); // Undefined array key "Product_amount
         }
+        mysqli_free_result($result);
+
+        $product_name_array = array();
+        $product_price_array = array();
+        foreach($product_id_array as &$product_id)
+        {
+            $sql = "SELECT Product_name, Price FROM `product` WHERE (Product_ID = '$product_id');";
+            $result = execute_sql($link, "DBS_project", $sql);
+            $data = mysqli_fetch_array($result);
+            array_push($product_name_array, $data['Product_name']); // Trying to access array offset on value of type null
+            array_push($product_price_array, $data['Price']); // Trying to access array offset on value of type null
+            mysqli_free_result($result);
+        }
+        setcookie("num_list", implode(",", $product_id_array));
+        setcookie("quantity_list", implode(",", $product_amount_array));
+        setcookie("name_list", implode(",", $product_name_array));
+        setcookie("price_list", implode(",", $product_price_array));
     }
 
     // Checks login to give $id.
@@ -201,4 +247,9 @@
         }
         $data = mysqli_fetch_array($result);
         return $data['Image_path'];
+    }
+
+    function set_url($url)
+    {
+        echo("<script>history.replaceState({},'','$url');</script>");
     }
