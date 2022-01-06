@@ -1,4 +1,7 @@
 <?php
+    include("shopcart.inc.php");
+    retrieve_shopping_cart();
+
 	if (empty($_COOKIE["id"]))
     {
       setcookie("id", "guest");	
@@ -7,13 +10,14 @@
     {
         $id = $_COOKIE["id"];
     }
-    $id = $_COOKIE["id"];	
+    $id = $_COOKIE["id"];
+
     if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
     {
-      setcookie("num_list", "");
-      setcookie("name_list", "");
-      setcookie("price_list", "");
-      setcookie("quantity_list", "");
+        setcookie("num_list", "0");
+        setcookie("name_list", "0");
+        setcookie("price_list", "0");
+        setcookie("quantity_list", "0");
       $sum=0;
       $namelen=0;
     }
@@ -31,12 +35,25 @@
             $namelen=count($namearray);
         }
        
-        $pricearray = explode(",",$price);
+        $pricearray = array_map('intval', explode(",",$price));
         $numarray=explode(",",$num);	
         $sum=0;
         for($i=0;$i<$namelen;$i++)
         {
             $sum=$sum+$pricearray[$i];
+        }
+    }
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST")
+    {
+        if ($_POST['remove_from_shopping_cart'] && $_POST['currentProductID'])
+        {
+            if($_POST['remove_from_shopping_cart'] == 'X')
+            {
+                $productId = $_POST['currentProductID'];
+                remove_item_from_shopping_cart($productId, 1);
+                header("Refresh:0");
+            }
         }
     }
 ?>
@@ -128,14 +145,19 @@
                                 <?php
                                     for($i=0;$i<$namelen;$i++)
                                     {
+                                        require_once("shopcart.inc.php");
+                                        $image_path = retrieve_image_path_from_db($numarray[$i]);
                                         echo"
                                         <tr>
-                                            <td class='product-remove'>
-                                                <a class='remove text-white' data-toggle='tooltip' data-placement='top' title='是否確定要移除'>X</a>
+                                            <td class='product-remove' method='post'>
+                                                <form method='post' name='remove_from_shopping_cart'>
+                                                    <input class='remove text-white' type='submit' data-toggle='tooltip' data-placement='top' name='remove_from_shopping_cart' title='是否確定要移除' value='X'>
+                                                    <input type='hidden' name='currentProductID' value='$numarray[$i]'>
+                                                </form>
                                             </td>
                                             <td class='product-thumbnail'>
                                                 <a href='$numarray[$i].html'>
-                                                    <img src='./images/product/$numarray[$i].png' alt='$numarray[$i]' class='img-fluid'>
+                                                    <img src='$image_path' alt='$numarray[$i]' class='img-fluid'>
                                                 </a>
                                             </td>
                                             <td class='product-name'>
@@ -143,7 +165,7 @@
                                             </td>
                                             <td class='product-price'>NT$&nbsp;$pricearray[$i]</td>
                                             <td class='product-quantity'>
-                                                <input type='number' value='1'>
+                                                <input type='number' value='$quantity[$i]'>
                                             </td>
                                             <td class='product-subtotal'>NT$&nbsp;$pricearray[$i]</td>
                                         </tr>

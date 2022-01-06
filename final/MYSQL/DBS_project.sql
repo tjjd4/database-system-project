@@ -164,10 +164,15 @@ create table ShoppingCart(
 	Member_ID int not null,
     Product_ID int not null,
 	Product_amount INT not null,
-	primary key (Member_ID),
+	primary key (Member_ID, Product_ID),
 	foreign key (Member_ID) references `Member`(Member_ID) on update cascade on delete cascade,
     foreign key (Product_ID) references Product(Product_ID) on update cascade on delete cascade
 );
+
+-- to fix the previous primary key for already table ShoppingCart, use:
+	-- 	ALTER TABLE ShoppingCart   
+	--   DROP PRIMARY KEY,
+	--   ADD PRIMARY KEY (Member_ID, Product_ID);
 
 create table `Order`(
 	Order_ID int not null AUTO_INCREMENT, 

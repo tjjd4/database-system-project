@@ -16,6 +16,25 @@
     $data = getProuctFromId($Product_ID);
     $images = getImagesFromProductId($Product_ID);
     $img_num = count($images);
+
+    $Product_ID = $_REQUEST['currentProductID'];
+    $Quantity = $_REQUEST['product_quantity']; // null
+    include("shopcart.inc.php");
+    if ($_SERVER["REQUEST_METHOD"] == "POST")
+    {
+        if ($Product_ID != Null && $Quantity != Null)
+        {
+            add_shopping_cart($Product_ID, $Quantity);
+            // if($_REQUEST['checkout']) // problem
+            // {
+            //     header("Location: checkout.php");
+            // }
+            // if($_REQUEST['add_shopping_cart']) // problem
+            // {
+            //     header("Location: cart.php");
+            // }
+        }
+    }
 ?>
 
 
@@ -108,13 +127,17 @@
                             <!-- <p class="mt-4">台中太陽堂傳統太陽餅 30入</p> -->
                             <div class="d-block mb-3">
                                 <p class="mb-0 d-inline-block">數量</p>
-                                <form action="" class="d-inline-block">
-                                    <input type="number" class="form-control w-25" id="quantity" value="1">
+                                <form method="post" class="d-inline-block">
+                                    <input type="number" class="form-control w-25" name="product_quantity" id="product_quantity"  min="1" value="1">
+                                    <input type="hidden" name="currentProductID" value="<?php echo $Product_ID?>">
                                 </form>
                             </div>
                             <div class="mb-3">
-                                <a href="cart.php" class="btn btn-primary text-white mr-1">加入購物車</a>
-                                <a href="checkout.php" class="btn btn-secondary text-white">直接結帳</a>
+                                <form> 
+                                    <!--  method="" action="test.php" -->
+                                    <a href="cart.php" class="btn btn-primary text-white mr-1">加入購物車</a>
+                                    <a href="checkout.php" class="btn btn-secondary text-white">直接結帳</a>
+                                </form>
                             </div>
                             <p class="d-block text-secondary">產品分類：<span>食品/點心類</span></p>
                         </div>
