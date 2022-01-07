@@ -1,33 +1,3 @@
-
-Skip to content
-Pull requests
-Issues
-Marketplace
-Explore
-@FangWen-Hao
-seantjjd4 /
-database-project
-Public
-
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-
-    Insights
-
-database-project/final/product_page.php /
-@FangWen-Hao
-FangWen-Hao Merge branch 'main' of https://github.com/seantjjd4/database-project …
-Latest commit 317bf8b 21 hours ago
-History
-2 contributors
-@FangWen-Hao
-@DeYiHung
-273 lines (267 sloc) 14.4 KB
 <?php 
     if (empty($_COOKIE["id"]))
     {
