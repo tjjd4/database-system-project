@@ -4,13 +4,16 @@
 
 	if (empty($_COOKIE["id"]))
     {
-      setcookie("id", "guest");	
+        setcookie("id", "guest");
+        setcookie("NickName", "guest");
+        $id = "guest";
+        $NickName = "guest";
     }
     else
     {
         $id = $_COOKIE["id"];
+        $NickName = $_COOKIE["NickName"];
     }
-    $id = $_COOKIE["id"];
 
     if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
     {
@@ -87,7 +90,7 @@
     <header class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <a class="navbar-brand" href="index.php">
-                <img src="./images/logo.png" alt="logo">
+                <img id="logo1" src="./images/logo.png" alt="logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -99,30 +102,32 @@
                         <a class="nav-link" href="index.php">首頁</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.php">HOLOLIVE</a>
+                        <a class="nav-link" href="about.php">關於我們</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="shop.php">HOLO商城</a>
+                        <a class="nav-link" href="shop.php">買名產囉</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="job.php">人物介紹</a>
+                        <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://schedule.hololive.tv/">直播時間與連結</a>
+                        <input name="search_product" type="text" class="form-control" id="search_product" placeholder="搜尋...">
                     </li>
                 </ul>
+                
                 <div class="ml-auto">
                     <?php
-                            if ($_COOKIE["id"]=="guest")
+                            if ($id == "guest")
                             {
                               echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
                             }
                             else
                             {
-                                echo"$id 你好";
+                                echo"<a href='main.php'>$NickName</a> 你好";
                                 echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
                             }
                     ?>
+                    
                     <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
                     <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
                 </div>

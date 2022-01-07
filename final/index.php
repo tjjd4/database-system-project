@@ -41,10 +41,10 @@
             $sum=$sum+$pricearray[$i];
         }
     }
-    include("shopcart.inc.php");
+    include_once("shopcart.inc.php");
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {  
-            if ($_POST['add_shopping_cart'] && $_POST['currentProductID'])
+            if (isset($_POST['add_shopping_cart']) && isset($_POST['currentProductID']))
             {
                 if($_POST['add_shopping_cart'] == '加入購物車')
                 {

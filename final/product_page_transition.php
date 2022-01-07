@@ -10,7 +10,7 @@
             if(isset($_POST['checkout']))
             {
                 echo "<script type='text/javascript'>";
-                echo "location.replace('checkout');  ";
+                echo "location.replace('checkout.php');  ";
                 echo "</script>";
             }
             if(isset($_POST['shopping_cart']))
