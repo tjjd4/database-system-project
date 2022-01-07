@@ -28,15 +28,12 @@
         }
         else{
             $namearray = explode(",",$name);
+            $quantityarray=explode(",", $quantity);
             $namelen=count($namearray);
         }
        
         $pricearray = array_map('intval', explode(",",$price));	
         $sum=0;
-        for($i=0;$i<$namelen;$i++)
-        {
-            $sum=$sum+$pricearray[$i];
-        }
     }
 
 ?>
@@ -186,9 +183,11 @@
                                 </tr>
                             <?php
                                 for($i=0;$i<$namelen;$i++){
+                                    $subsum = $pricearray[$i] * $quantityarray[$i];
+                                    $sum=$sum + $subsum;
                                     echo" <tr>
-                                    <td>$namearray[$i]</td>
-                                    <td>NT$&nbsp;$pricearray[$i]</td>
+                                    <td>$namearray[$i]　ｘ　$quantityarray[$i]</td>
+                                    <td>NT$&nbsp;$subsum</td>
                                      </tr>";
                                 }
                             ?>

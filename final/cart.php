@@ -171,12 +171,12 @@
                                                     <input type='hidden' name='currentProductID' value='$numarray[$i]'>
                                                 </td>
                                                 <td class='product-thumbnail'>
-                                                    <a href='$numarray[$i].html'>
+                                                    <a href='product_page.php?currentProductID=$numarray[$i]'>
                                                         <img src='$image_path' alt='$numarray[$i]' class='img-fluid'>
                                                     </a>
                                                 </td>
                                                 <td class='product-name'>
-                                                    <a href='$numarray[$i].html'>$namearray[$i]</a>
+                                                    <a href='product_page.php?currentProductID=$numarray[$i]'>$namearray[$i]</a>
                                                 </td>
                                                 <td class='product-price'>NT$&nbsp;$pricearray[$i]</td>
                                                 <td class='product-quantity'>

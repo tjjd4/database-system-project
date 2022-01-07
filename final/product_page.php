@@ -11,8 +11,7 @@
         $id = $_COOKIE["id"];
         $NickName = $_COOKIE["NickName"];
     }
-    $Product_ID = $_POST["currentProductID"];
-    unset($_POST);
+    $Product_ID = $_REQUEST["currentProductID"];
     include("function.php");
     $data = getProuctFromId($Product_ID);
     $images = getImagesFromProductId($Product_ID);
