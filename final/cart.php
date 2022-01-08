@@ -14,15 +14,15 @@
         $id = $_COOKIE["id"];
         $NickName = $_COOKIE["NickName"];
     }
-
+	
     if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
     {
         setcookie("num_list", "0");
         setcookie("name_list", "0");
         setcookie("price_list", "0");
         setcookie("quantity_list", "0");
-      $sum=0;
-      $namelen=0;
+        $sum=0;
+        $namelen=0;
     }
     else
     {	
@@ -39,7 +39,7 @@
         }
        
         $pricearray = array_map('intval', explode(",",$price));
-        $numarray=explode(",",$num);
+        $numarray=explode(",",$num);	
         $quantityarray=explode(",", $quantity);
     }
     $total = array(0);
@@ -90,7 +90,7 @@
     <header class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <a class="navbar-brand" href="index.php">
-                <img id="logo1" src="./images/logo.png" alt="logo">
+                <img id="logo1" src="./images/logo.png" alt="logo"> 
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -105,7 +105,7 @@
                         <a class="nav-link" href="about.php">關於我們</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="shop.php">買名產囉</a>
+                    <a class="nav-link" href="shop.php">買名產囉</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
@@ -114,7 +114,7 @@
                         <input name="search_product" type="text" class="form-control" id="search_product" placeholder="搜尋...">
                     </li>
                 </ul>
-                
+
                 <div class="ml-auto">
                     <?php
                             if ($id == "guest")
@@ -127,7 +127,7 @@
                                 echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
                             }
                     ?>
-                    
+
                     <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
                     <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
                 </div>
@@ -164,7 +164,7 @@
                                         array_push($total, $subTotal);
                                         echo"
                                         <tr>
-                                        <form method='post' name='remove_from_shopping_cart'>
+                                            <form method='post' name='remove_from_shopping_cart'>
                                                 <td class='product-remove'>
                                                     <input class='btn btn-success pull-left' type='submit' data-toggle='tooltip' data-placement='top' name='modify_from_shopping_cart' title='是否確定要改訂單' value='O'>
                                                     <input class='btn btn-danger pull-right' type='submit' data-toggle='tooltip' data-placement='top' name='remove_from_shopping_cart' title='是否確定要移除' value='x'>
@@ -239,7 +239,11 @@
                             <tfoot>
                                 <tr>
                                     <td colspan="2">
-                                        <a href="checkout.php" class="btn btn-outline-info btn-lg float-right <?php echo(((array_sum($total)) > 0) ? "enabled" : "disabled"); ?>">前往結帳</a>
+                                        <?php
+                                            include_once("function.php");
+                                            $data = chooseCoupon($id); 
+                                        ?>
+                                        <!-- <a href="checkout.php" class="btn btn-outline-info btn-lg float-right">前往結帳</a> -->
                                     </td>
                                 </tr>
                                 <tr>
