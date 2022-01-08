@@ -1,7 +1,4 @@
 <?php
-    include("shopcart.inc.php");
-    retrieve_shopping_cart();
-
 	if (empty($_COOKIE["id"]))
     {
         setcookie("id", "guest");
@@ -14,13 +11,13 @@
         $id = $_COOKIE["id"];
         $NickName = $_COOKIE["NickName"];
     }
-
+    $id = $_COOKIE["id"];	
     if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
     {
-        setcookie("num_list", "0");
-        setcookie("name_list", "0");
-        setcookie("price_list", "0");
-        setcookie("quantity_list", "0");
+      setcookie("num_list", "");
+      setcookie("name_list", "");
+      setcookie("price_list", "");
+      setcookie("quantity_list", "");
       $sum=0;
       $namelen=0;
     }
@@ -39,33 +36,12 @@
         }
        
         $pricearray = array_map('intval', explode(",",$price));
-        $numarray=explode(",",$num);
-        $quantityarray=explode(",", $quantity);
-    }
-    $total = array(0);
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST")
-    {
-        if ((isset($_POST['remove_from_shopping_cart']) || (isset($_POST['modify_from_shopping_cart']) && isset($_POST['quantity']))) && isset($_POST['currentProductID']))
+        $numarray=explode(",",$num);	
+        $sum=0;
+        for($i=0;$i<$namelen;$i++)
         {
-            $productId = $_POST['currentProductID'];
-            if(isset($_POST['remove_from_shopping_cart']))
-            {
-                remove_item_from_shopping_cart($productId);
-            }
-            if((isset($_POST['modify_from_shopping_cart']) && isset($_POST['quantity'])))
-            {
-                if ($_POST['quantity'] == 0)
-                {
-                    remove_item_from_shopping_cart($productId);
-                }
-                else
-                {
-                    $new_quantity = $_POST['quantity'];
-                    update_shopping_cart($productId, $new_quantity);
-                }
-            }
-        }   header("Refresh:0");
+            $sum=$sum+$pricearray[$i];
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -90,7 +66,7 @@
     <header class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <a class="navbar-brand" href="index.php">
-                <img id="logo1" src="./images/logo.png" alt="logo">
+                <img src="./images/logo.png" alt="logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -102,32 +78,30 @@
                         <a class="nav-link" href="index.php">首頁</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.php">關於我們</a>
+                        <a class="nav-link" href="about.php">HOLOLIVE</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="shop.php">買名產囉</a>
+                        <a class="nav-link" href="shop.php">HOLO商城</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
+                        <a class="nav-link" href="job.php">人物介紹</a>
                     </li>
                     <li class="nav-item">
-                        <input name="search_product" type="text" class="form-control" id="search_product" placeholder="搜尋...">
+                        <a class="nav-link" href="https://schedule.hololive.tv/">直播時間與連結</a>
                     </li>
                 </ul>
-                
                 <div class="ml-auto">
                     <?php
-                            if ($id == "guest")
+                            if ($_COOKIE["id"]=="guest")
                             {
                               echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
                             }
                             else
                             {
-                                echo"<a href='main.php'>$NickName</a> 你好";
+                                echo"$NickName 你好";
                                 echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
                             }
                     ?>
-                    
                     <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
                     <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
                 </div>
@@ -158,32 +132,24 @@
                                 <?php
                                     for($i=0;$i<$namelen;$i++)
                                     {
-                                        require_once("shopcart.inc.php");
-                                        $image_path = retrieve_image_path_from_db($numarray[$i]);
-                                        $subTotal = $pricearray[$i] * $quantityarray[$i];
-                                        array_push($total, $subTotal);
                                         echo"
                                         <tr>
-                                        <form method='post' name='remove_from_shopping_cart'>
-                                                <td class='product-remove'>
-                                                    <input class='btn btn-success pull-left' type='submit' data-toggle='tooltip' data-placement='top' name='modify_from_shopping_cart' title='是否確定要改訂單' value='O'>
-                                                    <input class='btn btn-danger pull-right' type='submit' data-toggle='tooltip' data-placement='top' name='remove_from_shopping_cart' title='是否確定要移除' value='x'>
-                                                    <input type='hidden' name='currentProductID' value='$numarray[$i]'>
-                                                </td>
-                                                <td class='product-thumbnail'>
-                                                    <a href='product_page.php?currentProductID=$numarray[$i]'>
-                                                        <img src='$image_path' alt='$numarray[$i]' class='img-fluid'>
-                                                    </a>
-                                                </td>
-                                                <td class='product-name'>
-                                                    <a href='product_page.php?currentProductID=$numarray[$i]'>$namearray[$i]</a>
-                                                </td>
-                                                <td class='product-price'>NT$&nbsp;$pricearray[$i]</td>
-                                                <td class='product-quantity'>
-                                                    <input type='number' min='0' name='quantity'value='$quantityarray[$i]'>
-                                                </td>
-                                                <td class='product-subtotal'>NT$&nbsp;$subTotal</td>
-                                            </form>
+                                            <td class='product-remove'>
+                                                <a class='remove text-white' data-toggle='tooltip' data-placement='top' title='是否確定要移除'>X</a>
+                                            </td>
+                                            <td class='product-thumbnail'>
+                                                <a href='$numarray[$i].html'>
+                                                    <img src='./images/product/$numarray[$i].png' alt='$numarray[$i]' class='img-fluid'>
+                                                </a>
+                                            </td>
+                                            <td class='product-name'>
+                                                <a href='$numarray[$i].html'>$namearray[$i]</a>
+                                            </td>
+                                            <td class='product-price'>NT$&nbsp;$pricearray[$i]</td>
+                                            <td class='product-quantity'>
+                                                <input type='number' value='1'>
+                                            </td>
+                                            <td class='product-subtotal'>NT$&nbsp;$pricearray[$i]</td>
                                         </tr>
                                         ";
                                     }
@@ -233,13 +199,17 @@
                             <tbody>
                                 <tr class="bg-info">
                                     <td>總計</td>
-                                    <td>NT$&nbsp;<?php echo (array_sum($total)) ?></td>
+                                    <td>NT$&nbsp;<?php echo"$sum" ?></td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <td colspan="2">
-                                        <a href="checkout.php" class="btn btn-outline-info btn-lg float-right <?php echo(((array_sum($total)) > 0) ? "enabled" : "disabled"); ?>">前往結帳</a>
+                                        <?php
+                                            include_once("function.php");
+                                            $data = chooseCoupon($_COOKIE["id"]); 
+                                        ?>
+                                        <!-- <a href="checkout.php" class="btn btn-outline-info btn-lg float-right">前往結帳</a> -->
                                     </td>
                                 </tr>
                                 <tr>

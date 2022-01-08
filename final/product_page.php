@@ -11,7 +11,7 @@
         $id = $_COOKIE["id"];
         $NickName = $_COOKIE["NickName"];
     }
-    $Product_ID = $_REQUEST["currentProductID"];
+    $Product_ID = $_POST["currentProductID"];
     include("function.php");
     $data = getProuctFromId($Product_ID);
     $images = getImagesFromProductId($Product_ID);
@@ -75,7 +75,7 @@
                             }
                             else
                             {
-                                echo"<a href='main.php'>$NickName</a> 你好";
+                                echo"$NickName 你好";
                                 echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
                             }
                     ?>
@@ -102,23 +102,20 @@
                         <!-- 商品介紹/start -->
                         <div class="col-12 col-md-6">
                             <h4 class="mb-3 title-color"><?= $data["Product_name"]?></h4>
-                            <h6 class="text-warning"><?=$data["Product_descripition"] ?></h6>
                             <h5 class="text-danger">
                                 NT$&nbsp;<?=$data["Price"]?>
                             </h5>
                             <!-- <p class="mt-4">台中太陽堂傳統太陽餅 30入</p> -->
-                            <form method="post" action="product_page_transition.php" class="d-inline-block">
                             <div class="d-block mb-3">
                                 <p class="mb-0 d-inline-block">數量</p>
-                                    <input type="number" class="form-control w-25" name="quantity"  min="1" value="1">
+                                <form action="" class="d-inline-block">
+                                    <input type="number" class="form-control w-25" id="quantity" value="1">
+                                </form>
                             </div>
-                            <div class="mb-3"> 
-                                    <input type="submit" class="btn btn-primary text-white mr-1" name="shopping_cart" value="加入購物車">
-                                    <input type="submit" class="btn btn-secondary text-white" name="checkout" value="直接結帳">
-                                    <input type="hidden" name="currentProductID" value="<?php echo($Product_ID)?>">
-                                
+                            <div class="mb-3">
+                                <a href="cart.php" class="btn btn-primary text-white mr-1">加入購物車</a>
+                                <a href="checkout.php" class="btn btn-secondary text-white">直接結帳</a>
                             </div>
-                            </form>
                             <p class="d-block text-secondary">產品分類：<span>食品/點心類</span></p>
                         </div>
                         <!-- 商品介紹/end -->
@@ -208,43 +205,20 @@
                         <!-- 產品分類/start -->
                         <div class="col-12 mb-5">
                             <h4 class="title-color">產品分類</h4>
-                            <div class="card-deck mt-2 product-categories" style="overflow-y: auto; overflow-x: hidden">
-                                <div class="row">
-                                    <a href="food_dessert.php" class="card">
-                                        <!-- <img class="card-img-top" src="./images/slider_1.png" alt="套組"> -->
-                                        <img class="card-img-top" src="./images/product_class/3.jpg" alt="食物">
-                                        <div class="card-body bg-dark card-title text-white text-center">
-                                            <h5>食品/</h5>
-                                            <h5>點心類</h5>
-                                        </div>
-                                    </a>
-                                    <a href="tea_drink.php" class="card">
-                                        <!-- <img class="card-img-top" src="./images/service_2.png" alt="卡套"> -->
-                                        <img class="card-img-top" src="./images/product_class/2.jpg" alt="飲料">
-                                        <div class="card-body bg-dark card-title text-white text-center">
-                                            <h5>茶葉/</h5>
-                                            <h5>飲品類</h5>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="row">
-                                    <a href="acc.php" class="card">
-                                        <!-- <img class="card-img-top" src="./images/service_3.png" alt="衣服"> -->
-                                        <img class="card-img-top" src="./images/product_class/4.jpg" alt="裝飾">
-                                        <div class="card-body bg-dark card-title text-white text-center">
-                                            <h5>裝飾/</h5>
-                                            <h5>飾品類</h5>
-                                        </div>
-                                    </a>
-                                    <a href="fruit.php" class="card">
-                                        <!-- <img class="card-img-top" src="./images/service_4.png" alt="滑鼠墊"> -->
-                                        <img class="card-img-top" src="./images/product_class/1.jpg" alt="水果">
-                                        <div class="card-body bg-dark card-title text-white text-center">
-                                            <h5>水果類</h5>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
+                            <ul class="sidebar-product-category">
+                                <li>
+                                    <a href="food_dessert.php">食品/點心類</a>
+                                </li>
+                                <li>
+                                    <a href="tea_drink.php">茶葉/飲品類</a>
+                                </li>
+                                <li>
+                                    <a href="acc.php">裝飾/飾品類</a>
+                                </li>
+                                <li>
+                                    <a href="fruit.php">水果類</a>
+                                </li>
+                            </ul>
                         </div>
                         <!-- 產品分類/end -->
                     </div>
@@ -293,18 +267,3 @@
     </script>
 </body>
 </html>
-
-    © 2022 GitHub, Inc.
-
-    Terms
-    Privacy
-    Security
-    Status
-    Docs
-    Contact GitHub
-    Pricing
-    API
-    Training
-    Blog
-    About
-

@@ -1,4 +1,6 @@
 <?php
+    require_once("dbtools.inc.php");
+    include("shopcart.inc.php");
 	if (empty($_COOKIE["id"]))
     {
         setcookie("id", "guest");
@@ -13,10 +15,10 @@
     }
     if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
     {
-        setcookie("num_list", "0");
-        setcookie("name_list", "0");
-        setcookie("price_list", "0");
-        setcookie("quantity_list", "0");
+      setcookie("num_list", "");
+      setcookie("name_list", "");
+      setcookie("price_list", "");
+      setcookie("quantity_list", "");
       $sum=0;
       $namelen=0;
     }
@@ -40,18 +42,6 @@
         {
             $sum=$sum+$pricearray[$i];
         }
-    }
-    include_once("shopcart.inc.php");
-    if ($_SERVER["REQUEST_METHOD"] == "POST")
-    {  
-            if (isset($_POST['add_shopping_cart']) && isset($_POST['currentProductID']))
-            {
-                if($_POST['add_shopping_cart'] == '加入購物車')
-                {
-                    $productId = $_POST['currentProductID'];
-                    add_shopping_cart($productId, 1);
-                }
-            }
     }
 ?>
 <!DOCTYPE html>
@@ -167,6 +157,23 @@
         </div>
     </section>
     <!-- 廣告/end -->
+
+    <!-- 領取優惠券/start -->
+    <section class="container mt-5">
+        <div class="row">
+            <div class="col-4">
+                <div class="card-deck mt-1 product-categories" style="height:100px;">
+                    <a href="coupon.php" class="card" style="height:10px;">
+                        <div class="card-body bg-success">
+                            <h4 class="card-title text-white text-center">點我領取優惠券</h4>
+                        </div>
+                    </a>              
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 領取優惠券/end -->
+
     <!-- 產品分類/start -->
     <section class="container mt-5">
         <div class="row">
@@ -234,6 +241,7 @@
             include_once("function.php");
             $data = createProductBox('4');
             ?>
+
             
         </div>
     </section>
