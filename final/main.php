@@ -95,8 +95,8 @@
         </div>
         <div class="row mt-5">
             <div class="col-12 col-md-4">
-                <div href="#" class="card mb-3">
-                    <img class="card-img-top" src="./images/chibiame.gif" alt="LG-GP-0001">
+                <div href="#" class="card h-100 mb-3">
+                    <img class="card-img-top" src="./images/chibiame-modify.gif" alt="LG-GP-0001">
                     <div class="card-body">
                        <a href="modify.php" class="btn btn-outline-secondary btn-block">修改會員資料</a>
                         
@@ -105,8 +105,8 @@
             </div>
             
             <div class="col-12 col-md-4">
-                <div href="#" class="card mb-3">
-                    <img class="card-img-top" src="./images/chibiame2.gif" alt="LG-GP-0001">
+                <div href="#" class="card h-100 mb-3">
+                    <img class="card-img-top" src="./images/chibiame-product_list.gif" alt="LG-GP-0001">
                     <div class="card-body">
                         <a href="product_list.php" class="btn btn-outline-secondary btn-block">管理商品</a>                      
                     </div>
@@ -124,8 +124,8 @@
             </div> -->
 
             <div class="col-12 col-md-4">
-                <div href="#" class="card mb-3">
-                    <img class="card-img-top" src="./images/chibiame3.gif" alt="LG-GP-0001">
+                <div href="#" class="card mb-3 h-100">
+                    <img class="card-img-top" src="./images/chibiame-index.gif" alt="LG-GP-0001">
                     <div class="card-body">
                         <a href="index.php" class="btn btn-outline-secondary btn-block">返回首頁</a>
                         
