@@ -1,5 +1,5 @@
--- create database DBS_project;
--- use DBS_project;
+create database DBS_project;
+use DBS_project;
 
 -- drop database DBS_project;
 
@@ -21,7 +21,7 @@ select * from `Member`; -- 查詢
 create table Product(
 	Product_ID int not null AUTO_INCREMENT,
 	Product_name VARCHAR(50) not null,
-    Product_descripition varchar(50) not null,
+    Product_description varchar(50) not null,
 	Price INT not null,
 	Stock INT not null,
 	Publish_date DATETIME not null,
@@ -31,7 +31,7 @@ create table Product(
 	primary key (Product_ID)
 );
 -- drop table Product;
-insert into Product(Product_name, Product_descripition, Price, stock, Publish_date, Product_detail, Product_standerd)
+insert into Product(Product_name, Product_description, Price, stock, Publish_date, Product_detail, Product_standerd)
 values("佳德糕餅 - 鳳梨酥","原味鳳梨酥禮盒(12入)","750", 100, '2021-12-29',"詳細資訊","我是好吃的鳳梨酥"),
 ("佳德糕餅 - 蔥軋餅","蔥軋餅(24片)禮盒","750", 100, '2021-12-29',"詳細資訊","我是好吃的蔥軋餅"),
 ("佳德糕餅 - 太陽餅","太陽餅(12入)","416", 100, '2021-12-29',"詳細資訊","standerd"),
@@ -65,9 +65,6 @@ values("佳德糕餅 - 鳳梨酥","原味鳳梨酥禮盒(12入)","750", 100, '20
 
 -- delete from `Product` where Product_ID;
 -- alter table `Product` AUTO_INCREMENT = 1;
-
-select * from Product;
-
 
 create table Category(
 	Product_ID int not null,
@@ -169,13 +166,6 @@ create table ShoppingCart(
 	foreign key (Member_ID) references `Member`(Member_ID) on update cascade on delete cascade,
     foreign key (Product_ID) references Product(Product_ID) on update cascade on delete cascade
 );
-<<<<<<< HEAD
-e previous primary key for already table ShoppingCart, use:
-	-- 	ALTER TABLE ShoppingCart   
-	--   DROP PRIMARY KEY,
-	--   ADD PRIMARY KEY (Member_ID, Product_ID);
-iver_method VARCHAR(20),
-=======
 
 -- to fix the previous primary key for already table ShoppingCart, use:
 	-- 	ALTER TABLE ShoppingCart   
@@ -189,7 +179,6 @@ create table `Order`(
 	Payment_method VARCHAR(20),
 	Payment_Date DATETIME,
 	Deliver_method VARCHAR(20),
->>>>>>> 70e62b8f40f004d9fcdb75c3832a63b980306d0c
     Deliver_address VARCHAR(100),
 	Total_price INT,
 	Discounted_price INT,

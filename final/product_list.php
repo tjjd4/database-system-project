@@ -98,38 +98,6 @@
                                 include_once("function.php");
                                 getSortedProductListByIdASC(1);
                               ?>
-                              <tr>
-                                <td>1</td>
-                                <td>佳德糕餅 - 鳳梨酥</td>
-                                <td>原味鳳梨酥禮盒(12入)</td>
-                                <td>750</td>
-                                <td>100</td>
-                                <td>我是好吃的鳳梨酥</td>
-                                <td><button class="btn btn-outline-info text-info my-2 my-sm-0" data-toggle="modal" data-target="#editProductModal">編輯</button></td>
-                              </tr>
-    
-                              <tr>
-                                <td>1</td>
-                                <td>佳德糕餅 - 鳳梨酥</td>
-                                <td>原味鳳梨酥禮盒(12入)</td>
-                                <td>750</td>
-                                <td>100</td>
-                                <td>我是好吃的鳳梨酥</td>
-                                <td><button class="btn btn-outline-info text-info my-2 my-sm-0" data-toggle="modal" data-target="#editProductModal">編輯</button></td>
-    
-                              </tr>
-    
-                              <tr>
-                                <td>1</td>
-                                <td>佳德糕餅 - 鳳梨酥</td>
-                                <td>原味鳳梨酥禮盒(12入)</td>
-                                <td>750</td>
-                                <td>100</td>
-                                <td>我是好吃的鳳梨酥</td>
-                                <td><button class="btn btn-outline-info text-info my-2 my-sm-0" data-toggle="modal" data-target="#editProductModal">編輯</button></td>
-    
-                              </tr>
-                              
                             </tbody>
                           </table>
                     </div>
@@ -155,38 +123,38 @@
                     <div class="modal-body">
                         <form action="" method="post" name="myForm">
                             <div class="form-group">
-                                <label for="product_name">商品名稱
+                                <label for="Product_name">商品名稱
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="product_name" type="text" class="form-control" id="product_name" placeholder="必填，商品名稱" required>
+                                <input name="Product_name" type="text" class="form-control" placeholder="必填，商品名稱" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="Password">價格
+                                <label for="price">價格
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="password" type="password" class="form-control" id="Password" placeholder="必填，價格" required>
+                                <input name="price" type="text" class="form-control" placeholder="必填，價格" required>
                             </div>
                             
                             <div class="form-group">
-                                <label for="Password">存貨
+                                <label for="Stock">存貨
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="password" type="password" class="form-control" id="Password" placeholder="必填，存貨" required>
+                                <input name="Stock" type="text" class="form-control" placeholder="必填，存貨" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="Password">敘述
+                                <label for="Product_description">敘述
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="password" type="password" class="form-control" id="Password" placeholder="必填，敘述" required>
+                                <input name="Product_description" type="text" class="form-control" placeholder="必填，敘述" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="Password">standerd
+                                <label for="Standerd">standerd
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="password" type="password" class="form-control" id="Password" placeholder="必填，standerd" required>
+                                <input name="Standerd" type="text" class="form-control" placeholder="必填，standerd" required>
                             </div>
                         </form>
                     </div>
@@ -218,38 +186,38 @@
                     <div class="modal-body">
                         <form action="" method="post" name="myForm">
                             <div class="form-group">
-                                <label for="product_name">商品名稱
+                                <label for="Product_name">商品名稱
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="product_name" type="text" class="form-control" id="product_name" placeholder="必填，商品名稱" required>
+                                <input name="Product_name" type="text" class="form-control" placeholder="必填，商品名稱" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="Password">價格
+                                <label for="price">價格
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="password" type="password" class="form-control" id="Password" placeholder="必填，價格" required>
+                                <input name="price" type="text" class="form-control" placeholder="必填，價格" required>
                             </div>
                             
                             <div class="form-group">
-                                <label for="Password">存貨
+                                <label for="Stock">存貨
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="password" type="password" class="form-control" id="Password" placeholder="必填，存貨" required>
+                                <input name="Stock" type="text" class="form-control" placeholder="必填，存貨" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="Password">敘述
+                                <label for="Product_description">敘述
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="password" type="password" class="form-control" id="Password" placeholder="必填，敘述" required>
+                                <input name="Product_description" type="text" class="form-control" placeholder="必填，敘述" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="Password">standerd
+                                <label for="Standerd">standerd
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="password" type="password" class="form-control" id="Password" placeholder="必填，standerd" required>
+                                <input name="Standerd" type="text" class="form-control" placeholder="必填，standerd" required>
                             </div>
                         </form>
                     </div>

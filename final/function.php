@@ -244,7 +244,7 @@
         $link = create_connection();  
         $sql = 'SELECT P.Product_ID
                 FROM `Product` as P 
-                order by P.id ASC;';
+                order by P.Product_ID ASC;';
         $result = execute_sql($link, "DBS_project", $sql);
         $full_data = array();
         while($single_data = mysqli_fetch_array($result)) {
@@ -258,7 +258,9 @@
         $last_index = $first_index + $product_num_each_page;
         mysqli_free_result($result);
         for($i  = $first_index;$i < $last_index;$i++){
-            $txt .= createProductList($full_data[$i][0]);
+            if($full_data[$i][0] != null){
+                $txt .= createProductList($full_data[$i][0]);
+            }
         };
         echo $txt;
     }
