@@ -99,7 +99,7 @@
             <div class="row">
                 <!-- 產品說明/start -->
                 <div class="col-12 col-md-9">
-                <h4 class="title-color" style="text-align: right"><?= $data["Product_name"]?></h4>
+                <h4 class="title-color" style="text-align: center"><?= $data["Product_name"]?></h4>
                     <div class="row">
                         <!-- 商品照片/start -->
                         <div class="col-12 col-md-6">
@@ -108,9 +108,9 @@
                         <!-- 商品照片/end -->
                         <!-- 商品介紹/start -->
                         <div class="col-12 col-md-6">
-                            <h5 class="text-danger">NT$&nbsp;<?=$data["Price"]?></h5> 
-                            <h5 class="text-dark">數量
-                                <input type="number" class="form-control w-25" name="quantity"  min="1" value="1"></h5>
+                            <h5 class="text-danger">NT$&nbsp;<?=$data["Price"]?></h5>
+                            <label for="qnty" class="text-dark" style="float: left"><h5>數量：</h5></label>
+                                <input type="number" class="form-control w-25" name="quantity" id="qnty" min="1" value="1">
                             <p>
                             <h5 class="text-secondary"><?=$data["Product_description"] ?></h5>
                             <!-- <p class="mt-4">台中太陽堂傳統太陽餅 30入</p> -->

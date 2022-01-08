@@ -138,6 +138,7 @@
                                     <option>依價格排序:高至低</option>
                                 </select>
                             </form>
+                            <hr>
                         </div>
                         <!-- 排序/end -->
                         <!-- 商品/start -->

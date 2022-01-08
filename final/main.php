@@ -85,7 +85,7 @@
     <div class="container pt-3 pb-3 mt-5">
         <div class="row">
             <div class="col-12 col-md12 ">
-                <p align-middle><?php echo $NickName?>你好 歡迎來到會員中心</p>
+                <p align-middle><?php echo $NickName?> 你好，歡迎來到會員中心</p>
             </div>
         </div>
         <div class="row ">
