@@ -96,15 +96,26 @@
                             <tbody>
                               <?php
                                 include_once("function.php");
-                                getSortedProductListByIdASC(1);
+                                if (isset($_GET["page"])){
+                                    $page = $_GET["page"];
+                                }else{
+                                    $page = 1;
+                                }
+                                getSortedProductListByIdASC($page);
                               ?>
                             </tbody>
                           </table>
                     </div>
-                    
                 </div>
                 <div class="col-0 col-md-3"></div>
                 <!-- 商品table/end -->
+                <!-- 分頁/start -->
+                <?php
+                include_once("function.php");
+                getNumberOfProduct($page);
+                getPageLink($page);
+                ?>
+                <!-- 分頁/end -->
             </div>
         </div>
 
