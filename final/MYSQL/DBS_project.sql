@@ -1,5 +1,6 @@
 -- create database DBS_project;
 -- use DBS_project;
+
 -- drop database DBS_project;
 
 create table `Member`(
@@ -186,14 +187,11 @@ create table ShoppingCart(
 	foreign key (Member_ID) references `Member`(Member_ID) on update cascade on delete cascade,
     foreign key (Product_ID) references Product(Product_ID) on update cascade on delete cascade
 );
-
-create table `Order`(
-	Order_ID int not null AUTO_INCREMENT, 
-	Member_ID int not null,
-	Coupon_ID int not null,
-	Payment_method VARCHAR(20),
-	Payment_Date DATETIME,
-	Deliver_method VARCHAR(20),
+e previous primary key for already table ShoppingCart, use:
+	-- 	ALTER TABLE ShoppingCart   
+	--   DROP PRIMARY KEY,
+	--   ADD PRIMARY KEY (Member_ID, Product_ID);
+iver_method VARCHAR(20),
     Deliver_address VARCHAR(100),
 	Total_price INT,
 	Discounted_price INT,

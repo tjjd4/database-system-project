@@ -53,6 +53,26 @@
         echo $txt;
     }
 
+    function createProductList($id){
+        $link = create_connection(); 
+        $sql = "SELECT * 
+                FROM `Product`as P, `Product_Image`as PI 
+                Where P.Product_ID = $id and P.Product_ID = PI.Product_ID and PI.Image_ID = $id;";
+        $result = execute_sql($link, "DBS_project", $sql);
+        $data = mysqli_fetch_array($result);
+        mysqli_free_result($result);
+        $txt = '<tr>
+                    <td>'.$data[0].'</td>
+                    <td>'.$data[1].'</td>
+                    <td>'.$data["Product_description"].'</td>
+                    <td>'.$data["Price"].'</td>
+                    <td>'.$data["Stock"].'</td>
+                    <td>standerd</td>
+                    <td><button class="btn btn-outline-info text-info my-2 my-sm-0" data-toggle="modal" data-target="#editProductModal">編輯</button></td>
+                </tr>';
+        echo $txt;
+    }
+
     function createProductBoxForProductPage($id){ 
         $link = create_connection();  
         $sql = "SELECT * 
@@ -307,6 +327,29 @@
                      <input type="submit" class="btn btn-outline-info btn-lg float-right" value="前往結帳">
                      </form>';
         }
+        echo $txt;
+    }
+
+    function getSortedProductListByIdASC($page){ 
+        $link = create_connection();  
+        $sql = 'SELECT P.Product_ID
+                FROM `Product` as P 
+                order by P.id ASC;';
+        $result = execute_sql($link, "DBS_project", $sql);
+        $full_data = array();
+        while($single_data = mysqli_fetch_array($result)) {
+            //will output all data on each loop.
+            array_push($full_data, $single_data);
+        };
+        $num = count($full_data);
+        $txt = "";
+        $product_num_each_page = 9;
+        $first_index = ($page-1)*$product_num_each_page;
+        $last_index = $first_index + $product_num_each_page;
+        mysqli_free_result($result);
+        for($i  = $first_index;$i < $last_index;$i++){
+            $txt .= createProductList($full_data[$i][0]);
+        };
         echo $txt;
     }
 

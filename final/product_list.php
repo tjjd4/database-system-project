@@ -56,7 +56,8 @@
                     </li>
                 </ul>
                 <div class="ml-auto">
-                    <a href="login.html" class="btn btn-outline-info text-info my-2 my-sm-0">登入</a>
+                    <a href='main.php'><?= $NickName?></a> 你好
+                    <a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>
                     <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
                     <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
                 </div>
@@ -76,7 +77,8 @@
                         <button class="btn btn-outline-info text-info my-2 my-sm-0" data-toggle="modal" data-target="#addProductModal">新增商品</button>
                     </div>
                     <!-- 新增商品/end -->
-    
+                    <br/>
+                    <br/>
                     <!-- 商品table/start -->
                     <div>
                         <table class="table table-borderless">
@@ -92,6 +94,10 @@
                               </tr>
                             </thead>
                             <tbody>
+                              <?php
+                                include_once("function.php");
+                                getSortedProductListByIdASC(1);
+                              ?>
                               <tr>
                                 <td>1</td>
                                 <td>佳德糕餅 - 鳳梨酥</td>
