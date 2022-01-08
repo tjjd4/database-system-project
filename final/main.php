@@ -11,6 +11,12 @@
     header("location:index.php");
     exit();
   }
+  else
+  {
+    include_once("shopcart.inc.php");
+    retrieve_shopping_cart();
+  }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
