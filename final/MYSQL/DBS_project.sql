@@ -155,7 +155,21 @@ create table Coupon(
 	DiscountCount INT not null,
 	StartDate Datetime not null,
 	EndDate Datetime not null,
+    Image_Path TEXT not null,
 	primary key (Coupon_ID)
+);
+insert into Coupon(Coupon_ID, Coupon_Name, DiscountCount, StartDate, EndDate, Image_Path)
+value
+(1, '25元折價券', 25, '2021-12-29', '2021-01-29', "./images/coupon/25.jpg"),
+(2, '50元折價券', 50, '2021-12-29', '2021-01-29', "./images/coupon/50.jpg"),
+(3, '100元折價券', 100, '2021-12-29', '2021-01-29', "./images/coupon/100.jpg");
+
+create table CouponList(
+	`Member_ID` int not null,
+	Coupon_ID int not null,
+    Used VARCHAR(10) not null,
+	foreign key (Coupon_ID) references Coupon(Coupon_ID) on update cascade on delete cascade,
+    foreign key (Member_ID) references `Member`(Member_ID) on update cascade on delete cascade
 );
 
 create table ShoppingCart(

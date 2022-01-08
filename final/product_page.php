@@ -102,7 +102,7 @@
                         <!-- 商品介紹/start -->
                         <div class="col-12 col-md-6">
                             <h4 class="mb-3 title-color"><?= $data["Product_name"]?></h4>
-                            <h6 class="text-warning"><?=$data["Product_descripition"] ?></h6>
+                            <h6 class="text-warning"><?=$data["Product_description"] ?></h6>
                             <h5 class="text-danger">
                                 NT$&nbsp;<?=$data["Price"]?>
                             </h5>
