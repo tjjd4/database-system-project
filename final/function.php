@@ -44,8 +44,9 @@
                             <input type="hidden" name="currentProductID" value='.$id.'>
                             <input class="btn btn-outline-secondary btn-block" type="submit" value="查看商品">
                         </form>
-                        <form method="post" name="myForm">
-                            <input class="btn btn-outline-primary btn-block mt-2" type="submit" onclick="update_shopping_cart($id, 1)" value="加入購物車">
+                        <form method="post" name="add_shoping_cart">
+                            <input class="btn btn-outline-primary btn-block mt-2" type="submit" name="add_shopping_cart" value="加入購物車">
+                            <input type="hidden" name="currentProductID" value='.$id.'>
                         </form>
                     </div>
                 </div>
@@ -75,7 +76,8 @@
                             <input class="btn btn-outline-secondary btn-block" type="submit" value="查看商品">
                         </form>
                         <form method="post" name="myForm">
-                            <input class="btn btn-outline-primary btn-block mt-2" type="submit" onclick="update_shopping_cart($id, 1)" value="加入購物車">
+                            <input class="btn btn-outline-primary btn-block mt-2" type="submit" name="add_shopping_cart" value="加入購物車">
+                            <input type="hidden" name="currentProductID" value='.$id.'>
                         </form>
                     </div>
                     </div>
@@ -194,6 +196,28 @@
             };
             return $txt;  
     }
-
+    
+    function createProduct($name,$description,$price,$stock,$standerd){ 
+        $link = create_connection();  
+        $sql = 'SELECT P.Product_ID
+                FROM `Product` as P
+                order by P.Publish_date DESC;';
+        $result = execute_sql($link, "DBS_project", $sql);
+        $full_data = array();
+        while($single_data = mysqli_fetch_array($result)) {
+            //will output all data on each loop.
+            array_push($full_data, $single_data); 
+        };
+        $num = count($full_data);
+        $txt = "";
+        $product_num_each_page = 9;
+        $first_index = ($page-1)*$product_num_each_page;
+        $last_index = $first_index + $product_num_each_page;
+        mysqli_free_result($result);
+        for($i  = $first_index;$i < $last_index;$i++){
+            $txt .= createProductBoxForProductPage($full_data[$i][0]);
+        };
+        return $txt;  
+}
 
 ?>

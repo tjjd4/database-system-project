@@ -11,6 +11,12 @@
     header("location:index.php");
     exit();
   }
+  else
+  {
+    include_once("shopcart.inc.php");
+    retrieve_shopping_cart();
+  }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,7 +108,7 @@
                 <div href="#" class="card mb-3">
                     <img class="card-img-top" src="./images/chibiame2.gif" alt="LG-GP-0001">
                     <div class="card-body">
-                        <a href="" class="btn btn-outline-secondary btn-block">管理商品</a>                      
+                        <a href="product_list.php" class="btn btn-outline-secondary btn-block">管理商品</a>                      
                     </div>
                 </div>
             </div>

@@ -13,10 +13,10 @@
     }
     if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
     {
-      setcookie("num_list", "");
-      setcookie("name_list", "");
-      setcookie("price_list", "");
-      setcookie("quantity_list", "");
+        setcookie("num_list", "0");
+        setcookie("name_list", "0");
+        setcookie("price_list", "0");
+        setcookie("quantity_list", "0");
       $sum=0;
       $namelen=0;
     }
@@ -40,6 +40,18 @@
         {
             $sum=$sum+$pricearray[$i];
         }
+    }
+    include_once("shopcart.inc.php");
+    if ($_SERVER["REQUEST_METHOD"] == "POST")
+    {  
+            if (isset($_POST['add_shopping_cart']) && isset($_POST['currentProductID']))
+            {
+                if($_POST['add_shopping_cart'] == '加入購物車')
+                {
+                    $productId = $_POST['currentProductID'];
+                    add_shopping_cart($productId, 1);
+                }
+            }
     }
 ?>
 <!DOCTYPE html>
@@ -65,13 +77,13 @@
     <header class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <a class="navbar-brand" href="index.php">
-                <img id="logo1" src="./images/logo.png" alt="logo">
+                <img src="./images/logo.png" alt="logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse " id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
                         <a class="nav-link" href="index.php">首頁</a>
@@ -85,24 +97,19 @@
                     <li class="nav-item">
                         <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
                     </li>
-                    <li class="nav-item">
-                        <input name="search_product" type="text" class="form-control" id="search_product" placeholder="搜尋...">
-                    </li>
                 </ul>
-                
                 <div class="ml-auto">
                     <?php
-                            if ($id == "guest")
+                            if ($_COOKIE["id"]=="guest")
                             {
                               echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
                             }
                             else
                             {
-                                echo"$NickName 你好";
+                                echo"<a href='main.php'>$NickName</a> 你好";
                                 echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
                             }
                     ?>
-                    
                     <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
                     <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
                 </div>
@@ -222,20 +229,43 @@
                         <!-- 產品分類/start -->
                         <div class="col-12 mb-5">
                             <h4 class="title-color">產品分類</h4>
-                            <ul class="sidebar-product-category">
-                                <li>
-                                    <a href="food_dessert.php">食品/點心類</a>
-                                </li>
-                                <li>
-                                    <a href="tea_drink.php">茶葉/飲品類</a>
-                                </li>
-                                <li>
-                                    <a href="acc.php">裝飾/飾品類</a>
-                                </li>
-                                <li>
-                                    <a href="fruit.php">水果類</a>
-                                </li>
-                            </ul>
+                            <div class="card-deck mt-2 product-categories" style="overflow-y: auto; overflow-x: hidden">
+                                <div class="row">
+                                    <a href="food_dessert.php" class="card">
+                                        <!-- <img class="card-img-top" src="./images/slider_1.png" alt="套組"> -->
+                                        <img class="card-img-top" src="./images/product_class/3.jpg" alt="食物">
+                                        <div class="card-body bg-dark card-title text-white text-center">
+                                            <h5>食品/</h5>
+                                            <h5>點心類</h5>
+                                        </div>
+                                    </a>
+                                    <a href="tea_drink.php" class="card">
+                                        <!-- <img class="card-img-top" src="./images/service_2.png" alt="卡套"> -->
+                                        <img class="card-img-top" src="./images/product_class/2.jpg" alt="飲料">
+                                        <div class="card-body bg-dark card-title text-white text-center">
+                                            <h5>茶葉/</h5>
+                                            <h5>飲品類</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="row">
+                                    <a href="acc.php" class="card">
+                                        <!-- <img class="card-img-top" src="./images/service_3.png" alt="衣服"> -->
+                                        <img class="card-img-top" src="./images/product_class/4.jpg" alt="裝飾">
+                                        <div class="card-body bg-dark card-title text-white text-center">
+                                            <h5>裝飾/</h5>
+                                            <h5>飾品類</h5>
+                                        </div>
+                                    </a>
+                                    <a href="fruit.php" class="card">
+                                        <!-- <img class="card-img-top" src="./images/service_4.png" alt="滑鼠墊"> -->
+                                        <img class="card-img-top" src="./images/product_class/1.jpg" alt="水果">
+                                        <div class="card-body bg-dark card-title text-white text-center">
+                                            <h5>水果類</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <!-- 產品分類/end -->
                     </div>

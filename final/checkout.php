@@ -10,10 +10,10 @@
     $id = $_COOKIE["id"];	
     if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
     {
-      setcookie("num_list", "");
-      setcookie("name_list", "");
-      setcookie("price_list", "");
-      setcookie("quantity_list", "");
+        setcookie("num_list", "0");
+        setcookie("name_list", "0");
+        setcookie("price_list", "0");
+        setcookie("quantity_list", "0");
       $sum=0;
       $namelen=0;
     }
@@ -28,15 +28,12 @@
         }
         else{
             $namearray = explode(",",$name);
+            $quantityarray=explode(",", $quantity);
             $namelen=count($namearray);
         }
        
         $pricearray = array_map('intval', explode(",",$price));	
         $sum=0;
-        for($i=0;$i<$namelen;$i++)
-        {
-            $sum=$sum+$pricearray[$i];
-        }
     }
 
 ?>
@@ -186,9 +183,11 @@
                                 </tr>
                             <?php
                                 for($i=0;$i<$namelen;$i++){
+                                    $subsum = $pricearray[$i] * $quantityarray[$i];
+                                    $sum=$sum + $subsum;
                                     echo" <tr>
-                                    <td>$namearray[$i]</td>
-                                    <td>NT$&nbsp;$pricearray[$i]</td>
+                                    <td>$namearray[$i]　ｘ　$quantityarray[$i]</td>
+                                    <td>NT$&nbsp;$subsum</td>
                                      </tr>";
                                 }
                             ?>
