@@ -1,11 +1,36 @@
+<!-- 使用折扣 -->
+<?php
+    require_once("dbtools.inc.php");
+    if (empty($_POST["couponDiscount"])) {
+        $discount = 0;
+    } else {
+        $CouponID = $_POST["couponDiscount"];
+        $link = create_connection();
+        $sql = "SELECT *
+                FROM `Coupon`
+                Where Coupon_ID = $CouponID;";
+        $result = execute_sql($link, "DBS_project", $sql);
+        $data = mysqli_fetch_array($result);
+        mysqli_free_result($result);
+    
+        $discount = $data["DiscountCount"];
+    }
+    
+?>
+
+
 <?php
 	if (empty($_COOKIE["id"]))
-    {
-      setcookie("id", "guest");	
+    {	
+        setcookie("id", "guest");
+        setcookie("NickName", "guest");
+        $id = "guest";
+        $NickName = "guest";
     }
     else
     {
         $id = $_COOKIE["id"];
+        $NickName = $_COOKIE["NickName"];
     }
     $id = $_COOKIE["id"];	
     if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
@@ -14,8 +39,8 @@
         setcookie("name_list", "0");
         setcookie("price_list", "0");
         setcookie("quantity_list", "0");
-      $sum=0;
-      $namelen=0;
+        $sum=0;
+        $namelen=0;
     }
     else
     {	
@@ -34,6 +59,10 @@
        
         $pricearray = array_map('intval', explode(",",$price));	
         $sum=0;
+        for($i=0;$i<$namelen-1;$i++)
+        {
+            $sum=$sum+$pricearray[$i];
+        }
     }
 
 ?>
@@ -91,7 +120,7 @@
                             }
                             else
                             {
-                                echo"$id 你好";
+                                echo"$NickName 你好 ";
                                 echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
                             }
                     ?>
@@ -162,9 +191,10 @@
                             </label>
                             <input  name="address" type="text" class="form-control" id="Address" required placeholder="* 填詳細好嗎">
                         </div> 
-                        <input type="hidden" name="price" value="<?php echo $sum+60 ?>">
+                        <input type="hidden" name="price" value="<?php if(($sum-$discount+60)<0) echo 0; else echo $sum-$discount+60;?>">
                         <input type="hidden" name="account" value="<?php echo $id?>">
                         <input type="hidden" name="itemlist" value="<?php echo $num?>">
+                        <input type="hidden" name="usedCoupon" value="<?php echo $CouponID?>">
                         <button type="submit" class="btn btn-outline-info btn-lg float-right">下單購買</button>
                     </form>
                     
@@ -194,10 +224,7 @@
                                
                                 <tr>
                                     <td>小計</td>
-                                    <td>NT$&nbsp;
-                                    <?php
-                                        echo"$sum";
-                            ?>
+                                    <td>NT$&nbsp;<?php echo $sum; ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -205,8 +232,13 @@
                                     <td>NT$&nbsp60</td>
                                 </tr>
                                 <tr>
+                                    <td>折扣</td>
+                                    <td>NT$&nbsp;<?php echo "$discount";?>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td>總計</td>
-                                    <td>NT$&nbsp;<?php echo $sum+60 ?></td>
+                                    <td>NT$&nbsp;<?php if(($sum-$discount+60)<0) echo 0; else echo $sum-$discount+60;?></td>
                                 </tr>
                             </tbody>
                             <tfoot>

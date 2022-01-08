@@ -1,5 +1,6 @@
--- create database DBS_project;
--- use DBS_project;
+create database DBS_project;
+use DBS_project;
+
 -- drop database DBS_project;
 
 create table `Member`(
@@ -20,7 +21,7 @@ select * from `Member`; -- 查詢
 create table Product(
 	Product_ID int not null AUTO_INCREMENT,
 	Product_name VARCHAR(50) not null,
-    Product_descripition varchar(50) not null,
+    Product_description varchar(50) not null,
 	Price INT not null,
 	Stock INT not null,
 	Publish_date DATETIME not null,
@@ -30,7 +31,7 @@ create table Product(
 	primary key (Product_ID)
 );
 -- drop table Product;
-insert into Product(Product_name, Product_descripition, Price, stock, Publish_date, Product_detail, Product_standerd)
+insert into Product(Product_name, Product_description, Price, stock, Publish_date, Product_detail, Product_standerd)
 values("佳德糕餅 - 鳳梨酥","原味鳳梨酥禮盒(12入)","750", 100, '2021-12-29',"詳細資訊","我是好吃的鳳梨酥"),
 ("佳德糕餅 - 蔥軋餅","蔥軋餅(24片)禮盒","750", 100, '2021-12-29',"詳細資訊","我是好吃的蔥軋餅"),
 ("佳德糕餅 - 太陽餅","太陽餅(12入)","416", 100, '2021-12-29',"詳細資訊","standerd"),
@@ -64,9 +65,6 @@ values("佳德糕餅 - 鳳梨酥","原味鳳梨酥禮盒(12入)","750", 100, '20
 
 -- delete from `Product` where Product_ID;
 -- alter table `Product` AUTO_INCREMENT = 1;
-
-select * from Product;
-
 
 create table Category(
 	Product_ID int not null,
@@ -157,7 +155,21 @@ create table Coupon(
 	DiscountCount INT not null,
 	StartDate Datetime not null,
 	EndDate Datetime not null,
+    Image_Path TEXT not null,
 	primary key (Coupon_ID)
+);
+insert into Coupon(Coupon_ID, Coupon_Name, DiscountCount, StartDate, EndDate, Image_Path)
+value
+(1, '25元折價券', 25, '2021-12-29', '2021-01-29', "./images/coupon/25.jpg"),
+(2, '50元折價券', 50, '2021-12-29', '2021-01-29', "./images/coupon/50.jpg"),
+(3, '100元折價券', 100, '2021-12-29', '2021-01-29', "./images/coupon/100.jpg");
+
+create table CouponList(
+	`Member_ID` int not null,
+	Coupon_ID int not null,
+    Used VARCHAR(10) not null,
+	foreign key (Coupon_ID) references Coupon(Coupon_ID) on update cascade on delete cascade,
+    foreign key (Member_ID) references `Member`(Member_ID) on update cascade on delete cascade
 );
 
 create table ShoppingCart(

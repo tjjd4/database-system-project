@@ -17,13 +17,19 @@
   $price = $_POST["price"];
   $account = $_POST["account"];
   $itemlist = $_POST["itemlist"];
+  $usedCoupon = $_POST['usedCoupon'];
   
 
   //建立資料連接   
     $link = create_connection();
 			
-    $sql = "INSERT INTO ltemlast (surname,name,phone,email,address,price,account,itemlist) VALUES ('$surname', '$name', '$phone','$email','$address','$price','$account','$itemlist')";
-    $result = execute_sql($link, "holomember", $sql);
+    $sql = "INSERT INTO ltemlast (surname,name,phone,email,address,price,account,itemlist) 
+            VALUES ('$surname', '$name', '$phone','$email','$address','$price','$account','$itemlist');
+
+            UPDATE CouponList
+            SET Used = 'Yes'
+            WHERE Member_ID=$account and Coupon_ID=$usedCoupon;";
+    $result = execute_sql($link, "DBS_project", $sql);
 	
   //關閉資料連接	
   mysqli_close($link);
