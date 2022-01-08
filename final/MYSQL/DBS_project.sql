@@ -12,10 +12,6 @@ create table `Member`(
 	primary key(Member_ID)
 );
 
-insert into `Member`(`Member_name`, `Username`, `Member_password`, `Email`, `Phone`)
-values
-('Ken', 'Ken', '123', '123@gmail.com', 0920777777);
-
 -- describe `Member`;
 -- delete from `Member` where member_ID; -- 清空
 -- alter table `Member` AUTO_INCREMENT = 1; -- 重設id為1開始
@@ -161,31 +157,22 @@ create table Coupon(
 	DiscountCount INT not null,
 	StartDate Datetime not null,
 	EndDate Datetime not null,
-    Image_Path TEXT not null,
 	primary key (Coupon_ID)
-);
-insert into Coupon(Coupon_ID, Coupon_Name, DiscountCount, StartDate, EndDate, Image_Path)
-value
-(1, '25元折價券', 25, '2021-12-29', '2021-01-29', "./images/coupon/25.jpg"),
-(2, '50元折價券', 50, '2021-12-29', '2021-01-29', "./images/coupon/50.jpg"),
-(3, '100元折價券', 100, '2021-12-29', '2021-01-29', "./images/coupon/100.jpg");
-
-create table CouponList(
-	`Member_ID` int not null,
-	Coupon_ID int not null,
-    Used VARCHAR(10) not null,
-	foreign key (Coupon_ID) references Coupon(Coupon_ID) on update cascade on delete cascade,
-    foreign key (Member_ID) references `Member`(Member_ID) on update cascade on delete cascade
 );
 
 create table ShoppingCart(
 	Member_ID int not null,
     Product_ID int not null,
 	Product_amount INT not null,
-	primary key (Member_ID),
+	primary key (Member_ID, Product_ID),
 	foreign key (Member_ID) references `Member`(Member_ID) on update cascade on delete cascade,
     foreign key (Product_ID) references Product(Product_ID) on update cascade on delete cascade
 );
+
+-- to fix the previous primary key for already table ShoppingCart, use:
+	-- 	ALTER TABLE ShoppingCart   
+	--   DROP PRIMARY KEY,
+	--   ADD PRIMARY KEY (Member_ID, Product_ID);
 
 create table `Order`(
 	Order_ID int not null AUTO_INCREMENT, 
