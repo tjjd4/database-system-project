@@ -92,9 +92,6 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <?php
-                                
-                              ?>
                               <tr>
                                 <td>1</td>
                                 <td>佳德糕餅 - 鳳梨酥</td>
