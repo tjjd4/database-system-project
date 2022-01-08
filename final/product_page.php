@@ -11,6 +11,12 @@
         $id = $_COOKIE["id"];
         $NickName = $_COOKIE["NickName"];
     }
+    if (!isset($_REQUEST["currentProductID"]))
+    {
+        echo "<script type='text/javascript'>";
+        echo "location.replace('index.php');  ";
+        echo "</script>";
+    }
     $Product_ID = $_REQUEST["currentProductID"];
     include("function.php");
     $data = getProuctFromId($Product_ID);
