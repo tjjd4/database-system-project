@@ -65,6 +65,7 @@ values("佳德糕餅 - 鳳梨酥","原味鳳梨酥禮盒(12入)","750", 100, '20
 
 -- delete from `Product` where Product_ID;
 -- alter table `Product` AUTO_INCREMENT = 1;
+select * from `Product`; -- 查詢 
 
 create table Category(
 	Product_ID int not null,
@@ -202,7 +203,7 @@ create table `Order`(
 	foreign key (Member_ID) references `Member`(Member_ID) on update cascade On delete cascade,
 	foreign key (Coupon_ID) references Coupon(Coupon_ID) on update cascade on delete cascade
 );
-insert into Order(Order_ID, Member_ID, Coupon_ID, Payment_method, Payment_Date, Deliver_method
+insert into `Order`(Order_ID, Member_ID, Coupon_ID, Payment_method, Payment_Date, Deliver_method
 ,Deliver_address, Total_price, Discounted_price, Order_date, Order_status)
 value
 (1, 1, 3, '匯款', '2021-12-29', '郵寄','台北市大安區忠孝東路三段1號', 1560, 1460, '2021-12-29', 2),

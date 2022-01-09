@@ -63,8 +63,8 @@
         $data = mysqli_fetch_array($result);
         mysqli_free_result($result);
         $txt = '<tr>
-                    <td>'.$data[0].'</td>
-                    <td>'.$data[1].'</td>
+                    <td>'.$data["Product_ID"].'</td>
+                    <td>'.$data["Product_name"].'</td>
                     <td>'.$data["Product_description"].'</td>
                     <td>'.$data["Price"].'</td>
                     <td>'.$data["Stock"].'</td>
