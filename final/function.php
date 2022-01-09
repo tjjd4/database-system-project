@@ -215,7 +215,31 @@
         };
         return $txt;
     }
+    function SearchToGetSortedProductByPriceASC($search_product,$page){ 
+        $link = create_connection();  
+        $sql = 'SELECT P.Product_ID 
+                FROM `Product` as P 
+                WHERE P.Product_Name LIKE "%'.$search_product.'%" AND LENGTH("%'.$search_product.'%")-Length(P.Product_Name)!=0;';
 
+        $result = execute_sql($link, "DBS_project", $sql)or die( mysqli_error($link));
+        $full_data = array();
+        while($single_data = mysqli_fetch_array($result)) {
+            //will output all data on each loop.
+            array_push($full_data, $single_data);
+        };
+        
+        $num = count($full_data);
+        $txt = "";
+        $product_num_each_page = $num;
+        $first_index = ($page-1)*$product_num_each_page;
+        $last_index = $first_index + $product_num_each_page;
+        mysqli_free_result($result);
+        
+        for($i  = $first_index;$i < $last_index;$i++){
+            
+            createProductBox(($full_data[$i][0]));
+        };
+    }
     function getSortedProductByPublishDateASC($page, $category){ 
         $link = create_connection();  
         if ($category == 'all')
