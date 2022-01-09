@@ -115,9 +115,7 @@
                             <p>
                             <h5 class="text-secondary"><?=$data["Product_description"] ?></h5>
                             <!-- <p class="mt-4">台中太陽堂傳統太陽餅 30入</p> -->
-                            
                             <div class="d-block mb-3">
-                                
                             </div>
                             <div class="mb-3"> 
                                     <input type="submit" class="btn btn-primary text-white mr-1" name="shopping_cart" value="加入購物車">
