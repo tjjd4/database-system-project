@@ -414,6 +414,10 @@
         FROM `Product` as P';
         $result = execute_sql($link, "DBS_project", $sql);
         $data = mysqli_fetch_array($result);
+        //釋放 $result 佔用的記憶體
+        mysqli_free_result($result);
+        //關閉資料連接	
+        mysqli_close($link);
         $num = $data[0];
         $product_num_each_page = 9;
         $num_of_pages = intval(ceil($num/$product_num_each_page));
@@ -434,6 +438,10 @@
         FROM `Product` as P';
         $result = execute_sql($link, "DBS_project", $sql);
         $data = mysqli_fetch_array($result);
+        //釋放 $result 佔用的記憶體
+        mysqli_free_result($result);
+        //關閉資料連接	
+        mysqli_close($link);
         $num = $data[0];
         $product_num_each_page = 9;
         $num_of_pages = intval(ceil($num/$product_num_each_page));
