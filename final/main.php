@@ -24,7 +24,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HOLO商城</title>
+<title>台灣名產商城</title>
     <link rel="shortcut icon" type="image/png" href="./images/logo.png"/>
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -127,8 +127,7 @@
                 <div href="#" class="card mb-3 h-100">
                     <img class="card-img-top" src="./images/chibiame-index.gif" alt="LG-GP-0001">
                     <div class="card-body">
-                        <a href="index.php" class="btn btn-outline-secondary btn-block">返回首頁</a>
-                        
+                        <a href="order_list.php" class="btn btn-outline-secondary btn-block">返回首頁</a>
                     </div>
                 </div>
             </div>

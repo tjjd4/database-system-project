@@ -40,7 +40,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HOLO商城</title>
+<title>台灣名產商城</title>
     <link rel="shortcut icon" type="image/png" href="./images/logo.png"/>
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -72,7 +72,7 @@
                         <a class="nav-link" href="about.php">HOLOLIVE</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="shop.php">HOLO商城</a>
+                        <a class="nav-link" href="shop.php">台灣名產商城</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="job.php">人物介紹</a>
@@ -125,7 +125,7 @@
                     <ul class="footer-menu">
                         <li><a href="index.php">首頁</a></li>
                         <li><a href="about.php">HOLOLIVE</a></li>
-                        <li><a href="shop.php">HOLO商城</a></li>
+                        <li><a href="shop.php">台灣名產商城</a></li>
                         <li><a href="job.php">成員簡介</a></li>
                         <li><a href="https://schedule.hololive.tv/">直播時間</a></li>
                         <li><a href="login.html">登入</a></li>

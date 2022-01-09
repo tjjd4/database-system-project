@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>台灣名產商城</title>
+    <title>台灣名產商城</title>
     <link rel="shortcut icon" type="image/png" href="./images/logo.png"/>
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -84,13 +84,12 @@
                         <table class="table table-borderless">
                             <thead class="table-info">
                               <tr>
-                                <th>編號</th>
-                                <th>商品名稱</th>
-                                <th>敘述</th>
+                                <th>訂單編號</th>
+                                <th>下訂時間</th>
                                 <th>價格</th>
-                                <th>存貨</th>
-                                <th>standerd</th>
-                                <th>編輯</th>
+                                <th>收件人資訊</th>
+                                <th>購買商品列表</th>
+                                <th>訂單狀況</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -101,7 +100,7 @@
                                 }else{
                                     $page = 1;
                                 }
-                                getSortedProductListByIdASC($page, 'all');
+                                getOrderListByIdDESC($page,$id);
                               ?>
                             </tbody>
                           </table>
@@ -112,10 +111,8 @@
                 <!-- 分頁/start -->
                 <?php
                 include_once("function.php");
-                echo('<p class="col-12 mt-3 mb-3 d-inline-block">');
-                getNumberOfProduct($page, 'all');
-                echo('</p>');
-                getPageLink($page, 'all');
+                getNumberOfProduct($page);
+                getPageLink($page);
                 ?>
                 <!-- 分頁/end -->
             </div>
@@ -184,21 +181,6 @@
                 </div>
             </div>
         </div>
-        <script>
-$(document).ready(function(){	
-	$("#contactForm").submit(function(){
-        $("#submitExample").click(function() {
-        $.ajax({
-            type: "POST", //傳送方式
-            url: "service.php", //傳送目的地
-            dataType: "json", //資料格式
-            data: { //傳送資料
-                nickname: $("#nickname").val(), //表單欄位 ID nickname
-                gender: $("#gender").val() //表單欄位 ID gender
-            },
-	});
-});
-        </script>
         <!-- 新增商品Modal/end -->
 
         <!-- 編輯商品Modal/start -->
