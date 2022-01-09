@@ -74,11 +74,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<<<<<<< HEAD
     <title>台灣名產商城</title>
-=======
-    <title>北科大商城</title>
->>>>>>> f3898f1c92db28fe497c8f6cfd95a355f0061ca5
     <link rel="shortcut icon" type="image/png" href="./images/logo.png"/>
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -204,11 +200,11 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="card mb-3">
-                                <img class="card-img-top" src="./images/product/eva_1.png" alt="TG-B-0001" class="img-fluid">
+                                <img class="card-img-top" src="./images/tea_drink_images/4.jpg" alt="TG-B-0001" class="img-fluid">
                                 <div class="card-body">
-                                    <h4 class="card-title">Hololive兔田佩克拉 生日套組</h4>
-                                    <p class="card-text">附特典</p>
-                                    <h5 class="card-text text-danger">NT$&nbsp;5180</h5>
+                                    <h4 class="card-title">小茶栽堂 - 紅雙禮盒</h4>
+                                    <p class="card-text">紅雙禮盒(古典罐2入-黑烏龍茶X古早味紅茶)</p>
+                                    <h5 class="card-text text-danger">NT$&nbsp;1300</h5>
                                     <a href="product.html" class="btn btn-outline-secondary btn-block">查看商品</a>
                                     <a href="cart.php" class="btn btn-outline-primary btn-block">加入購物車</a>
                                 </div>
@@ -216,11 +212,11 @@
                         </div>
                         <div class="col-6">
                             <div class="card mb-3">
-                                <img class="card-img-top" src="./images/product/eva_9.png" alt="TG-B-0001" class="img-fluid">
+                                <img class="card-img-top" src="./images/food_dessert_images/11.jpg" alt="TG-B-0001" class="img-fluid">
                                 <div class="card-body">
-                                    <h4 class="card-title">潤羽るしあ 生日紀念套組</h4>
-                                    <p class="card-text">附特典</p>
-                                    <h5 class="card-text text-danger">NT$&nbsp;4490</h5>
+                                    <h4 class="card-title">老媽拌麵 - 蔥油開洋拌麵</h4>
+                                    <p class="card-text">蔥油開洋拌麵(一袋4包)</p>
+                                    <h5 class="card-text text-danger">NT$&nbsp;987</h5>
                                     <a href="product.html" class="btn btn-outline-secondary btn-block">查看商品</a>
                                     <a href="cart.php" class="btn btn-outline-primary btn-block">加入購物車</a>
                                 </div>

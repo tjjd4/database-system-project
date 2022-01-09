@@ -24,11 +24,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<<<<<<< HEAD
     <title>台灣名產商城</title>
-=======
-    <title>北科大商城</title>
->>>>>>> f3898f1c92db28fe497c8f6cfd95a355f0061ca5
     <link rel="shortcut icon" type="image/png" href="./images/logo.png"/>
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -131,7 +127,7 @@
                 <div href="#" class="card mb-3 h-100">
                     <img class="card-img-top" src="./images/chibiame-index.gif" alt="LG-GP-0001">
                     <div class="card-body">
-                        <a href="order_list.php" class="btn btn-outline-secondary btn-block">返回首頁</a>
+                        <a href="order_list.php" class="btn btn-outline-secondary btn-block">查看訂單</a>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 <?php
   //檢查 cookie 中的 passed 變數是否等於 TRUE 
   $passed = $_COOKIE["passed"];
+  $NickName = $_COOKIE["NickName"]; 
   //如果 cookie 中的 passed 變數不等於 TRUE
   //表示尚未登入網站，將使用者導向首頁 index.php
   if ($passed != "TRUE")
@@ -33,11 +34,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<<<<<<< HEAD
     <title>台灣名產商城</title>
-=======
-    <title>北科大商城</title>
->>>>>>> f3898f1c92db28fe497c8f6cfd95a355f0061ca5
     <link rel="shortcut icon" type="image/png" href="./images/logo.png"/>
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -77,7 +74,7 @@
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse " id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
                         <a class="nav-link" href="index.php">首頁</a>
@@ -93,7 +90,17 @@
                     </li>
                 </ul>
                 <div class="ml-auto">
-                    <a href="login.html" class="btn btn-outline-info text-info my-2 my-sm-0">登入</a>
+                    <?php
+                            if ($_COOKIE["id"]=="guest")
+                            {
+                              echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
+                            }
+                            else
+                            {
+                                echo"<a href='main.php'>$NickName</a> 你好";
+                                echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
+                            }
+                    ?>
                     <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
                     <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
                 </div>
