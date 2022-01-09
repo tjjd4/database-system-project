@@ -1,6 +1,7 @@
--- create database DBS_project;
-use DBS_project;
 -- drop database DBS_project;
+-- create database DBS_project;
+-- use DBS_project;
+
 
 create table `Member`(
 	`Member_ID` int not null AUTO_INCREMENT,
@@ -9,8 +10,12 @@ create table `Member`(
 	`Member_password` VARCHAR(50) not null,
 	`Email` VARCHAR(255) not null,
 	`Phone` int not null,
+    `Permission` int default 0,
 	primary key(Member_ID)
 );
+
+insert into Member(Member_name, Username, Member_password, Email, Phone, Permission) 
+values("administrator", "administrator", "123", "administrator@gmail.com", "0912345678", "1");
 
 -- describe `Member`;
 -- delete from `Member` where member_ID; -- 清空
@@ -156,8 +161,16 @@ create table Coupon(
 	DiscountCount INT not null,
 	StartDate Datetime not null,
 	EndDate Datetime not null,
-	primary key (Coupon_ID)
+    Image_Path TEXT not null,
+ primary key (Coupon_ID)
 );
+
+insert into Coupon(Coupon_ID, Coupon_Name, DiscountCount, StartDate, EndDate, Image_Path)
+value
+(1, '25元折價券', 25, '2021-12-29', '2021-01-29', "./images/coupon/25.jpg"),
+(2, '50元折價券', 50, '2021-12-29', '2021-01-29', "./images/coupon/50.jpg"),
+(3, '100元折價券', 100, '2021-12-29', '2021-01-29', "./images/coupon/100.jpg");
+
 
 create table ShoppingCart(
 	Member_ID int not null,
@@ -167,6 +180,16 @@ create table ShoppingCart(
 	foreign key (Member_ID) references `Member`(Member_ID) on update cascade on delete cascade,
     foreign key (Product_ID) references Product(Product_ID) on update cascade on delete cascade
 );
+
+create table CouponList(
+	Member_ID int not null,
+	Coupon_ID int not null,
+	Used VARCHAR(10) not null,
+	foreign key (Coupon_ID) references Coupon(Coupon_ID) on update cascade on delete cascade,
+	foreign key (Member_ID) references `Member`(Member_ID) on update cascade on delete cascade
+);
+
+select * from CouponList;
 
 create table `Order`(
 	Order_ID int not null AUTO_INCREMENT, 
