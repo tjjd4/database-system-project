@@ -27,7 +27,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<<<<<<< HEAD
     <title>台灣名產商城</title>
+=======
+<title>台灣名產商城</title>
+>>>>>>> b34a7deccf0b2fb58f0ace0a3edf3952fd7dc671
     <link rel="shortcut icon" type="image/png" href="./images/logo.png"/>
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -107,6 +111,18 @@
                     </ul>
                 </div>
                 <!-- 選單連結/end -->
+<<<<<<< HEAD
+=======
+                <!-- 訂閱/start -->
+                <!-- <div class="col-12 col-md-6 mb-3">
+                    <h6 class="text-white">留下 E-mail，訂閱hololive，可搶先獲得最新的資訊喔！</h6>
+                    <form action="addemail.php" method="post" name="myForm">
+                        <input name="email" type="email" class="form-control mt-2 mb-2" placeholder="請輸入e-mail">
+                        <button type="submit" class="btn btn-primary float-right send-btn">傳送</button>
+                    </form>
+                </div> -->
+                <!-- 訂閱/end -->
+>>>>>>> b34a7deccf0b2fb58f0ace0a3edf3952fd7dc671
                 <!-- 版權所有/start -->
                 <div class="col-12 mt-3">
                     <p class="text-white text-center">© Copyright 2021 NTUT </p>

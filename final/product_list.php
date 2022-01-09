@@ -18,7 +18,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<<<<<<< HEAD
     <title>台灣名產商城</title>
+=======
+<title>台灣名產商城</title>
+>>>>>>> b34a7deccf0b2fb58f0ace0a3edf3952fd7dc671
     <link rel="shortcut icon" type="image/png" href="./images/logo.png"/>
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -132,51 +136,58 @@
                     </div>
                     <!-- Modal Header/end -->
                 
-                    <form action="addProduct.php" method="post" name="myForm" role="form">
+                    <form method="post" name="myForm">
                         <!-- Modal body/start -->
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="Product_name">商品名稱
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="Product_name" type="text" required="required" class="form-control" placeholder="必填，商品名稱" required>
+                                <input id="Product_name" type="text" required="required" class="form-control" placeholder="必填，商品名稱">
                             </div>
                             
                             <div class="form-group">
                                 <label for="Product_description">敘述
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="Product_description" type="text" required="required" class="form-control" placeholder="必填，敘述" required>
+                                <input id="Product_description" type="text" required="required" class="form-control" placeholder="必填，敘述">
                             </div>
 
                             <div class="form-group">
-                                <label for="price">價格
+                                <label for="Price">價格
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="price" type="text" class="form-control" required="required" placeholder="必填，價格" required>
+                                <input id="Price" type="number" class="form-control" required="required" placeholder="必填，價格">
                             </div>
                             
                             <div class="form-group">
                                 <label for="Stock">存貨
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="Stock" type="text" class="form-control" required="required" placeholder="必填，存貨" required>
+                                <input id="Stock" type="number" class="form-control" required="required" placeholder="必填，存貨">
                             </div>
 
                             <div class="form-group">
                                 <label for="Product_detail">詳細資訊</label>
-                                <input name="Product_description" type="text" class="form-control" placeholder="詳細資訊" required>
+                                <input id="Product_detail" type="text" class="form-control" placeholder="詳細資訊">
                             </div>
 
                             <div class="form-group">
-                                <label for="Product_standerd">standerd</label>
-                                <input name="Standerd" type="text" class="form-control" placeholder="standerd" required>
+                                <label for="Product_standerd">standard</label>
+                                <input id="Product_standerd" type="text" class="form-control" placeholder="standerd">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Image_path">圖片檔案名稱
+                                <span class="text-danger">* 必須將檔案放在 "final/added_product_images"</span>
+                                </label>
+                                <input id="Image_path" type="text" class="form-control" required="required" placeholder="ex: abc.jpeg">
                             </div>
                         </div>
                         <!-- Modal body/end -->
                         <!-- Modal footer/start -->
                         <div class="modal-footer">
-                            <input type="submit" class="btn btn-info" data-dismiss="modal" value="新增">
+                            <input id="submitButton" type="submit" class="btn btn-info" value="新增">
                             <input type="button" class="btn btn-danger" data-dismiss="modal" value="關閉">
                         </div>
                         <!-- Modal footer/end -->
@@ -184,6 +195,37 @@
                 </div>
             </div>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){	
+                $('#submitButton').click(function(){
+                    $.ajax({
+                        type: "POST", //傳送方式
+                        url: "addProduct.php", //傳送目的地
+                        dataType: "JSON",
+                        data: {
+                            Product_name: $("#Product_name").val(),
+                            Product_description: $("#Product_description").val(),
+                            Price: $("#Price").val(),
+                            Stock: $("#Stock").val(),
+                            Product_detail: $("#Product_detail").val(),
+                            Product_standerd: $("#Product_standerd").val(),
+                            Image_path: $("#Image_path").val()
+                        },
+                        success: function(data) {
+                            if (data.result) {
+                                alert("Product added successfully!");
+                            } else {
+                                alert("Product added failed!"+data.Product_name+data.Product_description+data.Price+data.Stock+data.Product_detail+data.Product_standerd);
+                            }
+                        },
+                        error: function() {
+                            alert("Connect error!");
+                        }
+                    })
+                })
+            });
+        </script>
         <!-- 新增商品Modal/end -->
 
         <!-- 編輯商品Modal/start -->

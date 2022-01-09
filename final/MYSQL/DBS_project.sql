@@ -1,7 +1,6 @@
+drop database DBS_project;
 create database DBS_project;
 use DBS_project;
-
--- drop database DBS_project;
 
 create table `Member`(
 	`Member_ID` int not null AUTO_INCREMENT,
@@ -10,13 +9,20 @@ create table `Member`(
 	`Member_password` VARCHAR(50) not null,
 	`Email` VARCHAR(255) not null,
 	`Phone` int not null,
+    `Permission` int default 0,
 	primary key(Member_ID)
 );
 
--- describe `Member`;
+insert into Member(Member_name, Username, Member_password, Email, Phone, Permission) 
+values("administrator", "administrator", "123", "administrator@gmail.com", "0912345678", "1"), 
+("testMember", "test", "123", "test@gmail.com", "0912345678", "0"); 
+
+select * from Member;
+
+describe `Member`;
 -- delete from `Member` where member_ID; -- 清空
 -- alter table `Member` AUTO_INCREMENT = 1; -- 重設id為1開始
-select * from `Member`; -- 查詢 
+-- select * from `Member`; -- 查詢 
 
 create table Product(
 	Product_ID int not null AUTO_INCREMENT,
@@ -31,6 +37,7 @@ create table Product(
 	primary key (Product_ID)
 );
 -- drop table Product;
+
 insert into Product(Product_name, Product_description, Price, stock, Publish_date, Product_detail, Product_standerd)
 values("佳德糕餅 - 鳳梨酥","原味鳳梨酥禮盒(12入)","750", 100, '2021-12-29',"詳細資訊","我是好吃的鳳梨酥"),
 ("佳德糕餅 - 蔥軋餅","蔥軋餅(24片)禮盒","750", 100, '2021-12-29',"詳細資訊","我是好吃的蔥軋餅"),
@@ -65,6 +72,8 @@ values("佳德糕餅 - 鳳梨酥","原味鳳梨酥禮盒(12入)","750", 100, '20
 
 -- delete from `Product` where Product_ID;
 -- alter table `Product` AUTO_INCREMENT = 1;
+-- select * from Product;
+
 
 create table Category(
 	Product_ID int not null,
@@ -103,6 +112,7 @@ values(1,"food_dessert"),
 (25,"fruit"),
 (26,"fruit"),
 (27,"fruit");
+
 create table Product_Image(
 	Image_ID int not null AUTO_INCREMENT,
 	Product_ID int not null,
@@ -110,7 +120,6 @@ create table Product_Image(
 	primary key (Image_ID, Product_ID),
 	foreign key (Product_ID) references Product(Product_ID) on update cascade on delete cascade
 );
-
 
 insert into Product_Image(Product_ID, Image_path)
 value(1,"./images/food_dessert_images/1.jpg"),
@@ -144,7 +153,7 @@ value(1,"./images/food_dessert_images/1.jpg"),
 (26,"./images/fruit/3.jpg"),
 (27,"./images/fruit/4.jpg");
 
-select * from Product_image;
+-- select * from Product_image;
 -- delete from `Product_image` where Product_ID;
 -- alter table `Product_image` AUTO_INCREMENT = 1;
 
@@ -156,35 +165,32 @@ create table Coupon(
 	StartDate Datetime not null,
 	EndDate Datetime not null,
     Image_Path TEXT not null,
-	primary key (Coupon_ID)
+ primary key (Coupon_ID)
 );
+
 insert into Coupon(Coupon_ID, Coupon_Name, DiscountCount, StartDate, EndDate, Image_Path)
 value
 (1, '25元折價券', 25, '2021-12-29', '2021-01-29', "./images/coupon/25.jpg"),
 (2, '50元折價券', 50, '2021-12-29', '2021-01-29', "./images/coupon/50.jpg"),
 (3, '100元折價券', 100, '2021-12-29', '2021-01-29', "./images/coupon/100.jpg");
 
-create table CouponList(
-	`Member_ID` int not null,
-	Coupon_ID int not null,
-    Used VARCHAR(10) not null,
-	foreign key (Coupon_ID) references Coupon(Coupon_ID) on update cascade on delete cascade,
-    foreign key (Member_ID) references `Member`(Member_ID) on update cascade on delete cascade
-);
 
 create table ShoppingCart(
 	Member_ID int not null,
     Product_ID int not null,
 	Product_amount INT not null,
-	primary key (Member_ID, Product_ID),
+	primary key (Member_ID),
 	foreign key (Member_ID) references `Member`(Member_ID) on update cascade on delete cascade,
     foreign key (Product_ID) references Product(Product_ID) on update cascade on delete cascade
 );
 
--- to fix the previous primary key for already table ShoppingCart, use:
-	-- 	ALTER TABLE ShoppingCart   
-	--   DROP PRIMARY KEY,
-	--   ADD PRIMARY KEY (Member_ID, Product_ID);
+create table CouponList(
+	Member_ID int not null,
+	Coupon_ID int not null,
+	Used VARCHAR(10) not null,
+	foreign key (Coupon_ID) references Coupon(Coupon_ID) on update cascade on delete cascade,
+	foreign key (Member_ID) references `Member`(Member_ID) on update cascade on delete cascade
+);
 
 create table `Order`(
 	Order_ID int not null AUTO_INCREMENT, 
@@ -206,6 +212,7 @@ create table `Order`(
 	foreign key (Member_ID) references `Member`(Member_ID) on update cascade On delete cascade,
 	foreign key (Coupon_ID) references `Coupon`(Coupon_ID) on update cascade on delete cascade
 );
+<<<<<<< HEAD
 -- insert into `Order`(Order_ID, Member_ID, Coupon_ID, Payment_method, Payment_Date, Deliver_method
 -- , Total_price, Discounted_price, Order_date, Order_status,Last_name,First_name,Phone,Email,Deliver_address)
 -- value
@@ -213,6 +220,14 @@ create table `Order`(
 -- (2, 1, 2, '匯款', '2022-01-05', '郵寄', 490 , 440 , '2022-01-05', 1,'Gawr','Gura','0952517868','Gura@gmail.com','台北市大安區忠孝東路三段1號'),
 -- (3, 1, 1, '匯款', '2022-01-09', '郵寄', 3460 ,3435, '2022-01-09', 0,'Watson','Amelia','0925677690','Amelia@gmail.com','台北市大安區忠孝東路三段1號');
 
+=======
+insert into `Order`(Order_ID, Member_ID, Coupon_ID, Payment_method, Payment_Date, Deliver_method
+,Deliver_address, Total_price, Discounted_price, Order_date, Order_status)
+values
+(1, 1, 3, '匯款', '2021-12-29', '郵寄','台北市大安區忠孝東路三段1號', 1560, 1460, '2021-12-29', 2),
+(2, 1, 2, '匯款', '2022-01-05', '郵寄','台北市大安區忠孝東路三段1號', 490 , 440 , '2022-01-05', 1),
+(3, 1, 1, '匯款', '2022-01-09', '郵寄','台北市大安區忠孝東路三段1號', 600 , 575, '2022-01-09', 0);
+>>>>>>> b34a7deccf0b2fb58f0ace0a3edf3952fd7dc671
 
 create table `Order_product`(
 	Order_ID int not null AUTO_INCREMENT, 
