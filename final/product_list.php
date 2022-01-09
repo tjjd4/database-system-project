@@ -182,6 +182,21 @@
                 </div>
             </div>
         </div>
+        <script>
+$(document).ready(function(){	
+	$("#contactForm").submit(function(){
+        $("#submitExample").click(function() {
+        $.ajax({
+            type: "POST", //傳送方式
+            url: "service.php", //傳送目的地
+            dataType: "json", //資料格式
+            data: { //傳送資料
+                nickname: $("#nickname").val(), //表單欄位 ID nickname
+                gender: $("#gender").val() //表單欄位 ID gender
+            },
+	});
+});
+        </script>
         <!-- 新增商品Modal/end -->
 
         <!-- 編輯商品Modal/start -->
