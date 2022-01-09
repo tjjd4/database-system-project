@@ -14,8 +14,7 @@
         mysqli_free_result($result);
     
         $discount = $data["DiscountCount"];
-    }
-    
+    } 
 ?>
 
 
@@ -100,16 +99,13 @@
                         <a class="nav-link" href="index.php">首頁</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.php">HOLOLIVE</a>
+                        <a class="nav-link" href="about.php">關於我們</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="shop.php">HOLO商城</a>
+                        <a class="nav-link" href="shop.php">買名產囉</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="job.php">人物介紹</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://schedule.hololive.tv/">直播時間與連結</a>
+                        <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
                     </li>
                 </ul>
                 <div class="ml-auto">
@@ -162,13 +158,13 @@
                                 <label for="LastName">姓氏
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="surname" type="text" class="form-control" id="LastName" required placeholder="* ex:赤井">
+                                <input name="Lname" type="text" class="form-control" id="LastName" required placeholder="* ex:赤井">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="FirstName">名字
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="name" type="text" class="form-control" id="FirstName" required placeholder="* ex:心">
+                                <input name="Fname" type="text" class="form-control" id="FirstName" required placeholder="* ex:心">
                             </div>
                         </div>
                         <div class="form-row">
@@ -193,8 +189,8 @@
                         </div> 
                         <input type="hidden" name="price" value="<?php if(($sum-$discount+60)<0) echo 0; else echo $sum-$discount+60;?>">
                         <input type="hidden" name="account" value="<?php echo $id?>">
-                        <input type="hidden" name="itemlist" value="<?php echo $num?>">
-                        <input type="hidden" name="usedCoupon" value="<?php echo $CouponID?>">
+                        <input type="hidden" name="productID" value="<?php echo $num?>">
+                        <input type="hidden" name="usedCouponID" value="<?php echo $CouponID?>">
                         <button type="submit" class="btn btn-outline-info btn-lg float-right">下單購買</button>
                     </form>
                     

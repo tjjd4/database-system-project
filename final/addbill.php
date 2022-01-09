@@ -9,26 +9,32 @@
         $id = $_COOKIE["id"];
     }
   //取得表單資料
-  $surname = $_POST["surname"];
-  $name = $_POST["name"];  
+  $account = $_POST["account"];
+  $Lname = $_POST["Lname"];
+  $Fname = $_POST["Fname"];  
   $phone = $_POST["phone"]; 
   $email = $_POST["email"]; 
   $address = $_POST["address"];
   $price = $_POST["price"];
-  $account = $_POST["account"];
-  $itemlist = $_POST["itemlist"];
-  $usedCoupon = $_POST['usedCoupon'];
+  $productID = $_POST["productID"];
+
+
+  if (!empty($CouponID)) {
+    $link = create_connection();
+    $usedCouponID = $_POST['usedCouponID'];
+    $sql = "UPDATE CouponList
+            SET Used = 'Yes'
+            WHERE Member_ID=$account and Coupon_ID=$usedCouponID;";
+    $result = execute_sql($link, "DBS_project", $sql);
+  }
+
   
 
   //建立資料連接   
     $link = create_connection();
 			
-    $sql = "INSERT INTO ltemlast (surname,name,phone,email,address,price,account,itemlist) 
-            VALUES ('$surname', '$name', '$phone','$email','$address','$price','$account','$itemlist');
-
-            UPDATE CouponList
-            SET Used = 'Yes'
-            WHERE Member_ID=$account and Coupon_ID=$usedCoupon;";
+    $sql = "INSERT INTO BillList (Member_ID, Lname, Fname, phone, email, `address`, Total_price, Product_ID, Order_status) 
+            VALUES ('$account', '$Lname', '$Fname', '$phone','$email','$address','$price','$productID', 0);";
     $result = execute_sql($link, "DBS_project", $sql);
 	
   //關閉資料連接	
@@ -108,11 +114,9 @@
           <img class="f1001 c"src="./images/holobg.png">
         </div>
         <div class="col-0 col-md-2"></div>
-      <div class="row c">
+      <div class="ml-auto">
         <div class="col-12 col-md-12 c">
-          <p class="c">訂單已送出<br>
-            <a href="index.php">返回首頁</a>。
-          </p>
+            <h1 class="text-success"> 訂單已送出 <a href="index.php" class="btn btn-outline-info btn-lg">返回首頁</a> </h1> 
         </div>
       </div>
     </div>
