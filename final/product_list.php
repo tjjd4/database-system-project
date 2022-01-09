@@ -153,14 +153,14 @@
                                 <label for="Price">價格
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input id="Price" type="text" class="form-control" required="required" placeholder="必填，價格">
+                                <input id="Price" type="number" class="form-control" required="required" placeholder="必填，價格">
                             </div>
                             
                             <div class="form-group">
                                 <label for="Stock">存貨
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input id="Stock" type="text" class="form-control" required="required" placeholder="必填，存貨">
+                                <input id="Stock" type="number" class="form-control" required="required" placeholder="必填，存貨">
                             </div>
 
                             <div class="form-group">
