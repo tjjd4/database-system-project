@@ -84,13 +84,12 @@
                         <table class="table table-borderless">
                             <thead class="table-info">
                               <tr>
-                                <th>編號</th>
-                                <th>商品名稱</th>
-                                <th>敘述</th>
+                                <th>訂單編號</th>
+                                <th>下訂時間</th>
                                 <th>價格</th>
-                                <th>存貨</th>
-                                <th>standerd</th>
-                                <th>編輯</th>
+                                <th>收件人資訊</th>
+                                <th>購買商品列表</th>
+                                <th>訂單狀況</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -101,7 +100,7 @@
                                 }else{
                                     $page = 1;
                                 }
-                                getSortedProductListByIdASC($page);
+                                getOrderListByIdDESC($page,$id);
                               ?>
                             </tbody>
                           </table>

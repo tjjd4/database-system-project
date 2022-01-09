@@ -66,7 +66,7 @@
                         <a class="nav-link" href="about.php">HOLOLIVE</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="shop.php">HOLO商城</a>
+                        <a class="nav-link" href="shop.php">台灣名產商城</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="job.php">人物介紹</a>

@@ -495,4 +495,65 @@
         echo $page_link;
     }
 
+    function createOrderList($id){
+        $link = create_connection(); 
+        $sql = "SELECT * 
+                FROM `Order`as O 
+                Where O.Order_ID = $id;";
+        $result = execute_sql($link, "DBS_project", $sql);
+        $data = mysqli_fetch_array($result);
+        mysqli_free_result($result);
+        if($data["Order_status"] == 0){
+            $status = '尚未出貨' ;
+        } elseif($data["Order_status"] == 1){
+            $status = '出貨中' ;
+        } elseif($data["Order_status"] == 2){
+            $status = '已送達' ;
+        } else{
+            $status = '發生錯誤' ;
+        };
+        $txt = '<tr>
+                    <td>'.$data[0].'</td>
+                    <td>'.$data["Order_date"].'</td>
+                    <td>'.$data["Total_price"].'</td>
+                    <td><button class="btn btn-outline-info text-info my-2 my-sm-0" data-toggle="modal" data-target="#OrderReceiverModal">查看</button></td>
+                    <td><button class="btn btn-outline-info text-info my-2 my-sm-0" data-toggle="modal" data-target="#OrderProductModal">查看</button></td>
+                    <td>'.$status.'</td>
+                    </tr>';
+        echo $txt;
+    }
+
+    function getOrderListByIdDESC($page,$id){ 
+        $link = create_connection();  
+        $sql = "SELECT O.Order_ID
+                FROM `Order` as O
+                Where O.Member_ID = $id
+                order by O.Order_ID DESC;";
+        $result = execute_sql($link, "DBS_project", $sql);
+        $full_data = array();
+        while($single_data = mysqli_fetch_array($result)) {
+            //will output all data on each loop.
+            array_push($full_data, $single_data);
+        };
+
+        if($page == null){
+            $page = 1;
+        }
+        $num = count($full_data);
+        $txt = "";
+        $product_num_each_page = 9;
+        $first_index = ($page-1)*$product_num_each_page;
+        if($first_index + $product_num_each_page > $num){
+            $last_index = $num;
+        }else{
+            $last_index = $first_index + $product_num_each_page;
+        }
+        mysqli_free_result($result);
+        for($i = $first_index;$i < $last_index;$i++){
+            if($full_data[$i][0] != null){
+                $txt .= createOrderList($full_data[$i][0]);
+            }
+        };
+        return $txt;  
+    }
 ?>
