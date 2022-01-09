@@ -1,6 +1,21 @@
 <!-- 使用折扣 -->
 <?php
-    require_once("dbtools.inc.php");
+    require_once("dbtools.inc.php"); 
+	if (empty($_COOKIE["id"]))
+    {	
+        setcookie("id", "guest");
+        setcookie("NickName", "guest");
+        $id = "guest";
+        $NickName = "guest";
+    }
+    else
+    {
+        $id = $_COOKIE["id"];
+        $NickName = $_COOKIE["NickName"];
+    }
+    $id = $_COOKIE["id"];
+    $sum=0;
+
     if (empty($_POST["couponDiscount"])) {
         $discount = 0;
     } else {
@@ -15,56 +30,8 @@
     
         $discount = $data["DiscountCount"];
     }
-    
-?>
-
-
-<?php
-	if (empty($_COOKIE["id"]))
-    {	
-        setcookie("id", "guest");
-        setcookie("NickName", "guest");
-        $id = "guest";
-        $NickName = "guest";
-    }
-    else
-    {
-        $id = $_COOKIE["id"];
-        $NickName = $_COOKIE["NickName"];
-    }
-    $id = $_COOKIE["id"];	
-    if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
-    {
-        setcookie("num_list", "0");
-        setcookie("name_list", "0");
-        setcookie("price_list", "0");
-        setcookie("quantity_list", "0");
-        $sum=0;
-        $namelen=0;
-    }
-    else
-    {	
-        $quantity= $_COOKIE["quantity_list"];
-        $num = $_COOKIE["num_list"];
-        $name= $_COOKIE["name_list"];
-        $price= $_COOKIE["price_list"];	
-        if(empty($_COOKIE["num_list"])){
-            $namelen=0;
-        }
-        else{
-            $namearray = explode(",",$name);
-            $quantityarray=explode(",", $quantity);
-            $namelen=count($namearray);
-        }
-       
-        $pricearray = array_map('intval', explode(",",$price));	
-        $sum=0;
-        for($i=0;$i<$namelen-1;$i++)
-        {
-            $sum=$sum+$pricearray[$i];
-        }
-    }
-
+    include_once("shopcart.inc.php");
+    $shoppingCart = retrieve_shopping_cart();  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -199,14 +166,23 @@
                                     <td>總計</td>
                                 </tr>
                             <?php
-                                for($i=0;$i<$namelen;$i++){
-                                    $subsum = $pricearray[$i] * $quantityarray[$i];
-                                    $sum=$sum + $subsum;
-                                    echo" <tr>
-                                    <td>$namearray[$i]　ｘ　$quantityarray[$i]</td>
-                                    <td>NT$&nbsp;$subsum</td>
-                                     </tr>";
-                                }
+                            if($shoppingCart != 0)
+                                    {
+                                        for($i=0;$i<sizeof($shoppingCart);$i++)
+                                        {
+                                        $productId = $shoppingCart[$i][0];
+                                        $Product_name = $shoppingCart[$i][1];
+                                        $Price = $shoppingCart[$i][2];
+                                        $Quantity = $shoppingCart[$i][3];
+
+                                        $subsum = $Price * $Quantity;
+                                        $sum=$sum + $subsum;
+                                        echo (" <tr>
+                                        <td>$Product_name 　ｘ　 $Quantity</td>
+                                        <td>NT$&nbsp;$subsum</td>
+                                        </tr>");
+                                        }
+                                    }
                             ?>
                                
                                 <tr>
