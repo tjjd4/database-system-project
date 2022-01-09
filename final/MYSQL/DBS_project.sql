@@ -184,6 +184,10 @@ create table `Order`(
 	foreign key (Member_ID) references `Member`(Member_ID) on update cascade On delete cascade,
 	foreign key (Coupon_ID) references Coupon(Coupon_ID) on update cascade on delete cascade
 );
-
-
+insert into Order(Order_ID, Member_ID, Coupon_ID, Payment_method, Payment_Date, Deliver_method
+,Deliver_address, Total_price, Discounted_price, Order_date, Order_status)
+value
+(1, 1, 3, '匯款', '2021-12-29', '郵寄','台北市大安區忠孝東路三段1號', 1560, 1460, '2021-12-29', 2),
+(2, 1, 2, '匯款', '2022-01-05', '郵寄','台北市大安區忠孝東路三段1號', 490 , 440 , '2022-01-05', 1),
+(3, 1, 1, '匯款', '2022-01-09', '郵寄','台北市大安區忠孝東路三段1號', 600 , 575, '2022-01-09', 0);
 
