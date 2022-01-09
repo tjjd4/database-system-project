@@ -14,8 +14,10 @@ create table `Member`(
 );
 
 insert into Member(Member_name, Username, Member_password, Email, Phone, Permission) 
-values("administrator", "administrator", "123", "administrator@gmail.com", "0912345678", "1"); 
--- 預設的管理員
+values("administrator", "administrator", "123", "administrator@gmail.com", "0912345678", "1"), 
+("testMember", "test", "123", "test@gmail.com", "0912345678", "0"); 
+
+select * from Member;
 
 describe `Member`;
 -- delete from `Member` where member_ID; -- 清空
@@ -80,36 +82,36 @@ create table Category(
 	foreign key (Product_ID) references Product(Product_ID) on update cascade on delete cascade
 );
 insert into Category(Product_ID, Category_name)
-values(1,"食品/點心類"),
-(2,"食品/點心類"),
-(3,"食品/點心類"),
-(4,"食品/點心類"),
-(5,"食品/點心類"),
-(6,"食品/點心類"),
-(7,"食品/點心類"),
-(8,"食品/點心類"),
-(9,"食品/點心類"),
-(10,"食品/點心類"),
-(11,"食品/點心類"),
-(12,"食品/點心類"),
-(13,"食品/點心類"),
+values(1,"food_dessert"),
+(2,"food_dessert"),
+(3,"food_dessert"),
+(4,"food_dessert"),
+(5,"food_dessert"),
+(6,"food_dessert"),
+(7,"food_dessert"),
+(8,"food_dessert"),
+(9,"food_dessert"),
+(10,"food_dessert"),
+(11,"food_dessert"),
+(12,"food_dessert"),
+(13,"food_dessert"),
 
-(14,"茶葉/飲品類"),
-(15,"茶葉/飲品類"),
-(16,"茶葉/飲品類"),
-(17,"茶葉/飲品類"),
-(18,"茶葉/飲品類"),
-(19,"茶葉/飲品類"),
-(20,"茶葉/飲品類"),
-(21,"茶葉/飲品類"),
+(14,"tea_drink"),
+(15,"tea_drink"),
+(16,"tea_drink"),
+(17,"tea_drink"),
+(18,"tea_drink"),
+(19,"tea_drink"),
+(20,"tea_drink"),
+(21,"tea_drink"),
 
-(22,"裝飾/飾品類"),
-(23,"裝飾/飾品類"),
+(22,"acc"),
+(23,"acc"),
 
-(24,"水果類"),
-(25,"水果類"),
-(26,"水果類"),
-(27,"水果類");
+(24,"fruit"),
+(25,"fruit"),
+(26,"fruit"),
+(27,"fruit");
 
 create table Product_Image(
 	Image_ID int not null AUTO_INCREMENT,

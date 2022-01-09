@@ -126,7 +126,12 @@
                                 
                             </div>
                             </form>
-                            <p class="d-block text-secondary">產品分類：<span><?= $category ?></span></p>
+                            <p class="d-block text-secondary">產品分類：<span>
+                                <?php if($category == "food_dessert"){echo "食品/點心類";}
+                                      if($category == "tea_drink"){echo "茶葉/飲品類";}
+                                      if($category == "acc"){echo "裝飾/飾品類";}
+                                      if($category == "fruit"){echo "水果類";}?>
+                            </span></p>  
                         </div>
                         <!-- 商品介紹/end -->
                         <!-- 詳細資料/start -->
