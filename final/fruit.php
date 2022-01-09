@@ -48,7 +48,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<<<<<<< HEAD
     <title>台灣名產商城</title>
+=======
+    <title>北科大商城</title>
+>>>>>>> f3898f1c92db28fe497c8f6cfd95a355f0061ca5
     <link rel="shortcut icon" type="image/png" href="./images/logo.png" />
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -122,7 +126,15 @@
                         </div>
                         <!-- 排序/start -->
                         <div class="col-12 mt-3 mb-3">
-                            <p class="d-inline-block">搜尋結果:13筆</p>
+                            <?php include_once("function.php");
+                                if (isset($_GET["page"])){
+                                    $page = $_GET["page"];
+                                }else{
+                                    $page = 1;
+                                }
+                                echo('<p class="d-inline-block">');
+                                getNumberOfProduct($page, 'fruit');
+                                echo('</p>'); ?>
                             <form action="" class="d-inline-block float-right">
                                 <select id="ProductSelect" class="form-control">
                                     <option>依上架時間</option>
@@ -132,16 +144,18 @@
                                 </select>
                             </form>
                             <hr>
-                        </div>
+                        </div>  
                         <!-- 排序/end -->
                         <!-- 商品/start -->
                         <?php
                         include_once("function.php");
-                        $data = getSameCategoryProduct("fruit");//get all products which category == fruit
+                        $data = getSortedProductByPriceASC($page, 'fruit');//get all products which category == acc
                         ?>                 
                         <!-- 商品/end -->
                         <!-- 分頁/start -->
-                        <div class="col-12 mt-3 mb-5">
+                        <?php getPageLink($page, 'fruit'); ?>
+
+                        <!-- <div class="col-12 mt-3 mb-5">
                             <nav aria-label="Page navigation product">
                                 <ul class="pagination">
                                     <li class="page-item">
@@ -162,7 +176,8 @@
                                     </li>
                                 </ul>
                             </nav>
-                        </div>
+                        </div> -->
+
                         <!-- 分頁/end -->
                     </div>
                 </div>
