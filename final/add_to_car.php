@@ -8,49 +8,12 @@ else
 {
     $id = $_COOKIE["id"];
 }
-  $quantity = $_POST["quantity"];
-  $price = $_POST["price"];
-  $name = $_POST["name"];
-  $num = $_POST["num"];
+  $product_amount = $_POST["quantity"];
+  $product_id = $_POST["num"];
 
+    include_once("shopcart.inc.php");
+    add_shopping_cart($product_id, $product_amount)
 
-  if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
-  {
-    setcookie("quantity_list", $quantity);
-    setcookie("price_list", $price);
-    setcookie("name_list", $name);		
-    setcookie("num_list", $num);		
-  }
-  else
-  {
-    //取得購物車資料
-    $quantity_array = explode(",", $_COOKIE["quantity_list"]);
-    $price_array = explode(",", $_COOKIE["price_list"]);
-    $name_array = explode(",", $_COOKIE["name_list"]);		
-    $num_array = explode(",", $_COOKIE["num_list"]);		
-		
-    //判斷選擇的物品有在購物車中
-    if (in_array($num, $num_array))
-    {
-      //如果選擇的物品已經在購物車中，變更物品數量即可
-      $key = array_search($num, $num_array);			
-      $quantity_array[$key] += $quantity;
-    }
-    else
-    {		
-      //如果選擇的物品沒有在購物車中，則將物品資料加入購物車				
-      $num_array[] = $num;
-      $name_array[] = $name;
-      $price_array[] = $price;			
-      $quantity_array[] = $quantity;												
-    }
-
-    //儲存購物車資料		
-    setcookie("num_list", implode(",", $num_array));
-    setcookie("name_list", implode(",", $name_array));
-    setcookie("price_list", implode(",", $price_array));
-    setcookie("quantity_list", implode(",", $quantity_array));			
-  }
 ?>
 <!DOCTYPE html>
 <html lang="en">

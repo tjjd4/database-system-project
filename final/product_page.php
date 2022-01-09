@@ -111,14 +111,13 @@
                         <!-- 商品介紹/start -->
                         <div class="col-12 col-md-6">
                             <h5 class="text-danger">NT$&nbsp;<?=$data["Price"]?></h5>
-                            <label for="qnty" class="text-dark" style="float: left"><h5>數量：</h5></label>
-                                <input type="number" class="form-control w-25" name="quantity" id="qnty" min="1" value="1">
+                            <form method="post" action="product_page_transition.php" class="d-inline-block">
+                            <label class="text-dark" style="float: left"><h5>數量：</h5></label>
+                            <input type="number" class="form-control w-25" name="quantity" min="1" value="1">
                             <p>
                             <h5 class="text-secondary"><?=$data["Product_description"] ?></h5>
                             <!-- <p class="mt-4">台中太陽堂傳統太陽餅 30入</p> -->
-                            <form method="post" action="product_page_transition.php" class="d-inline-block">
                             <div class="d-block mb-3">
-                                
                             </div>
                             <div class="mb-3"> 
                                     <input type="submit" class="btn btn-primary text-white mr-1" name="shopping_cart" value="加入購物車">

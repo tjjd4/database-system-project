@@ -11,36 +11,7 @@
         $id = $_COOKIE["id"];
         $NickName = $_COOKIE["NickName"];
     }
-    if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
-    {
-        setcookie("num_list", "0");
-        setcookie("name_list", "0");
-        setcookie("price_list", "0");
-        setcookie("quantity_list", "0");
-        $sum=0;
-        $namelen=0;
-    }
-    else
-    {	
-        $quantity= $_COOKIE["quantity_list"];
-        $num = $_COOKIE["num_list"];
-        $name= $_COOKIE["name_list"];
-        $price= $_COOKIE["price_list"];	
-        if(empty($_COOKIE["num_list"])){
-            $namelen=0;
-        }
-        else{
-            $namearray = explode(",",$name);
-            $namelen=count($namearray);
-        }
-       
-        $pricearray = array_map('intval', explode(",",$price));	
-        $sum=0;
-        for($i=0;$i<$namelen;$i++)
-        {
-            $sum=$sum+$pricearray[$i];
-        }
-    }
+    
     include_once("shopcart.inc.php");
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {  
