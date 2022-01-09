@@ -1,7 +1,5 @@
 <?php
     include("shopcart.inc.php");
-    retrieve_shopping_cart();
-
 	if (empty($_COOKIE["id"]))
     {
         setcookie("id", "guest");
@@ -14,34 +12,7 @@
         $id = $_COOKIE["id"];
         $NickName = $_COOKIE["NickName"];
     }
-	
-    if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
-    {
-        setcookie("num_list", "0");
-        setcookie("name_list", "0");
-        setcookie("price_list", "0");
-        setcookie("quantity_list", "0");
-        $sum=0;
-        $namelen=0;
-    }
-    else
-    {	
-        $quantity= $_COOKIE["quantity_list"];
-        $num = $_COOKIE["num_list"];
-        $name= $_COOKIE["name_list"];
-        $price= $_COOKIE["price_list"];	
-        if(empty($_COOKIE["num_list"])){
-            $namelen=0;
-        }
-        else{
-            $namearray = explode(",",$name);
-            $namelen=count($namearray);
-        }
-       
-        $pricearray = array_map('intval', explode(",",$price));
-        $numarray=explode(",",$num);	
-        $quantityarray=explode(",", $quantity);
-    }
+    $shoppingCart = retrieve_shopping_cart();
     $total = array(0);
 
     if ($_SERVER["REQUEST_METHOD"] == "POST")
@@ -65,7 +36,13 @@
                     update_shopping_cart($productId, $new_quantity);
                 }
             }
-        }   header("Refresh:0");
+        }
+
+        if(isset($_POST['clear_shopping_cart']))
+        {
+            clear_shopping_cart();
+        }
+        header("Refresh:0");
     }
 ?>
 <!DOCTYPE html>
@@ -156,11 +133,17 @@
                             </thead>
                             <tbody>
                                 <?php
-                                    for($i=0;$i<$namelen;$i++)
+                                    if($shoppingCart != 0)
                                     {
-                                        require_once("shopcart.inc.php");
-                                        $image_path = retrieve_image_path_from_db($numarray[$i]);
-                                        $subTotal = $pricearray[$i] * $quantityarray[$i];
+                                        for($i=0;$i<sizeof($shoppingCart);$i++)
+                                    {
+                                        $productId = $shoppingCart[$i][0];
+                                        $Product_name = $shoppingCart[$i][1];
+                                        $Price = $shoppingCart[$i][2];
+                                        $Quantity = $shoppingCart[$i][3];
+
+                                        $image_path = retrieve_image_path_from_db($productId);
+                                        $subTotal = $Price * $Quantity;
                                         array_push($total, $subTotal);
                                         echo"
                                         <tr>
@@ -168,30 +151,34 @@
                                                 <td class='product-remove'>
                                                     <input class='btn btn-success pull-left' type='submit' data-toggle='tooltip' data-placement='top' name='modify_from_shopping_cart' title='是否確定要改訂單' value='O'>
                                                     <input class='btn btn-danger pull-right' type='submit' data-toggle='tooltip' data-placement='top' name='remove_from_shopping_cart' title='是否確定要移除' value='x'>
-                                                    <input type='hidden' name='currentProductID' value='$numarray[$i]'>
+                                                    <input type='hidden' name='currentProductID' value='$productId'>
                                                 </td>
                                                 <td class='product-thumbnail'>
-                                                    <a href='product_page.php?currentProductID=$numarray[$i]'>
-                                                        <img src='$image_path' alt='$numarray[$i]' class='img-fluid'>
+                                                    <a href='product_page.php?currentProductID=$productId'>
+                                                        <img src='$image_path' alt='$productId' class='img-fluid'>
                                                     </a>
                                                 </td>
                                                 <td class='product-name'>
-                                                    <a href='product_page.php?currentProductID=$numarray[$i]'>$namearray[$i]</a>
+                                                    <a href='product_page.php?currentProductID=$productId'>$Product_name</a>
                                                 </td>
-                                                <td class='product-price'>NT$&nbsp;$pricearray[$i]</td>
+                                                <td class='product-price'>NT$&nbsp;$Price</td>
                                                 <td class='product-quantity'>
-                                                    <input type='number' min='0' name='quantity'value='$quantityarray[$i]'>
+                                                    <input type='number' min='0' name='quantity' value='$Quantity'>
                                                 </td>
                                                 <td class='product-subtotal'>NT$&nbsp;$subTotal</td>
                                             </form>
                                         </tr>
                                         ";
                                     }
+                                    }
                                 ?>
                                 
                             </tbody>
                         </table>
                     </div>
+                    <form method="post" name="myForm">
+                        <input class='btn btn-danger pull-right' style="float: right" type='submit' data-toggle='tooltip' data-placement='top' name='clear_shopping_cart' <?php echo(($shoppingCart != 0) ? "enabled" : "disabled") ?> title='是否確定要清除購物車' value='清除購物車'>
+                    </form>
                 </div>
                 <!-- 產品清單/end -->
                 <!-- 感興趣產品/start -->

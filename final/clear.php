@@ -11,21 +11,8 @@
     $id = $_COOKIE["id"];
     setcookie("id", "guest");	
     setcookie("passed", "");
-    if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
-    {
-        setcookie("num_list", "0");
-        setcookie("name_list", "0");
-        setcookie("price_list", "0");
-        setcookie("quantity_list", "0");
-        
-    }
-    else
-    {	
-        setcookie("num_list", "0");
-        setcookie("name_list", "0");
-        setcookie("price_list", "0");
-        setcookie("quantity_list", "0");			
-    }
+    include_once("shopcart.inc.php");
+    clear_shopping_cart();
   
 ?>
 <!DOCTYPE html>
