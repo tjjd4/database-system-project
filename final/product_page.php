@@ -99,6 +99,7 @@
             <div class="row">
                 <!-- 產品說明/start -->
                 <div class="col-12 col-md-9">
+                <h4 class="title-color" style="text-align: center"><?= $data["Product_name"]?></h4>
                     <div class="row">
                         <!-- 商品照片/start -->
                         <div class="col-12 col-md-6">
@@ -107,16 +108,15 @@
                         <!-- 商品照片/end -->
                         <!-- 商品介紹/start -->
                         <div class="col-12 col-md-6">
-                            <h4 class="mb-3 title-color"><?= $data["Product_name"]?></h4>
-                            <h6 class="text-warning"><?=$data["Product_description"] ?></h6>
-                            <h5 class="text-danger">
-                                NT$&nbsp;<?=$data["Price"]?>
-                            </h5>
+                            <h5 class="text-danger">NT$&nbsp;<?=$data["Price"]?></h5>
+                            <label for="qnty" class="text-dark" style="float: left"><h5>數量：</h5></label>
+                                <input type="number" class="form-control w-25" name="quantity" id="qnty" min="1" value="1">
+                            <p>
+                            <h5 class="text-secondary"><?=$data["Product_description"] ?></h5>
                             <!-- <p class="mt-4">台中太陽堂傳統太陽餅 30入</p> -->
                             <form method="post" action="product_page_transition.php" class="d-inline-block">
                             <div class="d-block mb-3">
-                                <p class="mb-0 d-inline-block">數量</p>
-                                    <input type="number" class="form-control w-25" name="quantity"  min="1" value="1">
+                                
                             </div>
                             <div class="mb-3"> 
                                     <input type="submit" class="btn btn-primary text-white mr-1" name="shopping_cart" value="加入購物車">
@@ -129,7 +129,7 @@
                         </div>
                         <!-- 商品介紹/end -->
                         <!-- 詳細資料/start -->
-                        <div class="col-12 mt-5 mb-5">
+                        <div class="col-12 mt-1 mb-1">
                             <ul class="nav nav-tabs bg-pekoralight" id="ProductTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">商品說明</a>
@@ -140,13 +140,50 @@
                             </ul>
                             <div class="tab-content" id="ProductTabContent">
                                 <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-                                    <?php 
-                                    for($i = 0; $i < $img_num; $i++){
-                                        echo '<img class="productpic" src='.$images[$i].'>';
-                                    }
-                                    ?>
+                                    <div id="carouselBanner" class="carousel slide" data-ride="carousel">
+                                        <ol class="carousel-indicators">
+                                            <?php
+                                            for ($i = 0; $i < $img_num; $i++)
+                                            {
+                                                echo("<li data-target='#carouselBanner' data-slide-to='$i'");
+                                                if ($i == 0)
+                                                {
+                                                    echo("  class='active'");
+                                                }
+                                                echo("></li>");
+                                            }
+                                            ?>
+                                        </ol>
+                                        <div class="carousel-inner">
+                                            <?php
+                                                for ($i = 0; $i < $img_num; $i++)
+                                                {
+                                                    $image = $images[$i];
+                                                    $slide_numb = $i + 1;
+                                                    echo("<div class='carousel-item");
+                                                    if ($i == 0)
+                                                    {
+                                                        echo(" active");
+                                                    }
+                                                    echo("'><img class='d-block w-100' src='$image' alt='Slide $slide_numb'>
+                                                    <div class='carousel-caption d-none d-md-block text-dark'>
+                                                        <h3></h3>
+                                                        <p></p>
+                                                    </div>
+                                                </div>");
+                                                }
+                                            ?>
+                                        </div>
+                                        <a class="carousel-control-prev" href="#carouselBanner" role="button" data-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carouselBanner" role="button" data-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
                                 </div>
-                                
                                 <div class="tab-pane fade" id="specification" role="tabpanel" aria-labelledby="specification-tab">
                                     <p class="p-2">
                                         <?=$data["Product_standerd"]?>
@@ -212,7 +249,7 @@
                         </div> -->
                         <!-- 購物清單/end -->
                         <!-- 產品分類/start -->
-                        <div class="col-12 mb-5">
+                        <div class="col-12 mb-5 ml-5">
                             <h4 class="title-color">產品分類</h4>
                             <div class="card-deck mt-2 product-categories" style="overflow-y: auto; overflow-x: hidden">
                                 <div class="row">
@@ -299,18 +336,3 @@
     </script>
 </body>
 </html>
-
-    © 2022 GitHub, Inc.
-
-    Terms
-    Privacy
-    Security
-    Status
-    Docs
-    Contact GitHub
-    Pricing
-    API
-    Training
-    Blog
-    About
-

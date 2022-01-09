@@ -31,9 +31,9 @@
         $data = mysqli_fetch_array($result);
         mysqli_free_result($result);
         $txt = '<div class="col-12 col-sm-6 col-md-3 ">
-                <div href="#" class="card mb-3">
+                <div href="#" class="card h-100 mb-3">
                     <!-- <img class="card-img-top" src='.$data["Image_path"].' alt="LTG-BY-0001"> -->
-                    <img class="card-img-top" src='.$data["Image_path"].' alt="LTG-BY-0001">
+                    <img class="card-img-top" src='.$data["Image_path"].' width="250" height="130" alt="LTG-BY-0001">
                     <div class="card-body">
                         <h4 class="card-title">'.$data["Product_name"].'</h4>
                         <p class="card-text">'.$data["Product_description"].'</p>
@@ -83,8 +83,8 @@
         $data = mysqli_fetch_array($result);
         mysqli_free_result($result);
         $txt = '<div class="col-12 col-sm-6 col-md-4 mb-3">
-                    <div class="card">
-                        <img class="card-img-top" src='.$data["Image_path"].' alt="LTG-BY-0001">
+                    <div class="card h-100">
+                        <img class="card-img-top" src='.$data["Image_path"].' width="250" height="130" alt="LTG-BY-0001">
                         <div class="card-body">
                         <h4 class="card-title">'.$data["Product_name"].'</h4>
                         <p class="card-text">'.$data["Product_description"].'</p>
@@ -306,8 +306,8 @@
         if ($MemberID == "guest") 
         {           
             $txt = '<div class="col-4">
-                        <div class="card mb-3">
-                            <img class="card-img-top" src='.$data["Image_Path"].' alt="TG-B-0001" class="img-fluid">
+                        <div class="card h-100 mb-3">
+                            <img class="card-img-top" src='.$data["Image_Path"].'width="250" height="130" alt="TG-B-0001" class="img-fluid">
                             <div class="card-body">
                                 <h4 class="card-title">'.$data["Coupon_Name"].'</h4>
                                 <p class="card-text text-danger">領取期限 :' .$data["ED"].'</p>
@@ -328,8 +328,8 @@
             if ($data2 && $data2["Member_ID"]==$MemberID and $data2["Coupon_ID"]==$CouponID)
             {
                 $txt = '<div class="col-4">
-                            <div class="card mb-3">
-                                <img class="card-img-top" src='.$data["Image_Path"].' alt="TG-B-0001" class="img-fluid">
+                            <div class="card h-100 mb-3">
+                                <img class="card-img-top" src='.$data["Image_Path"].' width="250" height="130" alt="TG-B-0001" class="img-fluid">
                                 <div class="card-body">
                                     <h4 class="card-title">'.$data["Coupon_Name"].'</h4>
                                     <p class="card-text text-danger">領取期限 :' .$data["ED"].'</p>
@@ -342,8 +342,8 @@
             else
             {
                 $txt = '<div class="col-4">
-                            <div class="card mb-3">
-                                <img class="card-img-top" src='.$data["Image_Path"].' alt="TG-B-0001" class="img-fluid">
+                            <div class="card h-100 mb-3">
+                                <img class="card-img-top" src='.$data["Image_Path"].' alt="TG-B-0001" width="250" height="130" class="img-fluid">
                                 <div class="card-body">
                                     <h4 class="card-title">'.$data["Coupon_Name"].'</h4>
                                     <p class="card-text text-danger">領取期限 :' .$data["ED"].'</p>
