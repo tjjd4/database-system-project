@@ -1,11 +1,7 @@
 <?php
   function create_connection()
   {
-<<<<<<< HEAD
-    $link = mysqli_connect("localhost", "root","", "DBS_project", "8889")
-=======
-    $link = mysqli_connect("localhost", "root","")
->>>>>>> aa7a08a1963084997c888b56269c4c385a9793e6
+    $link = mysqli_connect("localhost", "root","eagle511098")
     //, "123456"
       or die("無法建立資料連接: " . mysqli_connect_error());
 	  
