@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HOLO商城</title>
+    <title>北科大商城</title>
     <link rel="shortcut icon" type="image/png" href="./images/logo.png"/>
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -101,7 +101,7 @@
                                 }else{
                                     $page = 1;
                                 }
-                                getSortedProductListByIdASC($page);
+                                getSortedProductListByIdASC($page, 'all');
                               ?>
                             </tbody>
                           </table>
@@ -112,8 +112,10 @@
                 <!-- 分頁/start -->
                 <?php
                 include_once("function.php");
-                getNumberOfProduct($page);
-                getPageLink($page);
+                echo('<p class="col-12 mt-3 mb-3 d-inline-block">');
+                getNumberOfProduct($page, 'all');
+                echo('</p>');
+                getPageLink($page, 'all');
                 ?>
                 <!-- 分頁/end -->
             </div>
