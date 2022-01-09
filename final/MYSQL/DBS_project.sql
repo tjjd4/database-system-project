@@ -1,7 +1,6 @@
--- drop database DBS_project;
--- create database DBS_project;
--- use DBS_project;
-
+drop database DBS_project;
+create database DBS_project;
+use DBS_project;
 
 create table `Member`(
 	`Member_ID` int not null AUTO_INCREMENT,
@@ -15,9 +14,10 @@ create table `Member`(
 );
 
 insert into Member(Member_name, Username, Member_password, Email, Phone, Permission) 
-values("administrator", "administrator", "123", "administrator@gmail.com", "0912345678", "1");
+values("administrator", "administrator", "123", "administrator@gmail.com", "0912345678", "1"); 
+-- 預設的管理員
 
--- describe `Member`;
+describe `Member`;
 -- delete from `Member` where member_ID; -- 清空
 -- alter table `Member` AUTO_INCREMENT = 1; -- 重設id為1開始
 -- select * from `Member`; -- 查詢 
@@ -35,6 +35,7 @@ create table Product(
 	primary key (Product_ID)
 );
 -- drop table Product;
+
 insert into Product(Product_name, Product_description, Price, stock, Publish_date, Product_detail, Product_standerd)
 values("佳德糕餅 - 鳳梨酥","原味鳳梨酥禮盒(12入)","750", 100, '2021-12-29',"詳細資訊","我是好吃的鳳梨酥"),
 ("佳德糕餅 - 蔥軋餅","蔥軋餅(24片)禮盒","750", 100, '2021-12-29',"詳細資訊","我是好吃的蔥軋餅"),
@@ -79,36 +80,36 @@ create table Category(
 	foreign key (Product_ID) references Product(Product_ID) on update cascade on delete cascade
 );
 insert into Category(Product_ID, Category_name)
-values(1,"food_dessert"),
-(2,"food_dessert"),
-(3,"food_dessert"),
-(4,"food_dessert"),
-(5,"food_dessert"),
-(6,"food_dessert"),
-(7,"food_dessert"),
-(8,"food_dessert"),
-(9,"food_dessert"),
-(10,"food_dessert"),
-(11,"food_dessert"),
-(12,"food_dessert"),
-(13,"food_dessert"),
+values(1,"食品/點心類"),
+(2,"食品/點心類"),
+(3,"食品/點心類"),
+(4,"食品/點心類"),
+(5,"食品/點心類"),
+(6,"食品/點心類"),
+(7,"食品/點心類"),
+(8,"食品/點心類"),
+(9,"食品/點心類"),
+(10,"食品/點心類"),
+(11,"食品/點心類"),
+(12,"食品/點心類"),
+(13,"食品/點心類"),
 
-(14,"tea_drink"),
-(15,"tea_drink"),
-(16,"tea_drink"),
-(17,"tea_drink"),
-(18,"tea_drink"),
-(19,"tea_drink"),
-(20,"tea_drink"),
-(21,"tea_drink"),
+(14,"茶葉/飲品類"),
+(15,"茶葉/飲品類"),
+(16,"茶葉/飲品類"),
+(17,"茶葉/飲品類"),
+(18,"茶葉/飲品類"),
+(19,"茶葉/飲品類"),
+(20,"茶葉/飲品類"),
+(21,"茶葉/飲品類"),
 
-(22,"acc"),
-(23,"acc"),
+(22,"裝飾/飾品類"),
+(23,"裝飾/飾品類"),
 
-(24,"fruit"),
-(25,"fruit"),
-(26,"fruit"),
-(27,"fruit");
+(24,"水果類"),
+(25,"水果類"),
+(26,"水果類"),
+(27,"水果類");
 
 create table Product_Image(
 	Image_ID int not null AUTO_INCREMENT,
@@ -189,8 +190,6 @@ create table CouponList(
 	foreign key (Member_ID) references `Member`(Member_ID) on update cascade on delete cascade
 );
 
-select * from CouponList;
-
 create table `Order`(
 	Order_ID int not null AUTO_INCREMENT, 
 	Member_ID int not null,
@@ -207,9 +206,10 @@ create table `Order`(
 	foreign key (Member_ID) references `Member`(Member_ID) on update cascade On delete cascade,
 	foreign key (Coupon_ID) references Coupon(Coupon_ID) on update cascade on delete cascade
 );
-insert into Order(Order_ID, Member_ID, Coupon_ID, Payment_method, Payment_Date, Deliver_method
+
+insert into `Order`(Order_ID, Member_ID, Coupon_ID, Payment_method, Payment_Date, Deliver_method
 ,Deliver_address, Total_price, Discounted_price, Order_date, Order_status)
-value
+values
 (1, 1, 3, '匯款', '2021-12-29', '郵寄','台北市大安區忠孝東路三段1號', 1560, 1460, '2021-12-29', 2),
 (2, 1, 2, '匯款', '2022-01-05', '郵寄','台北市大安區忠孝東路三段1號', 490 , 440 , '2022-01-05', 1),
 (3, 1, 1, '匯款', '2022-01-09', '郵寄','台北市大安區忠孝東路三段1號', 600 , 575, '2022-01-09', 0);

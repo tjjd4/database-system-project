@@ -1,9 +1,17 @@
 <?php
     require_once("dbtools.inc.php");
     function getProuctFromId($id){
-        //建立資料連接
         $link = create_connection();
         $sql = "SELECT * FROM `Product` Where Product_ID = $id";
+        $result = execute_sql($link, "DBS_project", $sql);
+        $data = mysqli_fetch_array($result);
+        mysqli_free_result($result);
+        return $data;
+    }
+
+    function getCategoryFromId($id){
+        $link = create_connection();
+        $sql = "SELECT * FROM `Category` Where Product_ID = $id";
         $result = execute_sql($link, "DBS_project", $sql);
         $data = mysqli_fetch_array($result);
         mysqli_free_result($result);

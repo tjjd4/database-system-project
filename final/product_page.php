@@ -22,6 +22,8 @@
     $data = getProuctFromId($Product_ID);
     $images = getImagesFromProductId($Product_ID);
     $img_num = count($images);
+    $_category = getCategoryFromId($Product_ID);
+    $category = $_category["Category_name"];
 ?>
 
 
@@ -125,7 +127,7 @@
                                 
                             </div>
                             </form>
-                            <p class="d-block text-secondary">產品分類：<span>食品/點心類</span></p>
+                            <p class="d-block text-secondary">產品分類：<span><?= $category ?></span></p>
                         </div>
                         <!-- 商品介紹/end -->
                         <!-- 詳細資料/start -->
