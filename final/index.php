@@ -104,7 +104,6 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <!-- <img class="d-block w-100" src="./images/slider_4.png" alt="First slide"> -->
                         <img class="d-block w-100" src="./images/carousel/1.jpg" alt="First slide">
                         <div class="carousel-caption d-none d-md-block text-dark">
                             <h3></h3>
@@ -112,7 +111,6 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <!-- <img class="d-block w-100" src="./images/slider_2.png" alt="Second slide"> -->
                         <img class="d-block w-100" src="./images/carousel/2.jpg" alt="Second slide">
                         <div class="carousel-caption d-none d-md-block">
                             <h3></h3>
@@ -120,7 +118,6 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <!-- <img class="d-block w-100" src="./images/slider_3.png" alt="Third slide"> -->
                         <img class="d-block w-100" src="./images/carousel/3.png" alt="Third slide">
                         <div class="carousel-caption d-none d-md-block text-dark">
                             <h3></h3>
@@ -149,28 +146,25 @@
             <div class="col-12">
                 <div class="card-deck mt-2 product-categories">
                     <a href="food_dessert.php" class="card">
-                        <!-- <img class="card-img-top" src="./images/slider_1.png" alt="套組"> -->
                         <img class="card-img-top" src="./images/product_class/3.jpg" alt="食物">
                         <div class="card-body bg-dark">
                             <h4 class="card-title text-white text-center">食品/點心類</h4>
                         </div>
                     </a>
                     <a href="tea_drink.php" class="card">
-                        <!-- <img class="card-img-top" src="./images/service_2.png" alt="卡套"> -->
+                        
                         <img class="card-img-top" src="./images/product_class/2.jpg" alt="飲料">
                         <div class="card-body bg-dark">
                             <h4 class="card-title text-white text-center">茶葉/飲品類</h4>
                         </div>
                     </a>
                     <a href="acc.php" class="card">
-                        <!-- <img class="card-img-top" src="./images/service_3.png" alt="衣服"> -->
                         <img class="card-img-top" src="./images/product_class/4.jpg" alt="裝飾">
                         <div class="card-body bg-dark">
                             <h4 class="card-title text-white text-center">裝飾/飾品類</h4>
                         </div>
                     </a>
                     <a href="fruit.php" class="card">
-                        <!-- <img class="card-img-top" src="./images/service_4.png" alt="滑鼠墊"> -->
                         <img class="card-img-top" src="./images/product_class/1.jpg" alt="水果">
                         <div class="card-body bg-dark">
                             <h4 class="card-title text-white text-center">水果類</h4>

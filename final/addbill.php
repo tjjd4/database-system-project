@@ -143,20 +143,18 @@
         </nav>
     </header>
     <!-- header/end -->
-    
-    <div class="container pt-3 pb-3">
-      <div class="row">
-        <div class="col-0 col-md-2"></div>
-        <div class="col-12 col-md-8">
-          <img class="f1001 c"src="./images/holobg.png">
+    <section class="page-content">
+        <div class="container pt-3 pb-3">
+        <div class="row">
+            <div class="col-0 col-md-2"></div>
+            <div class="col-12 col-md-8">
+            <h1 class="text-success"> 訂單已送出
+            <p>Thank you! 感謝你的訂購！</p>
+            </h1> 
+            </div>
+            <div class="col-0 col-md-2"></div>
         </div>
-        <div class="col-0 col-md-2"></div>
-      <div class="ml-auto">
-        <div class="col-12 col-md-12 c">
-            <h1 class="text-success"> 訂單已送出</h1> 
-        </div>
-      </div>
-    </div>
+    </section>
     <!-- 頁腳/start -->
     <footer class="bg-pekoradark">
         <div class="container pt-3 pb-3">

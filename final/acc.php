@@ -175,7 +175,6 @@
                                         </div>
                                     </a>
                                     <a href="tea_drink.php" class="card">
-                                        <!-- <img class="card-img-top" src="./images/service_2.png" alt="卡套"> -->
                                         <img class="card-img-top" src="./images/product_class/2.jpg" alt="飲料">
                                         <div class="card-body bg-dark card-title text-white text-center">
                                             <h5>茶葉/</h5>

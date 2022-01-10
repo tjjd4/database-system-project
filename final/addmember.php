@@ -106,7 +106,7 @@
 
         <div class="col-12 col-md-4">
                 <div href="#" class="card mb-3">
-                    <img class="card-img-top f1001" src="./images/chibiame.gif" alt="LTG-BY-0001">
+                    <img class="card-img-top f1001" src="./images/success.gif" alt="LTG-BY-0001">
                     <div class="card-body">
                         <h4 class="card-title"><?php echo $Member_name ?>你好</h4>
                         <!-- <p class="card-text">id:<font color="#FF0000"><?php echo $account?></font></p>

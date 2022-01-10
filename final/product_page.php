@@ -221,7 +221,6 @@
                             <div class="card-deck mt-2 product-categories" style="overflow-y: auto; overflow-x: hidden">
                                 <div class="row">
                                     <a href="food_dessert.php" class="card">
-                                        <!-- <img class="card-img-top" src="./images/slider_1.png" alt="套組"> -->
                                         <img class="card-img-top" src="./images/product_class/3.jpg" alt="食物">
                                         <div class="card-body bg-dark card-title text-white text-center">
                                             <h5>食品/</h5>
@@ -229,7 +228,7 @@
                                         </div>
                                     </a>
                                     <a href="tea_drink.php" class="card">
-                                        <!-- <img class="card-img-top" src="./images/service_2.png" alt="卡套"> -->
+                                        
                                         <img class="card-img-top" src="./images/product_class/2.jpg" alt="飲料">
                                         <div class="card-body bg-dark card-title text-white text-center">
                                             <h5>茶葉/</h5>
@@ -239,7 +238,6 @@
                                 </div>
                                 <div class="row">
                                     <a href="acc.php" class="card">
-                                        <!-- <img class="card-img-top" src="./images/service_3.png" alt="衣服"> -->
                                         <img class="card-img-top" src="./images/product_class/4.jpg" alt="裝飾">
                                         <div class="card-body bg-dark card-title text-white text-center">
                                             <h5>裝飾/</h5>
@@ -247,7 +245,6 @@
                                         </div>
                                     </a>
                                     <a href="fruit.php" class="card">
-                                        <!-- <img class="card-img-top" src="./images/service_4.png" alt="滑鼠墊"> -->
                                         <img class="card-img-top" src="./images/product_class/1.jpg" alt="水果">
                                         <div class="card-body bg-dark card-title text-white text-center">
                                             <h5>水果類</h5>

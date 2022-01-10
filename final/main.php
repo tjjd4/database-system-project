@@ -105,7 +105,7 @@
             <div class="row mt-5">
                 <div class="col-12 col-md-4">
                     <div href="#" class="card h-100 mb-3">
-                        <img class="card-img-top" src="./images/chibiame-modify.gif" alt="LG-GP-0001">
+                        <img class="card-img-top" src="./images/modify.jpg" alt="LG-GP-0001">
                         <div class="card-body">
                         <a href="modify.php" class="btn btn-outline-secondary btn-block">修改會員資料</a>
                             
@@ -115,7 +115,7 @@
                 
                 <div class="col-12 col-md-4">
                     <div href="#" class="card h-100 mb-3">
-                        <img class="card-img-top" src="./images/chibiame-product_list.gif" alt="LG-GP-0001">
+                        <img class="card-img-top" src="./images/product_list.jpg" alt="LG-GP-0001">
                         <div class="card-body">
                             <a href="product_list.php" class="btn btn-outline-secondary btn-block">管理商品</a>                      
                         </div>
@@ -124,7 +124,7 @@
 
                 <div class="col-12 col-md-4">
                     <div href="#" class="card mb-3 h-100">
-                        <img class="card-img-top" src="./images/chibiame-index.gif" alt="LG-GP-0001">
+                        <img class="card-img-top" src="./images/to_index.jpg" alt="LG-GP-0001">
                         <div class="card-body">
                             <a href="order_list.php" class="btn btn-outline-secondary btn-block">管理訂單</a>
                         </div>
@@ -135,7 +135,7 @@
             <div class="row mt-5">
                 <div class="col-12 col-md-6">
                     <div href="#" class="card h-100 mb-3">
-                        <img class="card-img-top" src="./images/chibiame-modify.gif" alt="LG-GP-0001">
+                        <img class="card-img-top" src="./images/modify.jpg" alt="LG-GP-0001">
                         <div class="card-body">
                         <a href="modify.php" class="btn btn-outline-secondary btn-block">修改會員資料</a>
                             
@@ -145,7 +145,7 @@
 
             <div class="col-12 col-md-6">
                 <div href="#" class="card mb-3 h-100">
-                    <img class="card-img-top" src="./images/chibiame-index.gif" alt="LG-GP-0001">
+                    <img class="card-img-top" src="./images/to_index.jpg" alt="LG-GP-0001">
                     <div class="card-body">
                         <a href="order_list.php" class="btn btn-outline-secondary btn-block">查看訂單</a>
                     </div>
