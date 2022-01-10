@@ -55,39 +55,15 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse " id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.php">首頁</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.php">關於我們</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="shop.php">買名產囉</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
-                    </li>
-                    <form action="search.php">
-                        <li class="nav-item">
-                            <input name="search_product" type="text" class="form-control" id="search_product" placeholder="搜尋...">
-                        </li>
-                    </form>
-                </ul>
-                <div class="ml-auto">
-                    <?php
-                            if ($_COOKIE["id"]=="guest")
-                            {
-                              echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
-                            }
-                            else
-                            {
-                                echo"<a href='main.php'>$NickName</a> 你好";
-                                echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
-                            }
+            <?php
+                    include_once("web_function.php");
+                    create_top_left();
                     ?>
-                    <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
-                    <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
+                <div class="ml-auto">
+                <?php include_once("web_function.php");
+                    create_title($id,$NickName);
+                
+                ?>
                 </div>
             </div>
         </nav>

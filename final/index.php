@@ -36,10 +36,13 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/color.css">
     <link rel="stylesheet" href="./css/frame.css">
+    <link rel="stylesheet" href="./css/button1.css">
+
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="./js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body>
     <!-- header/start -->
@@ -53,41 +56,17 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.php">首頁</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.php">關於我們</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="shop.php">買名產囉</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
-                    </li>
-                    <form action ="search.php">
-                        <li class="nav-item">
-                            <input name="search_product" type="text" class="form-control" id="search_product" placeholder="搜尋...">
-                        </li>
-                    </form>
-                </ul>
+            <?php
+                    include_once("web_function.php");
+                    create_top_left();
+                    ?>
                 
                 <div class="ml-auto">
-                    <?php
-                            if ($id == "guest")
-                            {
-                              echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
-                            }
-                            else
-                            {
-                                echo"<a href='main.php'class=btn btn-outline-info text-danger >$NickName 你好</a> ";
-                                echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
-                            }
-                    ?>
-                    
-                    <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
-                    <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
+                   
+                <?php include_once("web_function.php");
+                    create_title($id,$NickName);
+                
+                ?>
                 </div>
             </div>
         </nav>
@@ -137,6 +116,17 @@
         </div>
     </section>
     <!-- 廣告/end -->
+    <section class="container mt-5">
+            <div class="center">
+                <div class="card-deck mt-1 product-categories" style="height:100px;">
+                    <a href="coupon.php" class="card" style="height:10px;">
+                        <div class="card-body bg-success">
+                            <h4 class="card-title text-white text-center" >點我領取優惠券</h4>
+                        </div>
+                    </a>              
+                </div>
+            </div>
+    </section>
     <!-- 產品分類/start -->
     <section class="container mt-5">
         <div class="row">
@@ -208,26 +198,16 @@
     <!-- 領取優惠券/start -->
 
     <section class="container mt-5">
-        <div class="row">
-            <div class="col-4">
+            <div class="center" style ="height:100px">
                 <div class="card-deck mt-1 product-categories" style="height:100px;">
                     <a href="shop.php" class="card" style="height:10px;">
-                        <div class="card-body bg-primary">
-                            <h4 class="card-title text-white text-center">開始買囉</h4>
+                        <div class="card-body bg-primary " >
+                            <h4 valign = "center"class="card-title text-white text-wrap text-center">開始買囉</h4>
                         </div>
                     </a>              
                 </div>
             </div>
-            <div class="col-4">
-                <div class="card-deck mt-1 product-categories" style="height:100px;">
-                    <a href="coupon.php" class="card" style="height:10px;">
-                        <div class="card-body bg-success">
-                            <h4 class="card-title text-white text-center">點我領取優惠券</h4>
-                        </div>
-                    </a>              
-                </div>
-            </div>
-        </div>
+            
     </section>
     <!-- 領取優惠券/end -->
     
