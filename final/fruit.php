@@ -11,35 +11,18 @@
         $id = $_COOKIE["id"];
         $NickName = $_COOKIE["NickName"];
     }
-    if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
-    {
-        setcookie("num_list", "0");
-        setcookie("name_list", "0");
-        setcookie("price_list", "0");
-        setcookie("quantity_list", "0");
-      $sum=0;
-      $namelen=0;
-    }
-    else
-    {	
-        $quantity= $_COOKIE["quantity_list"];
-        $num = $_COOKIE["num_list"];
-        $name= $_COOKIE["name_list"];
-        $price= $_COOKIE["price_list"];	
-        if(empty($_COOKIE["num_list"])){
-            $namelen=0;
-        }
-        else{
-            $namearray = explode(",",$name);
-            $namelen=count($namearray);
-        }
-       
-        $pricearray = array_map('intval', explode(",",$price));	
-        $sum=0;
-        for($i=0;$i<$namelen;$i++)
-        {
-            $sum=$sum+$pricearray[$i];
-        }
+
+    include_once("shopcart.inc.php");
+    if ($_SERVER["REQUEST_METHOD"] == "POST")
+    {  
+            if (isset($_POST['add_shopping_cart']) && isset($_POST['currentProductID']))
+            {
+                if($_POST['add_shopping_cart'] == '加入購物車')
+                {
+                    $productId = $_POST['currentProductID'];
+                    add_shopping_cart($productId, 1);
+                }
+            }
     }
 ?>
 <!DOCTYPE html>
@@ -48,7 +31,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>北科大商城</title>
+<title>台灣名產商城</title>
     <link rel="shortcut icon" type="image/png" href="./images/logo.png" />
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">

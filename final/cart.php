@@ -1,7 +1,5 @@
 <?php
     include("shopcart.inc.php");
-    retrieve_shopping_cart();
-
 	if (empty($_COOKIE["id"]))
     {
         setcookie("id", "guest");
@@ -14,34 +12,7 @@
         $id = $_COOKIE["id"];
         $NickName = $_COOKIE["NickName"];
     }
-	
-    if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
-    {
-        setcookie("num_list", "0");
-        setcookie("name_list", "0");
-        setcookie("price_list", "0");
-        setcookie("quantity_list", "0");
-        $sum=0;
-        $namelen=0;
-    }
-    else
-    {	
-        $quantity= $_COOKIE["quantity_list"];
-        $num = $_COOKIE["num_list"];
-        $name= $_COOKIE["name_list"];
-        $price= $_COOKIE["price_list"];	
-        if(empty($_COOKIE["num_list"])){
-            $namelen=0;
-        }
-        else{
-            $namearray = explode(",",$name);
-            $namelen=count($namearray);
-        }
-       
-        $pricearray = array_map('intval', explode(",",$price));
-        $numarray=explode(",",$num);	
-        $quantityarray=explode(",", $quantity);
-    }
+    $shoppingCart = retrieve_shopping_cart();
     $total = array(0);
 
     if ($_SERVER["REQUEST_METHOD"] == "POST")
@@ -65,7 +36,13 @@
                     update_shopping_cart($productId, $new_quantity);
                 }
             }
-        }   header("Refresh:0");
+        }
+
+        if(isset($_POST['clear_shopping_cart']))
+        {
+            clear_shopping_cart();
+        }
+        header("Refresh:0");
     }
 ?>
 <!DOCTYPE html>
@@ -74,7 +51,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>北科大商城</title>
+    <title>台灣名產商城</title>
     <link rel="shortcut icon" type="image/png" href="./images/logo.png"/>
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -156,11 +133,17 @@
                             </thead>
                             <tbody>
                                 <?php
-                                    for($i=0;$i<$namelen;$i++)
+                                    if($shoppingCart != 0)
                                     {
-                                        require_once("shopcart.inc.php");
-                                        $image_path = retrieve_image_path_from_db($numarray[$i]);
-                                        $subTotal = $pricearray[$i] * $quantityarray[$i];
+                                        for($i=0;$i<sizeof($shoppingCart);$i++)
+                                    {
+                                        $productId = $shoppingCart[$i][0];
+                                        $Product_name = $shoppingCart[$i][1];
+                                        $Price = $shoppingCart[$i][2];
+                                        $Quantity = $shoppingCart[$i][3];
+
+                                        $image_path = retrieve_image_path_from_db($productId);
+                                        $subTotal = $Price * $Quantity;
                                         array_push($total, $subTotal);
                                         echo"
                                         <tr>
@@ -168,30 +151,34 @@
                                                 <td class='product-remove'>
                                                     <input class='btn btn-success pull-left' type='submit' data-toggle='tooltip' data-placement='top' name='modify_from_shopping_cart' title='是否確定要改訂單' value='O'>
                                                     <input class='btn btn-danger pull-right' type='submit' data-toggle='tooltip' data-placement='top' name='remove_from_shopping_cart' title='是否確定要移除' value='x'>
-                                                    <input type='hidden' name='currentProductID' value='$numarray[$i]'>
+                                                    <input type='hidden' name='currentProductID' value='$productId'>
                                                 </td>
                                                 <td class='product-thumbnail'>
-                                                    <a href='product_page.php?currentProductID=$numarray[$i]'>
-                                                        <img src='$image_path' alt='$numarray[$i]' class='img-fluid'>
+                                                    <a href='product_page.php?currentProductID=$productId'>
+                                                        <img src='$image_path' alt='$productId' class='img-fluid'>
                                                     </a>
                                                 </td>
                                                 <td class='product-name'>
-                                                    <a href='product_page.php?currentProductID=$numarray[$i]'>$namearray[$i]</a>
+                                                    <a href='product_page.php?currentProductID=$productId'>$Product_name</a>
                                                 </td>
-                                                <td class='product-price'>NT$&nbsp;$pricearray[$i]</td>
+                                                <td class='product-price'>NT$&nbsp;$Price</td>
                                                 <td class='product-quantity'>
-                                                    <input type='number' min='0' name='quantity'value='$quantityarray[$i]'>
+                                                    <input type='number' min='0' name='quantity' value='$Quantity'>
                                                 </td>
                                                 <td class='product-subtotal'>NT$&nbsp;$subTotal</td>
                                             </form>
                                         </tr>
                                         ";
                                     }
+                                    }
                                 ?>
                                 
                             </tbody>
                         </table>
                     </div>
+                    <form method="post" name="myForm">
+                        <input class='btn btn-danger pull-right' style="float: right" type='submit' data-toggle='tooltip' data-placement='top' name='clear_shopping_cart' <?php echo(($shoppingCart != 0) ? "enabled" : "disabled") ?> title='是否確定要清除購物車' value='清除購物車'>
+                    </form>
                 </div>
                 <!-- 產品清單/end -->
                 <!-- 感興趣產品/start -->
@@ -200,11 +187,11 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="card mb-3">
-                                <img class="card-img-top" src="./images/product/eva_1.png" alt="TG-B-0001" class="img-fluid">
+                                <img class="card-img-top" src="./images/tea_drink_images/4.jpg" alt="TG-B-0001" class="img-fluid">
                                 <div class="card-body">
-                                    <h4 class="card-title">Hololive兔田佩克拉 生日套組</h4>
-                                    <p class="card-text">附特典</p>
-                                    <h5 class="card-text text-danger">NT$&nbsp;5180</h5>
+                                    <h4 class="card-title">小茶栽堂 - 紅雙禮盒</h4>
+                                    <p class="card-text">紅雙禮盒(古典罐2入-黑烏龍茶X古早味紅茶)</p>
+                                    <h5 class="card-text text-danger">NT$&nbsp;1300</h5>
                                     <a href="product.html" class="btn btn-outline-secondary btn-block">查看商品</a>
                                     <a href="cart.php" class="btn btn-outline-primary btn-block">加入購物車</a>
                                 </div>
@@ -212,11 +199,11 @@
                         </div>
                         <div class="col-6">
                             <div class="card mb-3">
-                                <img class="card-img-top" src="./images/product/eva_9.png" alt="TG-B-0001" class="img-fluid">
+                                <img class="card-img-top" src="./images/food_dessert_images/11.jpg" alt="TG-B-0001" class="img-fluid">
                                 <div class="card-body">
-                                    <h4 class="card-title">潤羽るしあ 生日紀念套組</h4>
-                                    <p class="card-text">附特典</p>
-                                    <h5 class="card-text text-danger">NT$&nbsp;4490</h5>
+                                    <h4 class="card-title">老媽拌麵 - 蔥油開洋拌麵</h4>
+                                    <p class="card-text">蔥油開洋拌麵(一袋4包)</p>
+                                    <h5 class="card-text text-danger">NT$&nbsp;987</h5>
                                     <a href="product.html" class="btn btn-outline-secondary btn-block">查看商品</a>
                                     <a href="cart.php" class="btn btn-outline-primary btn-block">加入購物車</a>
                                 </div>
@@ -269,7 +256,7 @@
                     <ul class="footer-menu">
                         <li><a href="index.php">首頁</a></li>
                         <li><a href="about.php">HOLOLIVE</a></li>
-                        <li><a href="shop.php">HOLO商城</a></li>
+                        <li><a href="shop.php">台灣名產商城</a></li>
                         <li><a href="job.php">成員簡介</a></li>
                         <li><a href="https://schedule.hololive.tv/">直播時間</a></li>
                         <li><a href="login.html">登入</a></li>

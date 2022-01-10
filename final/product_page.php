@@ -22,6 +22,8 @@
     $data = getProuctFromId($Product_ID);
     $images = getImagesFromProductId($Product_ID);
     $img_num = count($images);
+    $_category = getCategoryFromId($Product_ID);
+    $category = $_category["Category_name"];
 ?>
 
 
@@ -31,7 +33,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>北科大商城</title>
+    <title>台灣名產商城</title>
     <link rel="shortcut icon" type="image/png" href="./images/logo.png" />
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -109,14 +111,13 @@
                         <!-- 商品介紹/start -->
                         <div class="col-12 col-md-6">
                             <h5 class="text-danger">NT$&nbsp;<?=$data["Price"]?></h5>
-                            <label for="qnty" class="text-dark" style="float: left"><h5>數量：</h5></label>
-                                <input type="number" class="form-control w-25" name="quantity" id="qnty" min="1" value="1">
+                            <form method="post" action="product_page_transition.php" class="d-inline-block">
+                            <label class="text-dark" style="float: left"><h5>數量：</h5></label>
+                            <input type="number" class="form-control w-25" name="quantity" min="1" value="1">
                             <p>
                             <h5 class="text-secondary"><?=$data["Product_description"] ?></h5>
                             <!-- <p class="mt-4">台中太陽堂傳統太陽餅 30入</p> -->
-                            <form method="post" action="product_page_transition.php" class="d-inline-block">
                             <div class="d-block mb-3">
-                                
                             </div>
                             <div class="mb-3"> 
                                     <input type="submit" class="btn btn-primary text-white mr-1" name="shopping_cart" value="加入購物車">
@@ -125,7 +126,12 @@
                                 
                             </div>
                             </form>
-                            <p class="d-block text-secondary">產品分類：<span>食品/點心類</span></p>
+                            <p class="d-block text-secondary">產品分類：<span>
+                                <?php if($category == "food_dessert"){echo "食品/點心類";}
+                                      if($category == "tea_drink"){echo "茶葉/飲品類";}
+                                      if($category == "acc"){echo "裝飾/飾品類";}
+                                      if($category == "fruit"){echo "水果類";}?>
+                            </span></p>  
                         </div>
                         <!-- 商品介紹/end -->
                         <!-- 詳細資料/start -->

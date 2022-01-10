@@ -3,38 +3,55 @@
   header("Content-type: text/html; charset=utf-8");
   
   //取得表單資料
-  $Username = $_POST["account"]; 
-  $Email = $_POST["email"];
-  $show_method = $_POST["show_method"]; 
+  #$Username = $_POST["account"]; 
+  #$Email = $_POST["email"];
+  #$show_method = $_POST["show_method"]; 
 
+  #########(project code)
+  $search_product=$_GET["search_product"];
+  #########
+  
   //建立資料連接
   $link = create_connection();
-			
+
   //檢查查詢的帳號是否存在
-  $sql = "SELECT Member_password, Member_name FROM Member WHERE Username = '$Username' AND Email = '$Email'";
+  #$sql = "SELECT Member_password, Member_name FROM Member WHERE Username = '$Username' AND Email = '$Email'";
+  #$result = execute_sql($link, "DBS_project", $sql);
+
+  ###########project code
+  #檢查搜尋是否有結果
+  $sql='SELECT P.Product_ID 
+        FROM `Product` as P 
+        WHERE P.Product_Name LIKE "%'.$search_product.'%" AND ABS(LENGTH("%'.$search_product.'%")-Length(P.Product_Name))!=0;';
   $result = execute_sql($link, "DBS_project", $sql);
+
 
   //如果帳號不存在
   if (mysqli_num_rows($result) == 0)
   {
-    //顯示訊息告知使用者，查詢的帳號並不存在
+    //顯示訊息告知使用者，查詢的商品並不存在
     echo "<script type='text/javascript'>
             alert('您所查詢的資料不存在，請檢查是否輸入錯誤。');
             history.back();
           </script>";
   }
-  else  //如果帳號存在
-  {
-    $row = mysqli_fetch_assoc($result);
-    $password = $row["Member_password"];
-    $NickName = $row["Member_name"];
+//   else  //如果帳號存在
+//   {
+    #$row = mysqli_fetch_assoc($result);
+    #echo $row["Product_Name"];
+    #echo $row["Price"];
+    
+    #$Product_Name = $row["Product_Name"];
+    #$Price = $row["Price"];
+    ?>
     $msg2="<!DOCTYPE html>
+    
     <html lang='en'>
     <head>
         <meta charset='UTF-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <meta http-equiv='X-UA-Compatible' content='ie=edge'>
-        <title>北科大商城</title>
+        <title>台灣名產商城</title>
         <link rel='shortcut icon' type='image/png' href='./images/logo.png'/>
         <!-- CSS文件載入 -->
         <link rel='stylesheet' href='./css/bootstrap.min.css'>
@@ -84,11 +101,37 @@
             </nav>
         </header>
         <!-- header/end -->
-        
+        <section class="page-content">
+        <div class="container pt-5 pb-5">
+            <div class="row">
+                <!-- 商品區/start -->
+                <div class="col-12 col-md-9">
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <img src="./images/shop.jpg" alt="Shop Banner" class="img-fluid">
+                        </div>
+                        <!-- 排序/start -->
+                        <div class="col-12 mt-3 mb-3">
+                            <p class="d-inline-block">顯示 27 筆結果中的 1–9 筆</p>
+                            <form action="" class="d-inline-block float-right">
+                                <select id="ProductSelect" class="form-control">
+                                    <option>依上架時間</option>
+                                    <option>依熱銷度</option>
+                                    <option>依價格排序:低至高</option>
+                                    <option>依價格排序:高至低</option>
+                                </select>
+                            </form>
+                        </div>
+                        <!-- 排序/end -->
+                        <!-- 商品/start -->
+                        <?php
+                        include_once("function.php");
+                        SearchToGetSortedProductByPriceASC($search_product,1);
+                        ?>
         <div class='container pt-3 pb-3 mt-5'>
             <div class='row'>
                 <div class='col-12 col-md12 '>
-                    <p align-middle>你以為這邊有功能了嗎?</p>
+                    <p align-middle>查詢結果</p>
                 </div>
             </div>
             <div class='row '>
@@ -103,6 +146,7 @@
                 </div>
             </div>
         </div>
+        
         <!-- 頁腳/start -->
         <footer class='bg-pekoradark'>
             <div class='container pt-3 pb-3'>
@@ -148,7 +192,7 @@
         <meta charset='UTF-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <meta http-equiv='X-UA-Compatible' content='ie=edge'>
-        <title>北科大商城</title>
+        <title>台灣名產商城</title>
         <link rel='shortcut icon' type='image/png' href='./images/logo.png'/>
         <!-- CSS文件載入 -->
         <link rel='stylesheet' href='./css/bootstrap.min.css'>
@@ -259,7 +303,7 @@
     </body>
     </html>
     ";
-	
+	<?php
     if ($show_method == "網頁顯示")
     {
       echo $message;   //顯示訊息告知使用者帳號密碼
@@ -269,7 +313,7 @@
       
       echo $msg2;				
     }
-  }
+  
 
   //釋放 $result 佔用的記憶體
   mysqli_free_result($result);

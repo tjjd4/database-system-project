@@ -17,14 +17,22 @@
     retrieve_shopping_cart();
   }
 
+  $link = create_connection();	
+  $sql = "SELECT Permission FROM `Member` Where Member_ID = $id";
+  $result = execute_sql($link, "DBS_project", $sql);
+  $data = mysqli_fetch_array($result);
+  mysqli_free_result($result);
+  mysqli_close($link);
+  $permission = $data["Permission"]
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>北科大商城</title>
+    <title>台灣名產商城</title>
     <link rel="shortcut icon" type="image/png" href="./images/logo.png"/>
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -93,46 +101,57 @@
                 <img class="f1001"src="./images/center.png">
             </div>
         </div>
-        <div class="row mt-5">
-            <div class="col-12 col-md-4">
-                <div href="#" class="card h-100 mb-3">
-                    <img class="card-img-top" src="./images/chibiame-modify.gif" alt="LG-GP-0001">
-                    <div class="card-body">
-                       <a href="modify.php" class="btn btn-outline-secondary btn-block">修改會員資料</a>
-                        
+        <?php if ($permission == 1):?>
+            <div class="row mt-5">
+                <div class="col-12 col-md-4">
+                    <div href="#" class="card h-100 mb-3">
+                        <img class="card-img-top" src="./images/chibiame-modify.gif" alt="LG-GP-0001">
+                        <div class="card-body">
+                        <a href="modify.php" class="btn btn-outline-secondary btn-block">修改會員資料</a>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-12 col-md-4">
+                    <div href="#" class="card h-100 mb-3">
+                        <img class="card-img-top" src="./images/chibiame-product_list.gif" alt="LG-GP-0001">
+                        <div class="card-body">
+                            <a href="product_list.php" class="btn btn-outline-secondary btn-block">管理商品</a>                      
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div href="#" class="card mb-3 h-100">
+                        <img class="card-img-top" src="./images/chibiame-index.gif" alt="LG-GP-0001">
+                        <div class="card-body">
+                            <a href="order_list.php" class="btn btn-outline-secondary btn-block">管理訂單</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="col-12 col-md-4">
-                <div href="#" class="card h-100 mb-3">
-                    <img class="card-img-top" src="./images/chibiame-product_list.gif" alt="LG-GP-0001">
-                    <div class="card-body">
-                        <a href="product_list.php" class="btn btn-outline-secondary btn-block">管理商品</a>                      
+        <?php else:?>
+            <div class="row mt-5">
+                <div class="col-12 col-md-6">
+                    <div href="#" class="card h-100 mb-3">
+                        <img class="card-img-top" src="./images/chibiame-modify.gif" alt="LG-GP-0001">
+                        <div class="card-body">
+                        <a href="modify.php" class="btn btn-outline-secondary btn-block">修改會員資料</a>
+                            
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- <div class="col-12 col-md-4">
-                <div href="#" class="card mb-3">
-                    <img class="card-img-top" src="./images/chibiame2.gif" alt="LG-GP-0001">
-                    <div class="card-body">
-                        <a href="delete.php" class="btn btn-outline-secondary btn-block">刪除會員資料</a>
-                       
-                    </div>
-                </div>
-            </div> -->
-
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-6">
                 <div href="#" class="card mb-3 h-100">
                     <img class="card-img-top" src="./images/chibiame-index.gif" alt="LG-GP-0001">
                     <div class="card-body">
-                        <a href="index.php" class="btn btn-outline-secondary btn-block">返回首頁</a>
-                        
+                        <a href="order_list.php" class="btn btn-outline-secondary btn-block">查看訂單</a>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php endif;?>
     </div>
     <!-- 頁腳/start -->
     <footer class="bg-pekoradark">
@@ -148,15 +167,6 @@
                     </ul>
                 </div>
                 <!-- 選單連結/end -->
-                <!-- 訂閱/start -->
-                <!-- <div class="col-12 col-md-6 mb-3">
-                    <h6 class="text-white">留下 E-mail，訂閱hololive，可搶先獲得最新的資訊喔！</h6>
-                    <form action="addemail.php" method="post" name="myForm">
-                        <input name="email" type="email" class="form-control mt-2 mb-2" placeholder="請輸入e-mail">
-                        <button type="submit" class="btn btn-primary float-right send-btn">傳送</button>
-                    </form>
-                </div> -->
-                <!-- 訂閱/end -->
                 <!-- 版權所有/start -->
                 <div class="col-12 mt-3">
                     <p class="text-white text-center">© Copyright 2021 NTUT </p>

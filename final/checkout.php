@@ -1,6 +1,21 @@
 <!-- 使用折扣 -->
 <?php
-    require_once("dbtools.inc.php");
+    require_once("dbtools.inc.php"); 
+	if (empty($_COOKIE["id"]))
+    {	
+        setcookie("id", "guest");
+        setcookie("NickName", "guest");
+        $id = "guest";
+        $NickName = "guest";
+    }
+    else
+    {
+        $id = $_COOKIE["id"];
+        $NickName = $_COOKIE["NickName"];
+    }
+    $id = $_COOKIE["id"];
+    $sum=0;
+
     if (empty($_POST["couponDiscount"])) {
         $discount = 0;
     } else {
@@ -14,56 +29,9 @@
         mysqli_free_result($result);
     
         $discount = $data["DiscountCount"];
-    } 
-?>
-
-
-<?php
-	if (empty($_COOKIE["id"]))
-    {	
-        setcookie("id", "guest");
-        setcookie("NickName", "guest");
-        $id = "guest";
-        $NickName = "guest";
     }
-    else
-    {
-        $id = $_COOKIE["id"];
-        $NickName = $_COOKIE["NickName"];
-    }
-    $id = $_COOKIE["id"];	
-    if (empty($_COOKIE["num_list"]) || empty($_COOKIE["name_list"]) || empty($_COOKIE["price_list"]) || empty($_COOKIE["quantity_list"]))
-    {
-        setcookie("num_list", "0");
-        setcookie("name_list", "0");
-        setcookie("price_list", "0");
-        setcookie("quantity_list", "0");
-        $sum=0;
-        $namelen=0;
-    }
-    else
-    {	
-        $quantity= $_COOKIE["quantity_list"];
-        $num = $_COOKIE["num_list"];
-        $name= $_COOKIE["name_list"];
-        $price= $_COOKIE["price_list"];	
-        if(empty($_COOKIE["num_list"])){
-            $namelen=0;
-        }
-        else{
-            $namearray = explode(",",$name);
-            $quantityarray=explode(",", $quantity);
-            $namelen=count($namearray);
-        }
-       
-        $pricearray = array_map('intval', explode(",",$price));	
-        $sum=0;
-        for($i=0;$i<$namelen-1;$i++)
-        {
-            $sum=$sum+$pricearray[$i];
-        }
-    }
-
+    include_once("shopcart.inc.php");
+    $shoppingCart = retrieve_shopping_cart();  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,7 +39,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>北科大商城</title>
+    <title>台灣名產商城</title>
     <link rel="shortcut icon" type="image/png" href="./images/logo.png"/>
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -87,7 +55,7 @@
     <header class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <a class="navbar-brand" href="index.php">
-                <img src="./images/logo.png" alt="logo">
+                <img id="logo1" src="./images/logo.png" alt="logo"> 
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -102,15 +70,19 @@
                         <a class="nav-link" href="about.php">關於我們</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="shop.php">買名產囉</a>
+                    <a class="nav-link" href="shop.php">買名產囉</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
                     </li>
+                    <li class="nav-item">
+                        <input name="search_product" type="text" class="form-control" id="search_product" placeholder="搜尋...">
+                    </li>
                 </ul>
+
                 <div class="ml-auto">
                     <?php
-                            if ($_COOKIE["id"]=="guest")
+                            if ($id == "guest")
                             {
                               echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
                             }
@@ -120,6 +92,7 @@
                                 echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
                             }
                     ?>
+
                     <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
                     <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
                 </div>
@@ -208,14 +181,23 @@
                                     <td>總計</td>
                                 </tr>
                             <?php
-                                for($i=0;$i<$namelen;$i++){
-                                    $subsum = $pricearray[$i] * $quantityarray[$i];
-                                    $sum=$sum + $subsum;
-                                    echo" <tr>
-                                    <td>$namearray[$i]　ｘ　$quantityarray[$i]</td>
-                                    <td>NT$&nbsp;$subsum</td>
-                                     </tr>";
-                                }
+                            if($shoppingCart != 0)
+                                    {
+                                        for($i=0;$i<sizeof($shoppingCart);$i++)
+                                        {
+                                        $productId = $shoppingCart[$i][0];
+                                        $Product_name = $shoppingCart[$i][1];
+                                        $Price = $shoppingCart[$i][2];
+                                        $Quantity = $shoppingCart[$i][3];
+
+                                        $subsum = $Price * $Quantity;
+                                        $sum=$sum + $subsum;
+                                        echo (" <tr>
+                                        <td>$Product_name 　ｘ　 $Quantity</td>
+                                        <td>NT$&nbsp;$subsum</td>
+                                        </tr>");
+                                        }
+                                    }
                             ?>
                                
                                 <tr>
@@ -260,28 +242,15 @@
                 <div class="col-12 col-md-6 mb-3">
                     <ul class="footer-menu">
                         <li><a href="index.php">首頁</a></li>
-                        <li><a href="about.php">HOLOLIVE</a></li>
-                        <li><a href="shop.php">HOLO商城</a></li>
-                        <li><a href="job.php">成員簡介</a></li>
-                        <li><a href="https://schedule.hololive.tv/">直播時間</a></li>
-                        <li><a href="login.html">登入</a></li>
-                        <li><a href="cart.php">購物車</a></li>
-                        <li><a href="checkout.php">結帳</a></li>
+                        <li><a href="#">客服中心</a></li>
+                        <li><a href="#">常見問題</a></li>
+                        <li><a href="#">隱私條款聲明</a></li>
                     </ul>
                 </div>
                 <!-- 選單連結/end -->
-                <!-- 訂閱/start -->
-                <div class="col-12 col-md-6 mb-3">
-                    <h6 class="text-white">留下 E-mail，訂閱hololive，可搶先獲得最新的資訊喔！</h6>
-                    <form action="addemail.php" method="post" name="myForm">
-                        <input name="email" type="email" class="form-control mt-2 mb-2" placeholder="請輸入e-mail">
-                        <button type="submit" class="btn btn-primary float-right send-btn">傳送</button>
-                    </form>
-                </div>
-                <!-- 訂閱/end -->
                 <!-- 版權所有/start -->
                 <div class="col-12 mt-3">
-                    <p class="text-white text-center">© Copyright 2021 hololive</p>
+                    <p class="text-white text-center">© Copyright 2021 NTUT </p>
                 </div>
                 <!-- 版權所有/end -->
             </div>

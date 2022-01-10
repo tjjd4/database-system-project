@@ -1,11 +1,25 @@
+<?php
+//檢查 cookie 中的 passed 變數是否等於 TRUE
+$passed = $_COOKIE["passed"];
+$id = $_COOKIE["id"];
+$NickName = $_COOKIE["NickName"];
+
+/*  如果 cookie 中的 passed 變數不等於 TRUE
+      表示尚未登入網站，將使用者導向首頁 index.php	*/
+if ($passed != "TRUE") {
+    header("location:index.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>台灣名產商城</title>
-    <link rel="shortcut icon" type="image/png" href="./images/logo.png"/>
+    <link rel="shortcut icon" type="image/png" href="./images/logo.png" />
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/color.css">
@@ -15,6 +29,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="./js/bootstrap.bundle.min.js"></script>
 </head>
+
 <body>
     <!-- header/start -->
     <header class="container">
@@ -22,8 +37,7 @@
             <a class="navbar-brand" href="index.php">
                 <img src="./images/logo.png" alt="logo">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -42,7 +56,8 @@
                     </li>
                 </ul>
                 <div class="ml-auto">
-                    <a href="login.html" class="btn btn-outline-info text-info my-2 my-sm-0">登入</a>
+                    <a href='main.php'><?= $NickName ?></a> 你好
+                    <a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>
                     <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
                     <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
                 </div>
@@ -50,45 +65,62 @@
         </nav>
     </header>
     <!-- header/end -->
-    <!-- 登入與註冊/start -->
+    <!-- 商品列表/start -->
     <section class="page-content">
         <div class="container pt-5 pb-5">
             <div class="row">
-                <div class="col-0 col-md-3 bg"></div>
-                <!-- 登入/start -->
-                <div class="col-12 col-md-6 mb-5">
-                    <h2>登入</h2>
-                    <form action="checkpwd.php" method="post" name="myForm">
-                        <div class="form-group">
-                            <label for="Email">帳號或Email電子信箱
-                                <span class="text-danger">*</span>
-                            </label>
-                            <input name="account" type="text" class="form-control" id="Email" placeholder="必填，帳號或Email電子信箱" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="Password">密碼
-                                <span class="text-danger">*</span>
-                            </label>
-                            <input name="password" type="password" class="form-control" id="Password" placeholder="必填，密碼" required>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox">記住我
-                                </label>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary send-btn">登入</button>
-                        <a class="btn btn-link" href="setup.html" role="button">沒有帳號嗎? 註冊點我</a>
-                        <a class="btn btn-link" href="search_pwd.html" role="button">忘記密碼? 你很笨耶</a>
-                    </form>
+                <div class="col-0 col-md-1 bg"></div>
+
+                <div class="col-12 col-md-10 mb-5">
+
+                    <!-- 商品table/start -->
+                    <div>
+                        <table class="table table-borderless">
+                            <thead class="table-info">
+                                <tr>
+                                    <th>訂單編號</th>
+                                    <th>下訂時間</th>
+                                    <th>收件人資訊</th>
+                                    <th>購買商品列表</th>
+                                    <th>價格詳細</th>
+                                    <th>總價格</th>
+                                    <th>訂單狀況</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                include_once("function.php");
+                                if (isset($_GET["page"])) {
+                                    $page = $_GET["page"];
+                                } else {
+                                    $page = 1;
+                                }
+                                getOrderListByIdDESC($page, $id);
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="col-0 col-md-3"></div>
-                <!-- 登入/end -->
+                <!-- 商品table/end -->
+
             </div>
         </div>
+
+        <?php
+        include_once("function.php");
+        if (isset($_GET["page"])) {
+            $page = $_GET["page"];
+        } else {
+            $page = 1;
+        }
+        getOrderListReceiverModal($page, $id);
+        getOrderListProductModal($page, $id);
+        getOrderListTotalModal($page, $id);
+        ?>
+
     </section>
-    <!-- 登入與註冊/end -->
+    <!-- 商品列表/end -->
     <!-- 頁腳/start -->
     <footer class="bg-pekoradark">
         <div class="container pt-3 pb-3">
@@ -103,15 +135,7 @@
                     </ul>
                 </div>
                 <!-- 選單連結/end -->
-                <!-- 訂閱/start -->
-                <!-- <div class="col-12 col-md-6 mb-3">
-                    <h6 class="text-white">留下 E-mail，訂閱hololive，可搶先獲得最新的資訊喔！</h6>
-                    <form action="addemail.php" method="post" name="myForm">
-                        <input name="email" type="email" class="form-control mt-2 mb-2" placeholder="請輸入e-mail">
-                        <button type="submit" class="btn btn-primary float-right send-btn">傳送</button>
-                    </form>
-                </div> -->
-                <!-- 訂閱/end -->
+
                 <!-- 版權所有/start -->
                 <div class="col-12 mt-3">
                     <p class="text-white text-center">© Copyright 2021 NTUT </p>
@@ -122,4 +146,5 @@
     </footer>
     <!-- 頁腳/end -->
 </body>
+
 </html>
