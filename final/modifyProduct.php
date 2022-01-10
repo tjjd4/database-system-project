@@ -3,7 +3,7 @@
   @$Product_ID = $_POST["Product_ID"];
   @$Product_name = $_POST["Product_name"];
   @$Product_description = $_POST["Product_description"];
-  @$Category = $_POST["Category"];
+  @$Category = intval($_POST["Category"]);
   @$Price = intval($_POST["Price"]);
   @$Stock = intval($_POST["Stock"]);
   @$Product_detail = $_POST["Product_detail"] ? $_POST["Product_detail"] : "詳細資訊";
@@ -37,8 +37,10 @@
   $link = create_connection();
   $sql_update_product =
     'UPDATE Product SET `Product_name`="'.$Product_name.'", `Product_description`="'.$Product_description.'", `Price`='.$Price.', `Stock`='.$Stock.', `Modified_date`="'.date("y-m-d").'", `Product_detail`="'.$Product_detail.'", `Product_standerd`="'.$Product_standerd.'" where Product_ID = '.$Product_ID.';';
-    $sql_update_category =
-    'UPDATE Category SET `Category_name`="'.$Category_name'" where Product_ID = '.$Product_ID.';';
+  $sql_update_category =
+    'UPDATE Category SET `Category_name`="'.$Category_name.'" where Product_ID = '.$Product_ID.';';
+
+  $full_image_path = "./images/addProductImages/'.$Image_path.'";
   $sql_insert_image =
     'INSERT INTO Product_Image(`Product_ID`, `Image_path`)
     Values('.$Product_ID.', "./images/addProductImages/'.$Image_path.'");';
@@ -56,7 +58,7 @@
     }
   }
 
-  //關閉資料連接	
+//   關閉資料連接	
   mysqli_close($link);
   echo json_encode(array(
     'result_product' => $result_product,

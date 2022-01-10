@@ -228,15 +228,17 @@
                             Image_path: $("#Image_path_add").val()
                         },
                         success: function(data) {
-                            if (data.result_product) {
-                                if (data.result_delete){
-                                    alert("Product "+data.Product_name+" added failed! (image error)");
-                                }else {
-                                    alert("Product and Image added successfully!");
-                                }
-                            }else {
-                                alert("Product "+data.Product_name+" added failed!");
-                            }
+                            alert(data.Product_ID);
+                            alert(data.Product_name);
+                            // if (data.result_product) {
+                            //     if (data.result_delete){
+                            //         alert("Product "+data.Product_name+" added failed! (image error)");
+                            //     }else {
+                            //         alert("Product and Image added successfully!");
+                            //     }
+                            // }else {
+                            //     alert("Product "+data.Product_name+" added failed!");
+                            // }
                         },
                         error: function() {
                             alert("Connect error!");

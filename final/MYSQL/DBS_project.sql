@@ -111,7 +111,7 @@ values(1,"food_dessert"),
 (25,"fruit"),
 (26,"fruit"),
 (27,"fruit");
-
+UPDATE Category SET `Category_name`="tea" where Product_ID = 27;
 create table Product_Image(
 	Image_ID int not null AUTO_INCREMENT,
 	Product_ID int not null,
