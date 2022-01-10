@@ -396,7 +396,7 @@ function getSortedProductByPriceDESC($page, $category){
         if ($MemberID == "guest") {
             $txt = '<div class="col-4">
                         <div class="card h-100 mb-3">
-                            <img class="card-img-top" src=' . $data["Image_Path"] . 'width="250" height="130" alt="TG-B-0001" class="img-fluid">
+                            <img class="card-img-top" src=' . $data["Image_Path"] . ' width="250" height="130" alt="TG-B-0001" class="img-fluid">
                             <div class="card-body">
                                 <h4 class="card-title">' . $data["Coupon_Name"] . '</h4>
                                 <p class="card-text text-danger">領取期限 :' . $data["ED"] . '</p>
