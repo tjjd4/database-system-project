@@ -69,6 +69,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
                     </li>
+                    <form action="search.php">
+                        <li class="nav-item">
+                            <input name="search_product" type="text" class="form-control" id="search_product" placeholder="搜尋...">
+                        </li>
+                    </form>
                 </ul>
                 <div class="ml-auto">
                     <?php

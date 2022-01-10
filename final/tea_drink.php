@@ -118,7 +118,7 @@
                                     $sortBy = "DateASC";
                                 }
                                 echo('<p class="d-inline-block">');
-                                getNumberOfProduct($page, 'all');
+                                getNumberOfProduct($page, 'tea_drink');
                                 echo('</p>'); ?>
                             <form action="" class="d-inline-block float-right">
                                 <?php
