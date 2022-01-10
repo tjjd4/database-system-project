@@ -72,7 +72,7 @@ values("佳德糕餅 - 鳳梨酥","原味鳳梨酥禮盒(12入)","750", 100, '20
 
 -- delete from `Product` where Product_ID;
 -- alter table `Product` AUTO_INCREMENT = 1;
--- select * from Product;
+select * from Product;
 
 create table Category(
 	Product_ID int not null,
@@ -111,7 +111,7 @@ values(1,"food_dessert"),
 (25,"fruit"),
 (26,"fruit"),
 (27,"fruit");
-UPDATE Category SET `Category_name`="tea" where Product_ID = 27;
+
 create table Product_Image(
 	Image_ID int not null AUTO_INCREMENT,
 	Product_ID int not null,
@@ -152,7 +152,7 @@ value(1,"./images/food_dessert_images/1.jpg"),
 (26,"./images/fruit/3.jpg"),
 (27,"./images/fruit/4.jpg");
 
--- select * from Product_image;
+select * from Product_image;
 -- delete from `Product_image` where Product_ID;
 -- alter table `Product_image` AUTO_INCREMENT = 1;
 
