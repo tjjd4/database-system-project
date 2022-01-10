@@ -96,7 +96,7 @@
     <header class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <a class="navbar-brand" href="index.php">
-                <img src="./images/logo.png" alt="logo">
+                <img id="logo1" src="./images/logo.png" alt="logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -116,9 +116,26 @@
                     <li class="nav-item">
                         <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
                     </li>
+                    <form action ="search.php">
+                        <li class="nav-item">
+                            <input name="search_product" type="text" class="form-control" id="search_product" placeholder="搜尋...">
+                        </li>
+                    </form>
                 </ul>
+                
                 <div class="ml-auto">
-                    <a href="login.html" class="btn btn-outline-info text-info my-2 my-sm-0">登入</a>
+                    <?php
+                            if ($id == "guest")
+                            {
+                              echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
+                            }
+                            else
+                            {
+                                echo"<a href='main.php'>$NickName</a> 你好";
+                                echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
+                            }
+                    ?>
+                    
                     <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
                     <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
                 </div>

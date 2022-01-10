@@ -195,7 +195,7 @@ create table `Order`(
 	Order_ID int not null AUTO_INCREMENT, 
 	Member_ID int not null,
 	Payment_method VARCHAR(20),
-	Payment_Date TIMESTAMP DEFAULT NULL,
+	Payment_Date TIMESTAMP,
 	Deliver_method VARCHAR(20),
 	Total_price INT,
 	Discounted_price INT,
