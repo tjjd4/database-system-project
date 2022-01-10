@@ -61,7 +61,7 @@
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div<?php
+            <div><?php
                     include_once("web_function.php");
                     create_top_left();
                     ?>

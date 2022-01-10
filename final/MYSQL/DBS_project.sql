@@ -18,7 +18,7 @@ values("administrator", "administrator", "123", "administrator@gmail.com", "0912
 ("testMember", "test", "123", "test@gmail.com", "0912345678", "0"); 
 
 
--- select * from Member;
+select * from Member;
 
 -- describe `Member`;
 -- delete from `Member` where member_ID; -- 清空
@@ -210,11 +210,11 @@ create table `Order`(
 	primary key (Order_ID),
 	foreign key (Member_ID) references `Member`(Member_ID) on update cascade On delete cascade
 );
-select * from `Order`;
+-- select * from `Order`;
 
-SELECT Order_ID
-FROM `Order`
-order by Order_ID DESC;
+-- SELECT Order_ID
+-- FROM `Order`
+-- order by Order_ID DESC;
 
 create table `Order_product`(
 	Order_ID int not null, 

@@ -79,7 +79,7 @@
         </div>
         <div class="row ">
             <div class="col-12 col-md12">
-                <img class="f1001"src="./images/center.png">
+                <img class="f1001"src="./images/Center.png">
             </div>
         </div>
         <?php if ($permission == 1):?>
