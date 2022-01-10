@@ -105,31 +105,54 @@
                         </div>
                         <!-- 排序/start -->
                         <div class="col-12 mt-3 mb-3">
-                            <?php include_once("function.php");
+                        <?php include_once("function.php");
                                 if (isset($_GET["page"])){
                                     $page = $_GET["page"];
                                 }else{
                                     $page = 1;
                                 }
+                                if (isset($_GET["sortBy"])){
+                                    $sortBy = $_GET["sortBy"];
+                                    setcookie("sortBy", $sortBy);
+                                }else{
+                                    $sortBy = "DateASC";
+                                }
                                 echo('<p class="d-inline-block">');
-                                getNumberOfProduct($page, 'acc');
+                                getNumberOfProduct($page, 'all');
                                 echo('</p>'); ?>
                             <form action="" class="d-inline-block float-right">
-                                <select id="ProductSelect" class="form-control">
-                                    <option>依上架時間</option>
-                                    <option>依熱銷度</option>
-                                    <option>依價格排序:低至高</option>
-                                    <option>依價格排序:高至低</option>
-                                </select>
+                                <?php
+                                    if($page==1){
+                                        dropDownSelect($sortBy);
+                                    }else{
+                                        dropDownSelect($_COOKIE["sortBy"]);
+                                    }
+                                ?>
                             </form>
                             <hr>
                         </div>  
+                        <script>
+                            window.onload=initForm;
+                            function initForm(){
+                                var osel=document.getElementById("ProductSelect");
+                                // osel.selectedIndex=0;
+                                osel.onchange=jumpPage;
+                            }
+                            function jumpPage(){
+                                var osel=document.getElementById("ProductSelect");
+                                var newURL=osel.options [osel.selectedIndex].value;
+                                if(newURL!=""){
+                                    window.location.href=newURL;
+                                }
+                            }
+                        </script>
                         <!-- 排序/end -->
                         <!-- 商品/start -->
                         <?php
                         include_once("function.php");
-                        $data = getSortedProductByPriceASC($page, 'acc');//get all products which category == acc
-                        ?>                 
+                        getSortedProduct($sortBy, $page, 'acc')
+                        
+                        ?>                  
                         <!-- 商品/end -->
                         <!-- 分頁/start -->
                         <?php getPageLink($page, 'acc'); ?>

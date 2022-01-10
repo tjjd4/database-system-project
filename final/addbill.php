@@ -1,44 +1,67 @@
 <?php
-  require_once("dbtools.inc.php");
-  if (empty($_COOKIE["id"]))
+    require_once("dbtools.inc.php");
+    include("shopcart.inc.php");
+    if (empty($_COOKIE["id"]))
     {
-      setcookie("id", "guest");	
+        setcookie("id", "guest");	
     }
     else
     {
         $id = $_COOKIE["id"];
     }
-  //取得表單資料
-  $account = $_POST["account"];
-  $Lname = $_POST["Lname"];
-  $Fname = $_POST["Fname"];  
-  $phone = $_POST["phone"]; 
-  $email = $_POST["email"]; 
-  $address = $_POST["address"];
-  $price = $_POST["price"];
-  $productID = $_POST["productID"];
+    //取得表單資料
+    $account = $_POST["account"];
+    $Lname = $_POST["Lname"];
+    $Fname = $_POST["Fname"];  
+    $phone = $_POST["phone"]; 
+    $email = $_POST["email"]; 
+    $address = $_POST["address"];
+    $price = $_POST["price"];
+    $discountPrice = $_POST["discountPrice"];
+    include_once("shopcart.inc.php");
+    $shoppingCart = retrieve_shopping_cart();
 
 
-  if (!empty($CouponID)) {
+    $usedCouponID = null;
+    if (!empty($_POST['usedCouponID'])) {
     $link = create_connection();
     $usedCouponID = $_POST['usedCouponID'];
     $sql = "UPDATE CouponList
             SET Used = 'Yes'
             WHERE Member_ID=$account and Coupon_ID=$usedCouponID;";
     $result = execute_sql($link, "DBS_project", $sql);
-  }
+    }
 
-  
 
-  //建立資料連接   
+
+    //建立資料連接   
     $link = create_connection();
-			
-    $sql = "INSERT INTO BillList (Member_ID, Lname, Fname, phone, email, `address`, Total_price, Product_ID, Order_status) 
-            VALUES ('$account', '$Lname', '$Fname', '$phone','$email','$address','$price','$productID', 0);";
+            
+    $sql = "INSERT INTO `Order` (Member_ID, Coupon_ID, Payment_method, Payment_Date, Deliver_method, Total_price, Discounted_price, Order_status, Last_name, First_name, phone, email, Deliver_address) 
+            VALUES ('$account','$usedCouponID', '匯款', null, ' 郵寄', '$price', '$discountPrice', 0, '$Lname', '$Fname', '$phone','$email','$address');";
     $result = execute_sql($link, "DBS_project", $sql);
-	
-  //關閉資料連接	
-  mysqli_close($link);
+
+    $sql = "SELECT Max(Order_ID) From `Order`;";
+    $result = execute_sql($link, "DBS_project", $sql);
+    $data = mysqli_fetch_array($result);
+    $Order_ID = $data[0];
+    mysqli_free_result($result);
+
+    if($shoppingCart != 0){
+        for($i=0;$i<sizeof($shoppingCart);$i++) {
+            $productId = $shoppingCart[$i][0];
+            $Product_amount = $shoppingCart[$i][3];
+            $sql = "INSERT INTO `Order_product` (Order_ID, Product_ID, Product_amount)
+                    VALUES ('$Order_ID', '$productId', '$Product_amount');";
+            $result = execute_sql($link, "DBS_project", $sql);
+        }
+    }
+
+    clear_shopping_cart();
+    
+
+    //關閉資料連接	
+    mysqli_close($link);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,11 +69,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<<<<<<< HEAD
-    <title>台灣名產商城</title>
-=======
 <title>台灣名產商城</title>
->>>>>>> b34a7deccf0b2fb58f0ace0a3edf3952fd7dc671
     <link rel="shortcut icon" type="image/png" href="./images/logo.png"/>
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -120,7 +139,7 @@
         <div class="col-0 col-md-2"></div>
       <div class="ml-auto">
         <div class="col-12 col-md-12 c">
-            <h1 class="text-success"> 訂單已送出 <a href="index.php" class="btn btn-outline-info btn-lg">返回首頁</a> </h1> 
+            <h1 class="text-success"> 訂單已送出</h1> 
         </div>
       </div>
     </div>

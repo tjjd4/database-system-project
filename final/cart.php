@@ -192,8 +192,7 @@
                                     <h4 class="card-title">小茶栽堂 - 紅雙禮盒</h4>
                                     <p class="card-text">紅雙禮盒(古典罐2入-黑烏龍茶X古早味紅茶)</p>
                                     <h5 class="card-text text-danger">NT$&nbsp;1300</h5>
-                                    <a href="product.html" class="btn btn-outline-secondary btn-block">查看商品</a>
-                                    <a href="cart.php" class="btn btn-outline-primary btn-block">加入購物車</a>
+                                    <a href="product_page.php" class="btn btn-outline-secondary btn-block">查看商品</a>
                                 </div>
                             </div>
                         </div>
@@ -204,8 +203,7 @@
                                     <h4 class="card-title">老媽拌麵 - 蔥油開洋拌麵</h4>
                                     <p class="card-text">蔥油開洋拌麵(一袋4包)</p>
                                     <h5 class="card-text text-danger">NT$&nbsp;987</h5>
-                                    <a href="product.html" class="btn btn-outline-secondary btn-block">查看商品</a>
-                                    <a href="cart.php" class="btn btn-outline-primary btn-block">加入購物車</a>
+                                    <a href="product_page.php" class="btn btn-outline-secondary btn-block">查看商品</a>
                                 </div>
                             </div>
                         </div>

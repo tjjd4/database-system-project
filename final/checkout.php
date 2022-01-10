@@ -122,54 +122,7 @@
                     ?>
                 </div>
                 <!-- 結帳訊息/end -->
-                <!-- 帳單資訊/start -->
-                <div class="col-12 col-md-6 mb-3">
-                    <h2>帳單資訊</h2>
-                    <form action="addbill.php" method="post" name="myForm">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="LastName">姓氏
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input name="Lname" type="text" class="form-control" id="LastName" required placeholder="* ex:赤井">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="FirstName">名字
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input name="Fname" type="text" class="form-control" id="FirstName" required placeholder="* ex:心">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="tel">連絡電話
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input name="phone" type="number" class="form-control" id="tel" required placeholder="* ex:0987487587">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="EMail">電子信箱
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input  name="email" type="email" class="form-control" id="EMail" required placeholder="* 包含@">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="Address">地址
-                                <span class="text-danger">*</span>
-                            </label>
-                            <input  name="address" type="text" class="form-control" id="Address" required placeholder="* 填詳細好嗎">
-                        </div> 
-                        <input type="hidden" name="price" value="<?php if(($sum-$discount+60)<0) echo 0; else echo $sum-$discount+60;?>">
-                        <input type="hidden" name="account" value="<?php echo $id?>">
-                        <input type="hidden" name="productID" value="<?php echo $num?>">
-                        <input type="hidden" name="usedCouponID" value="<?php echo $CouponID?>">
-                        <button type="submit" class="btn btn-outline-info btn-lg float-right">下單購買</button>
-                    </form>
-                    
-                        
-                </div>
-                <!-- 帳單資訊/end -->
+                
                 <!-- 您的訂單/start -->
                 <div class="col-12 col-md-6">
                     <h2>您的訂單</h2>
@@ -230,6 +183,53 @@
                     </div>
                 </div>
                 <!-- 您的訂單/end -->
+
+                <!-- 帳單資訊/start -->
+                <div class="col-12 col-md-6 mb-3">
+                    <h2>帳單資訊</h2>
+                    <form action="addbill.php" method="post" name="myForm">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="LastName">姓氏
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input name="Lname" type="text" class="form-control" id="LastName" required placeholder="* ex:赤井">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="FirstName">名字
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input name="Fname" type="text" class="form-control" id="FirstName" required placeholder="* ex:心">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="tel">連絡電話
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input name="phone" type="number" class="form-control" id="tel" required placeholder="* ex:0987487587">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="EMail">電子信箱
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input  name="email" type="email" class="form-control" id="EMail" required placeholder="* 包含@">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Address">地址
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input  name="address" type="text" class="form-control" id="Address" required placeholder="* 填詳細好嗎">
+                        </div> 
+                        <input type="hidden" name="price" value="<?php if(($sum-60)<0) echo 0; else echo $sum+60;?>">
+                        <input type="hidden" name="discountPrice" value="<?php echo $discount?>">
+                        <input type="hidden" name="account" value="<?php echo $id?>">
+                        <input type="hidden" name="usedCouponID" value="<?php echo $CouponID?>">
+                        <button type="submit" class="btn btn-outline-info btn-lg float-right">下單購買</button>
+                    </form>               
+                </div>
+                <!-- 帳單資訊/end -->
             </div> 
         </div>
     </section>
