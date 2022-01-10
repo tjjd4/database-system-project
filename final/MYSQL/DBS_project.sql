@@ -9,13 +9,14 @@ create table `Member`(
 	`Member_password` VARCHAR(50) not null,
 	`Email` VARCHAR(255) not null,
 	`Phone` int not null,
-    `Permission` int default 0,
+    `Permission` int default 0 not null,
 	primary key(Member_ID)
 );
 
 insert into Member(Member_name, Username, Member_password, Email, Phone, Permission) 
 values("administrator", "administrator", "123", "administrator@gmail.com", "0912345678", "1"), 
 ("testMember", "test", "123", "test@gmail.com", "0912345678", "0"); 
+
 
 -- select * from Member;
 
@@ -209,6 +210,11 @@ create table `Order`(
 	primary key (Order_ID),
 	foreign key (Member_ID) references `Member`(Member_ID) on update cascade On delete cascade
 );
+select * from `Order`;
+
+SELECT Order_ID
+FROM `Order`
+order by Order_ID DESC;
 
 create table `Order_product`(
 	Order_ID int not null, 
