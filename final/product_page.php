@@ -128,9 +128,11 @@
                             </form>
                             <p class="d-block text-secondary">產品分類：<span>
                                 <?php if($category == "food_dessert"){echo "食品/點心類";}
-                                      if($category == "tea_drink"){echo "茶葉/飲品類";}
-                                      if($category == "acc"){echo "裝飾/飾品類";}
-                                      if($category == "fruit"){echo "水果類";}?>
+                                      elseif($category == "tea_drink"){echo "茶葉/飲品類";}
+                                      elseif($category == "acc"){echo "裝飾/飾品類";}
+                                      elseif($category == "fruit"){echo "水果類";}
+                                      else{echo "其他類";}
+                                      ?>
                             </span></p>  
                         </div>
                         <!-- 商品介紹/end -->
@@ -138,14 +140,17 @@
                         <div class="col-12 mt-1 mb-1">
                             <ul class="nav nav-tabs bg-pekoralight" id="ProductTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">商品說明</a>
+                                    <a class="nav-link active" id="image-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">商品照片</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="specification-tab" data-toggle="tab" href="#specification" role="tab" aria-controls="specification" aria-selected="false">產品規格</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="descrption-tab" data-toggle="tab" href="#descrption" role="tab" aria-controls="descrption" aria-selected="false">產品資訊</a>
+                                </li>
                             </ul>
                             <div class="tab-content" id="ProductTabContent">
-                                <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                                <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="image-tab">
                                     <div id="carouselBanner" class="carousel slide" data-ride="carousel">
                                         <ol class="carousel-indicators">
                                             <?php
@@ -190,20 +195,17 @@
                                         </a>
                                     </div>
                                 </div>
+                                <div class="tab-pane fade" id="descrption" role="tabpanel" aria-labelledby="descrption-tab">
+                                    <p class="p-2">
+                                        <?=$data["Product_detail"]?>
+                                    </p>
+                                </div>
                                 <div class="tab-pane fade" id="specification" role="tabpanel" aria-labelledby="specification-tab">
                                     <p class="p-2">
                                         <?=$data["Product_standerd"]?>
-                                        </p>
-                                        <!-- 品 名:太陽堂-太陽餅<br>
-                                        成 份: 高級麵粉、糖、酥油、麥芽、奶粉、蜂蜜<br>
-                                        淨 重:200g/盒X6盒<br>
-                                        保存期限:2個月<br>
-                                        保存溫度:請置於陰涼處，勿冰存以保風味<br>
-                                        廠商名稱:太禓創意行銷有限公司<br>
-                                        廠商地址：新北市汐止區忠孝東路487-1號1樓<br>
-                                        投保產品責任險字號：0527第20AML0000061<br>
-                                        食品業者登錄字號：F-145917082-00001-0</p> -->
+                                    </p>
                                 </div>
+                                
                             </div>
                         </div>
                         <!-- 詳細資料/end -->
