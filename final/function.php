@@ -70,21 +70,21 @@ function createProductBox($id)
 function createProductList($id)
 {
     $link = create_connection();
-    $sql = "SELECT * 
-                FROM `Product`as P, `Product_Image`as PI 
-                Where P.Product_ID = $id and P.Product_ID = PI.Product_ID and PI.Image_ID = $id;";
+    $sql = "SELECT *
+                FROM `Product`as P, `Product_Image`as PI
+                Where P.Product_ID = $id;";
     $result = execute_sql($link, "DBS_project", $sql);
     $data = mysqli_fetch_array($result);
     mysqli_free_result($result);
     $txt = '<tr>
-                    <td>' . $data["Product_ID"] . '</td>
-                    <td>' . $data["Product_name"] . '</td>
-                    <td>' . $data["Product_description"] . '</td>
-                    <td>' . $data["Price"] . '</td>
-                    <td>' . $data["Stock"] . '</td>
-                    <td>standerd</td>
-                    <td><button class="btn btn-outline-info text-info my-2 my-sm-0" data-toggle="modal" data-target="#editProductModal">編輯</button></td>
-                </tr>';
+                <td>' . $data[0] . '</td>
+                <td>' . $data["Product_name"] . '</td>
+                <td>' . $data["Product_description"] . '</td>
+                <td>' . $data["Price"] . '</td>
+                <td>' . $data["Stock"] . '</td>
+                <td>' . $data["Product_standerd"] . '</td>
+                <td><button class="btn btn-outline-info text-info my-2 my-sm-0" data-toggle="modal" data-target="#editProductModal">編輯</button></td>
+            </tr>';
     echo $txt;
 }
 
