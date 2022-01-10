@@ -182,15 +182,7 @@
                     </ul>
                 </div>
                 <!-- 選單連結/end -->
-                <!-- 訂閱/start -->
-                <!-- <div class="col-12 col-md-6 mb-3">
-                    <h6 class="text-white">留下 E-mail，訂閱hololive，可搶先獲得最新的資訊喔！</h6>
-                    <form action="addemail.php" method="post" name="myForm">
-                        <input name="email" type="email" class="form-control mt-2 mb-2" placeholder="請輸入e-mail">
-                        <button type="submit" class="btn btn-primary float-right send-btn">傳送</button>
-                    </form>
-                </div> -->
-                <!-- 訂閱/end -->
+            
                 <!-- 版權所有/start -->
                 <div class="col-12 mt-3">
                     <p class="text-white text-center">© Copyright 2021 NTUT </p>

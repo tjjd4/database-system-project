@@ -156,30 +156,6 @@
                         <!-- 商品/end -->
                         <!-- 分頁/start -->
                         <?php getPageLink($page, 'food_dessert'); ?>
-
-                        <!-- <div class="col-12 mt-3 mb-5">
-                            <nav aria-label="Page navigation product">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">1</a>
-                                    </li>
-                                   
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div> -->
-
                         <!-- 分頁/end -->
                     </div>
                 </div>
@@ -187,47 +163,6 @@
                 <!-- 側邊欄/start -->
                 <div class="col-12 col-md-3">
                     <div class="row">
-                        <!-- 搜尋/start -->
-                        <!-- <div class="col-12 mb-5">
-                            <form action="">
-                                <input type="test" class="form-control" id="PorductSearch" placeholder="搜尋...">
-                            </form>
-                        </div> -->
-                        <!-- 搜尋/end -->
-                        <!-- 購物清單/start -->
-                        <!-- <div class="col-12 mb-5">
-                            <h4 class="title-color">購物車</h4>
-                            <div class="d-block sidebar-product-list">
-                                <a class="text-white remove" data-toggle="tooltip" data-placement="top" title="是否確定要移除">X</a>
-                                <a href="z1.html" class="d-inline-block">
-                                    <img src="./images/product/eva_1.png" alt="eva1" class="productpic">
-                                    <h6 class="d-inline-block">Hololive兔田佩克拉 生日套組</h6>
-                                </a>
-                                <p class="d-block text-secondary pl-4">
-                                    <span class="text-warning">1</span>&nbsp;X&nbsp;NT$500
-                                </p>
-                            </div>
-                            <div class="d-block sidebar-product-list">
-                                <a class="text-white remove" data-toggle="tooltip" data-placement="top" title="是否確定要移除">X</a>
-                                <a href="z9.html" class="d-inline-block">
-                                    <img src="./images/product/eva_9.png" alt="eva9" class="productpic">
-                                    <h6 class="d-inline-block">潤羽るしあ 生日紀念套組</h6>
-                                </a>
-                                <p class="d-block text-secondary pl-4">
-                                    <span class="text-warning">1</span>&nbsp;X&nbsp;NT$500
-                                </p>
-                            </div>
-                            <div class="d-block mt-3 mb-3">
-                                <h5 class="text-center">小計：NT$&nbsp;1,000</h5>
-                            </div>
-                            <div class="d-block">
-                                <a href="cart.php" class="btn btn-primary btn-block text-white" role="button">查看購物車</a>
-                            </div>
-                            <div class="d-block mt-1 mb-3">
-                                <a href="checkout.php" class="btn btn-secondary btn-block text-white" role="button">結帳</a>
-                            </div>
-                        </div> -->
-                        <!-- 購物清單/end -->
                         <!-- 產品分類/start -->
                         <div class="col-12 mb-5 ml-5">
                             <h4 class="title-color">產品分類</h4>

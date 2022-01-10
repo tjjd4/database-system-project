@@ -58,14 +58,6 @@
             history.back();
           </script>";
   }
-//   else  //如果帳號存在
-//   {
-    #$row = mysqli_fetch_assoc($result);
-    #echo $row["Product_Name"];
-    #echo $row["Price"];
-    
-    #$Product_Name = $row["Product_Name"];
-    #$Price = $row["Price"];
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -171,34 +163,6 @@
                             <!-- 商品/end -->
                             <!-- 分頁/start -->
                             <?php getPageLink($page, 'all'); ?>
-                            <!-- <div class="col-12 mt-3 mb-5">
-                                <nav aria-label="Page navigation product">
-                                    <ul class="pagination">
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                                <span class="sr-only">Previous</span>
-                                            </a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="shop.php">1</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="page2.php">2</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="page3.php">3</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                                <span class="sr-only">Next</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div> -->
-
                             <!-- 分頁/end -->
                         </div>
                     </div>
