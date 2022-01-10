@@ -3,7 +3,6 @@ function create_title($id,$NickName)
 {
     if ($id != "guest")
     {
-        echo"<a href='main.php'class='btn  text-info my-2 my-sm-0'  >$NickName 您好</a> ";
         echo"<a href='main.php'class='btn btn-outline-info text-info my-2 my-sm-0'  >會員中心</a> ";
     };
     echo"<a href='cart.php'class='btn btn-outline-info text-info my-2 my-sm-0'  >購物車</a> ";
@@ -11,15 +10,16 @@ function create_title($id,$NickName)
     if ($id != "guest"){ echo"<a href='logout.php' class='btn btn-outline-danger text-danger '>登出</a>";}
     else
         {
-            echo"<a href='logout.php' class='btn btn-danger '>登入</a>";
+            echo"<a href='login.html' class='btn btn-outline-danger text-danger'>登入</a>";
         }
-
 }
 function create_top_left()
 {
-    echo '<ul class="navbar-nav">
+    echo '
+    
+    <ul class="nav justify-content-center">
     <li class="nav-item ">
-        <a class="nav-link"  style="height:100px width:300px" href="index.php">首頁</a>
+        <a class="navbar-brand" href="index.php">首頁</a>
     </li>
     <li class="nav-item ">
         <a class="nav-link" href="about.php">關於我們</a>
@@ -40,3 +40,10 @@ function create_top_left()
 
 
 ?>
+<!-- <a class="navbar-brand" href="index.php">
+                <img id="logo1" src="./images/logo.png" alt="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button> -->

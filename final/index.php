@@ -47,8 +47,14 @@
 <body>
     <!-- header/start -->
     <header class="container">
+    <?php
+    if ($id != "guest")
+    {
+        echo"<a href='main.php'class='btn  text-info my-2 my-sm-0'  >$NickName 您好</a> ";
+    };
+    ?>
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
-            <a class="navbar-brand" href="index.php">
+        <a class="navbar-brand" href="index.php">
                 <img id="logo1" src="./images/logo.png" alt="logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
@@ -56,6 +62,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
+                
             <?php
                     include_once("web_function.php");
                     create_top_left();
