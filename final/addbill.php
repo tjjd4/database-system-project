@@ -1,38 +1,77 @@
 <?php
-  require_once("dbtools.inc.php");
-  if (empty($_COOKIE["id"]))
+    require_once("dbtools.inc.php");
+    include("shopcart.inc.php");
+    if (empty($_COOKIE["id"]))
     {
-      setcookie("id", "guest");	
+        setcookie("id", "guest");
+        setcookie("NickName", "guest");
+        $id = "guest";
+        $NickName = "guest";
     }
     else
     {
         $id = $_COOKIE["id"];
+        $NickName = $_COOKIE["NickName"];
     }
-  //取得表單資料
-  $surname = $_POST["surname"];
-  $name = $_POST["name"];  
-  $phone = $_POST["phone"]; 
-  $email = $_POST["email"]; 
-  $address = $_POST["address"];
-  $price = $_POST["price"];
-  $account = $_POST["account"];
-  $itemlist = $_POST["itemlist"];
-  $usedCoupon = $_POST['usedCoupon'];
-  
+    //取得表單資料
+    $account = $_POST["account"];
+    $Lname = $_POST["Lname"];
+    $Fname = $_POST["Fname"];  
+    $phone = $_POST["phone"]; 
+    $email = $_POST["email"]; 
+    $address = $_POST["address"];
+    $price = $_POST["price"];
+    $discountPrice = $_POST["discountPrice"];
+    include_once("shopcart.inc.php");
+    $shoppingCart = retrieve_shopping_cart();
 
-  //建立資料連接   
+    if ($price-60 <= 0){
+        echo "<script type='text/javascript'>";
+        echo "alert('您沒有購買物品');";
+        echo "history.back();";
+        echo "</script>";
+    } 
+
+    $usedCouponID = null;
+    if (!empty($_POST['usedCouponID'])) {
+        $link = create_connection();
+        $usedCouponID = $_POST['usedCouponID'];
+        $sql = "UPDATE CouponList
+                SET Used = 'Yes'
+                WHERE Member_ID=$account and Coupon_ID=$usedCouponID;";
+        $result = execute_sql($link, "DBS_project", $sql);
+    }
+
+
+
+    //建立資料連接   
     $link = create_connection();
-			
-    $sql = "INSERT INTO ltemlast (surname,name,phone,email,address,price,account,itemlist) 
-            VALUES ('$surname', '$name', '$phone','$email','$address','$price','$account','$itemlist');
-
-            UPDATE CouponList
-            SET Used = 'Yes'
-            WHERE Member_ID=$account and Coupon_ID=$usedCoupon;";
+            
+    $sql = "INSERT INTO `Order` (Member_ID, Payment_method, Payment_Date, Deliver_method, Total_price, Discounted_price, Order_status, Last_name, First_name, phone, email, Deliver_address) 
+            VALUES ('$account', '匯款', null, ' 郵寄', '$price', '$discountPrice', 0, '$Lname', '$Fname', '$phone','$email','$address');";
     $result = execute_sql($link, "DBS_project", $sql);
-	
-  //關閉資料連接	
-  mysqli_close($link);
+
+    $sql = "SELECT Max(Order_ID) From `Order`;";
+    $result = execute_sql($link, "DBS_project", $sql);
+    $data = mysqli_fetch_array($result);
+    $Order_ID = $data[0];
+    mysqli_free_result($result);
+
+    if($shoppingCart != 0){
+        for($i=0;$i<sizeof($shoppingCart);$i++) {
+            $productId = $shoppingCart[$i][0];
+            $Product_amount = $shoppingCart[$i][3];
+            $sql = "INSERT INTO `Order_product` (Order_ID, Product_ID, Product_amount)
+                    VALUES ('$Order_ID', '$productId', '$Product_amount');";
+            $result = execute_sql($link, "DBS_project", $sql);
+        }
+    }
+
+    clear_shopping_cart();
+    
+
+    //關閉資料連接	
+    mysqli_close($link);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,11 +79,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<<<<<<< HEAD
-    <title>台灣名產商城</title>
-=======
 <title>台灣名產商城</title>
->>>>>>> b34a7deccf0b2fb58f0ace0a3edf3952fd7dc671
     <link rel="shortcut icon" type="image/png" href="./images/logo.png"/>
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -89,11 +124,11 @@
                     <?php
                             if ($_COOKIE["id"]=="guest")
                             {
-                              echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
+                                echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
                             }
                             else
                             {
-                                echo"$id 你好";
+                                echo"<a href='main.php'>$NickName</a> 你好";
                                 echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
                             }
                     ?>
@@ -112,11 +147,9 @@
           <img class="f1001 c"src="./images/holobg.png">
         </div>
         <div class="col-0 col-md-2"></div>
-      <div class="row c">
+      <div class="ml-auto">
         <div class="col-12 col-md-12 c">
-          <p class="c">訂單已送出<br>
-            <a href="index.php">返回首頁</a>。
-          </p>
+            <h1 class="text-success"> 訂單已送出</h1> 
         </div>
       </div>
     </div>

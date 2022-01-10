@@ -212,6 +212,7 @@
     </section>
 
     <!-- 領取優惠券/start -->
+
     <section class="container mt-5">
         <div class="row">
             <div class="col-4">

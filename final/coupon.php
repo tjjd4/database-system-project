@@ -85,17 +85,17 @@
                 <div class="row">
                     <?php
                         include_once("function.php");
-                        $data = getCoupon('1', $_COOKIE["id"]); 
+                        $data = getCoupon('1', $id); 
                     ?>   
                     
                     <?php
                         include_once("function.php");
-                        $data = getCoupon('2', $_COOKIE["id"]); 
+                        $data = getCoupon('2', $id); 
                     ?>                                
 
                     <?php
                         include_once("function.php");
-                        $data = getCoupon('3', $_COOKIE["id"]); 
+                        $data = getCoupon('3', $id); 
                     ?>                                
                 </div>
             </div>
