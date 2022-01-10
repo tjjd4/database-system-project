@@ -31,11 +31,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<<<<<<< HEAD
-    <title>台灣名產商城</title>
-=======
 <title>台灣名產商城</title>
->>>>>>> b34a7deccf0b2fb58f0ace0a3edf3952fd7dc671
     <link rel="shortcut icon" type="image/png" href="./images/logo.png" />
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -109,31 +105,54 @@
                         </div>
                         <!-- 排序/start -->
                         <div class="col-12 mt-3 mb-3">
-                            <?php include_once("function.php");
+                        <?php include_once("function.php");
                                 if (isset($_GET["page"])){
                                     $page = $_GET["page"];
                                 }else{
                                     $page = 1;
                                 }
+                                if (isset($_GET["sortBy"])){
+                                    $sortBy = $_GET["sortBy"];
+                                    setcookie("sortBy", $sortBy);
+                                }else{
+                                    $sortBy = "DateASC";
+                                }
                                 echo('<p class="d-inline-block">');
-                                getNumberOfProduct($page, 'food_dessert');
+                                getNumberOfProduct($page, 'all');
                                 echo('</p>'); ?>
                             <form action="" class="d-inline-block float-right">
-                                <select id="ProductSelect" class="form-control">
-                                    <option>依上架時間</option>
-                                    <option>依熱銷度</option>
-                                    <option>依價格排序:低至高</option>
-                                    <option>依價格排序:高至低</option>
-                                </select>
+                                <?php
+                                    if($page==1){
+                                        dropDownSelect($sortBy);
+                                    }else{
+                                        dropDownSelect($_COOKIE["sortBy"]);
+                                    }
+                                ?>
                             </form>
                             <hr>
                         </div>  
+                        <script>
+                            window.onload=initForm;
+                            function initForm(){
+                                var osel=document.getElementById("ProductSelect");
+                                // osel.selectedIndex=0;
+                                osel.onchange=jumpPage;
+                            }
+                            function jumpPage(){
+                                var osel=document.getElementById("ProductSelect");
+                                var newURL=osel.options [osel.selectedIndex].value;
+                                if(newURL!=""){
+                                    window.location.href=newURL;
+                                }
+                            }
+                        </script>
                         <!-- 排序/end -->
                         <!-- 商品/start -->
                         <?php
                         include_once("function.php");
-                        $data = getSortedProductByPriceASC($page, 'food_dessert');//get all products which category == acc
-                        ?>                 
+                        getSortedProduct($sortBy, $page, 'food_dessert')
+                        
+                        ?>                
                         <!-- 商品/end -->
                         <!-- 分頁/start -->
                         <?php getPageLink($page, 'food_dessert'); ?>
