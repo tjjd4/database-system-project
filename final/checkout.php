@@ -207,7 +207,7 @@
                                 <label for="tel">連絡電話
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="phone" type="number" class="form-control" id="tel" required placeholder="* ex:0987487587">
+                                <input name="phone" type="tel" class="form-control" id="tel" required placeholder="* ex:0987487587">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="EMail">電子信箱
@@ -223,9 +223,9 @@
                             <input  name="address" type="text" class="form-control" id="Address" required placeholder="* 填詳細好嗎">
                         </div> 
                         <input type="hidden" name="price" value="<?php if(($sum-60)<0) echo 0; else echo $sum+60;?>">
-                        <input type="hidden" name="discountPrice" value="<?php echo $discount?>">
+                        <input type="hidden" name="discountPrice" value="<?php echo $discount;?>">
                         <input type="hidden" name="account" value="<?php echo $id?>">
-                        <input type="hidden" name="usedCouponID" value="<?php echo $CouponID?>">
+                        <input type="hidden" name="usedCouponID" value="<?php if (!empty($CouponID))echo $CouponID;?>">
                         <button type="submit" class="btn btn-outline-info btn-lg float-right">下單購買</button>
                     </form>               
                 </div>

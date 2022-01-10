@@ -3,11 +3,15 @@
     include("shopcart.inc.php");
     if (empty($_COOKIE["id"]))
     {
-        setcookie("id", "guest");	
+        setcookie("id", "guest");
+        setcookie("NickName", "guest");
+        $id = "guest";
+        $NickName = "guest";
     }
     else
     {
         $id = $_COOKIE["id"];
+        $NickName = $_COOKIE["NickName"];
     }
     //取得表單資料
     $account = $_POST["account"];
@@ -21,15 +25,21 @@
     include_once("shopcart.inc.php");
     $shoppingCart = retrieve_shopping_cart();
 
+    if ($price-60 <= 0){
+        echo "<script type='text/javascript'>";
+        echo "alert('您沒有購買物品');";
+        echo "history.back();";
+        echo "</script>";
+    } 
 
     $usedCouponID = null;
     if (!empty($_POST['usedCouponID'])) {
-    $link = create_connection();
-    $usedCouponID = $_POST['usedCouponID'];
-    $sql = "UPDATE CouponList
-            SET Used = 'Yes'
-            WHERE Member_ID=$account and Coupon_ID=$usedCouponID;";
-    $result = execute_sql($link, "DBS_project", $sql);
+        $link = create_connection();
+        $usedCouponID = $_POST['usedCouponID'];
+        $sql = "UPDATE CouponList
+                SET Used = 'Yes'
+                WHERE Member_ID=$account and Coupon_ID=$usedCouponID;";
+        $result = execute_sql($link, "DBS_project", $sql);
     }
 
 
@@ -37,8 +47,8 @@
     //建立資料連接   
     $link = create_connection();
             
-    $sql = "INSERT INTO `Order` (Member_ID, Coupon_ID, Payment_method, Payment_Date, Deliver_method, Total_price, Discounted_price, Order_status, Last_name, First_name, phone, email, Deliver_address) 
-            VALUES ('$account','$usedCouponID', '匯款', null, ' 郵寄', '$price', '$discountPrice', 0, '$Lname', '$Fname', '$phone','$email','$address');";
+    $sql = "INSERT INTO `Order` (Member_ID, Payment_method, Payment_Date, Deliver_method, Total_price, Discounted_price, Order_status, Last_name, First_name, phone, email, Deliver_address) 
+            VALUES ('$account', '匯款', null, ' 郵寄', '$price', '$discountPrice', 0, '$Lname', '$Fname', '$phone','$email','$address');";
     $result = execute_sql($link, "DBS_project", $sql);
 
     $sql = "SELECT Max(Order_ID) From `Order`;";
@@ -114,11 +124,11 @@
                     <?php
                             if ($_COOKIE["id"]=="guest")
                             {
-                              echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
+                                echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
                             }
                             else
                             {
-                                echo"$id 你好";
+                                echo"<a href='main.php'>$NickName</a> 你好";
                                 echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
                             }
                     ?>
