@@ -807,11 +807,30 @@ function getSortedProductByPriceDESC($page, $category){
     function getOrderListReceiverModal($page, $id)
     {
         $link = create_connection();
-        $sql = "SELECT O.Order_ID
-                FROM `Order` as O
-                Where O.Member_ID = $id
-                order by O.Order_ID DESC;";
-        $result = execute_sql($link, "DBS_project", $sql);
+        $sql_1 = "SELECT Member.Permission
+                FROM `Member` 
+                Where Member_ID = $id";
+        
+        $sql_2 = "SELECT *
+                FROM `Order` 
+                Where Member_ID = $id
+                order by Order_ID DESC;";
+
+        $sql_3 = "SELECT *
+            FROM `Order`
+            order by Order_ID DESC;";
+
+        $result_1 = execute_sql($link, "DBS_project", $sql_1);
+        $data_1 = mysqli_fetch_array($result_1);
+        mysqli_free_result($result_1);
+        $permission = $data_1["Permission"];
+        if($permission == 1){
+            $result = execute_sql($link, "DBS_project", $sql_3);
+        }
+        else{
+            $result = execute_sql($link, "DBS_project", $sql_2);
+        }
+
         $full_data = array();
         while ($single_data = mysqli_fetch_array($result)) {
             //will output all data on each loop.
@@ -924,11 +943,29 @@ function getSortedProductByPriceDESC($page, $category){
     function getOrderListProductModal($page, $id)
     {
         $link = create_connection();
-        $sql = "SELECT O.Order_ID
-                FROM `Order` as O
-                Where O.Member_ID = $id
-                order by O.Order_ID DESC;";
-        $result = execute_sql($link, "DBS_project", $sql);
+        $sql_1 = "SELECT Member.Permission
+                FROM `Member` 
+                Where Member_ID = $id";
+        
+        $sql_2 = "SELECT *
+                FROM `Order` 
+                Where Member_ID = $id
+                order by Order_ID DESC;";
+
+        $sql_3 = "SELECT *
+            FROM `Order`
+            order by Order_ID DESC;";
+
+        $result_1 = execute_sql($link, "DBS_project", $sql_1);
+        $data_1 = mysqli_fetch_array($result_1);
+        mysqli_free_result($result_1);
+        $permission = $data_1["Permission"];
+        if($permission == 1){
+            $result = execute_sql($link, "DBS_project", $sql_3);
+        }
+        else{
+            $result = execute_sql($link, "DBS_project", $sql_2);
+        }
         $full_data = array();
         while ($single_data = mysqli_fetch_array($result)) {
             //will output all data on each loop.
@@ -1024,11 +1061,29 @@ function getSortedProductByPriceDESC($page, $category){
     function getOrderListTotalModal($page, $id)
     {   
         $link = create_connection();
-        $sql = "SELECT O.Order_ID
-                FROM `Order` as O
-                Where O.Member_ID = $id
-                order by O.Order_ID DESC;";
-        $result = execute_sql($link, "DBS_project", $sql);
+        $sql_1 = "SELECT Member.Permission
+                FROM `Member` 
+                Where Member_ID = $id";
+        
+        $sql_2 = "SELECT *
+                FROM `Order` 
+                Where Member_ID = $id
+                order by Order_ID DESC;";
+
+        $sql_3 = "SELECT *
+            FROM `Order`
+            order by Order_ID DESC;";
+
+        $result_1 = execute_sql($link, "DBS_project", $sql_1);
+        $data_1 = mysqli_fetch_array($result_1);
+        mysqli_free_result($result_1);
+        $permission = $data_1["Permission"];
+        if($permission == 1){
+            $result = execute_sql($link, "DBS_project", $sql_3);
+        }
+        else{
+            $result = execute_sql($link, "DBS_project", $sql_2);
+        }
         $full_data = array();
         while ($single_data = mysqli_fetch_array($result)) {
             //will output all data on each loop.
