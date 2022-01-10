@@ -141,7 +141,7 @@
                                         $page = 1;
                                     }
                                     echo('<p class="d-inline-block">');
-                                    getNumberOfProduct($page, 'all');
+                                    getNumberOfSearchedProduct($page, $search_product);
                                     echo('</p>'); ?>
                                 <form action="" class="d-inline-block float-right">
                                     <select id="ProductSelect" class="form-control">

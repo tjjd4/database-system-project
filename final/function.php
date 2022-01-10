@@ -264,7 +264,7 @@ function getSortedProductByPriceDESC($page, $category){
         $link = create_connection();
         $sql = 'SELECT P.Product_ID 
                 FROM `Product` as P 
-                WHERE P.Product_Name LIKE "%' . $search_product . '%" AND LENGTH("%' . $search_product . '%")-Length(P.Product_Name)!=0;';
+                WHERE P.Product_Name LIKE "%' . $search_product . '%" AND LENGTH("'. $search_product .'")>1;';
 
         $result = execute_sql($link, "DBS_project", $sql) or die(mysqli_error($link));
         $full_data = array();
@@ -532,6 +532,31 @@ function getSortedProductByPriceDESC($page, $category){
                     FROM `category` as P
                     WHERE Category_name = "' . $category . '";';
         }
+        $result = execute_sql($link, "DBS_project", $sql);
+        $data = mysqli_fetch_array($result);
+        //釋放 $result 佔用的記憶體
+        mysqli_free_result($result);
+        //關閉資料連接	
+        mysqli_close($link);
+        $num = $data[0];
+        $product_num_each_page = 9;
+        $num_of_pages = intval(ceil($num / $product_num_each_page));
+        $first_index = ($page - 1) * $product_num_each_page;
+        if ($first_index + $product_num_each_page > $num) {
+            $last_index = $num;
+        } else {
+            $last_index = $first_index + $product_num_each_page;
+        }
+        $num_of_data =
+            '共' . $num_of_pages . '頁&nbsp;&nbsp;&nbsp;&nbsp;顯示' . $num . '筆結果中的' . ($first_index + 1) . '-' . $last_index . '筆';
+        echo $num_of_data;
+    }
+    function getNumberOfSearchedProduct($page, $search_product)
+    {
+        $link = create_connection();
+        $sql ='SELECT Count(*)
+                FROM `Product` as P 
+                WHERE P.Product_Name LIKE "%' . $search_product . '%" AND LENGTH("'. $search_product .'")>1;';
         $result = execute_sql($link, "DBS_project", $sql);
         $data = mysqli_fetch_array($result);
         //釋放 $result 佔用的記憶體
