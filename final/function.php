@@ -1,3 +1,4 @@
+
 <?php
 require_once("dbtools.inc.php");
 function getProuctFromId($id)
@@ -70,21 +71,21 @@ function createProductBox($id)
 function createProductList($id)
 {
     $link = create_connection();
-    $sql = "SELECT * 
-                FROM `Product`as P, `Product_Image`as PI 
-                Where P.Product_ID = $id and P.Product_ID = PI.Product_ID and PI.Image_ID = $id;";
+    $sql = "SELECT *
+                FROM `Product`as P, `Product_Image`as PI
+                Where P.Product_ID = $id;";
     $result = execute_sql($link, "DBS_project", $sql);
     $data = mysqli_fetch_array($result);
     mysqli_free_result($result);
     $txt = '<tr>
-                    <td>' . $data["Product_ID"] . '</td>
-                    <td>' . $data["Product_name"] . '</td>
-                    <td>' . $data["Product_description"] . '</td>
-                    <td>' . $data["Price"] . '</td>
-                    <td>' . $data["Stock"] . '</td>
-                    <td>standerd</td>
-                    <td><button class="btn btn-outline-info text-info my-2 my-sm-0" data-toggle="modal" data-target="#editProductModal">編輯</button></td>
-                </tr>';
+                <td>' . $data[0] . '</td>
+                <td>' . $data["Product_name"] . '</td>
+                <td>' . $data["Product_description"] . '</td>
+                <td>' . $data["Price"] . '</td>
+                <td>' . $data["Stock"] . '</td>
+                <td>' . $data["Product_standerd"] . '</td>
+                <td><button class="btn btn-outline-info text-info my-2 my-sm-0" data-toggle="modal" data-target="#editProductModal">編輯</button></td>
+            </tr>';
     echo $txt;
 }
 
@@ -694,7 +695,6 @@ function getSortedProductByPriceDESC($page, $category){
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <!-- Modal Header/end -->
-
                     <!-- Modal body/start -->
                     <div class="modal-body">
                         <form action="" method="post" name="myForm">
@@ -703,17 +703,14 @@ function getSortedProductByPriceDESC($page, $category){
                                 <label>' . $data["Last_name"] . '</label>
                                 <label>' . $data["First_name"] . '</label>
                             </div>
-
                             <div class="form-group">
                                 <label>電話:</label>
                                 <label>' . $data["Phone"] . '</label>
                             </div>
-
                             <div class="form-group">
                                 <label>信箱:</label>
                                 <label>' . $data["Email"] . '</label>
                             </div>
-
                             <div class="form-group">
                                 <label>住址:</label>
                                 <label>' . $data["Deliver_address"] . '</label>
@@ -721,7 +718,6 @@ function getSortedProductByPriceDESC($page, $category){
                         </form>
                     </div>
                     <!-- Modal body/end -->
-
                     <!-- Modal footer/start -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">關閉</button>
@@ -815,7 +811,6 @@ function getSortedProductByPriceDESC($page, $category){
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <!-- Modal Header/end -->
-
                 <!-- Modal body/start -->
                 <div class="modal-body">
                     <table class="table table-borderless table-hover">
@@ -839,7 +834,6 @@ function getSortedProductByPriceDESC($page, $category){
                     </table>
                 </div>
                 <!-- Modal body/end -->
-
                 <!-- Modal footer/start -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">關閉</button>
@@ -909,7 +903,6 @@ function getSortedProductByPriceDESC($page, $category){
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <!-- Modal Header/end -->
-
                 <!-- Modal body/start -->
                 <div class="modal-body">
                     <table class="table table-borderless table-hover">
@@ -942,7 +935,6 @@ function getSortedProductByPriceDESC($page, $category){
                     </table>
                 </div>
                 <!-- Modal body/end -->
-
                 <!-- Modal footer/start -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">關閉</button>
@@ -1062,4 +1054,3 @@ function getSortedProductByPriceDESC($page, $category){
             }
         }
     }
-

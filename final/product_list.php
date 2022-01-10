@@ -183,7 +183,7 @@
                         <!-- Modal body/end -->
                         <!-- Modal footer/start -->
                         <div class="modal-footer">
-                            <input id="submitButton" type="submit" class="btn btn-info" value="新增">
+                            <input id="addButton" type="submit" class="btn btn-info" value="新增">
                             <input type="button" class="btn btn-danger" data-dismiss="modal" value="關閉">
                         </div>
                         <!-- Modal footer/end -->
@@ -194,7 +194,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
             $(document).ready(function(){	
-                $('#submitButton').click(function(){
+                $('#addButton').click(function(){
                     $.ajax({
                         type: "POST", //傳送方式
                         url: "addProduct.php", //傳送目的地
@@ -209,10 +209,16 @@
                             Image_path: $("#Image_path").val()
                         },
                         success: function(data) {
-                            if (data.result) {
-                                alert("Product added successfully!");
+                            if (data.result_product) {
+                                if (data.result_image)
+                                    alert("Product and Image added successfully!");
+                                else if (data.result_delete){
+                                    alert("Product "+data.Product_name+" added failed!");
+                                }else {
+                                    alert("fatal error: a product without image added");
+                                }
                             } else {
-                                alert("Product added failed!"+data.Product_name+data.Product_description+data.Price+data.Stock+data.Product_detail+data.Product_standerd);
+                                alert("Product "+data.Product_name+" added failed!");
                             }
                         },
                         error: function() {

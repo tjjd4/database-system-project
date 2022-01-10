@@ -179,7 +179,7 @@ create table ShoppingCart(
 	Member_ID int not null,
     Product_ID int not null,
 	Product_amount INT not null,
-	primary key (Member_ID),
+	primary key (Member_ID, Product_ID),
 	foreign key (Member_ID) references `Member`(Member_ID) on update cascade on delete cascade,
     foreign key (Product_ID) references Product(Product_ID) on update cascade on delete cascade
 );
@@ -195,13 +195,13 @@ create table CouponList(
 create table `Order`(
 	Order_ID int not null AUTO_INCREMENT, 
 	Member_ID int not null,
-	Coupon_ID int not null,
+	Coupon_ID int,
 	Payment_method VARCHAR(20),
-	Payment_Date DATETIME,
+	Payment_Date TIMESTAMP,
 	Deliver_method VARCHAR(20),
 	Total_price INT,
 	Discounted_price INT,
-	Order_date DATETIME,
+	Order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
 	Order_status INT not null,
 	Last_name VARCHAR(30),
 	First_name VARCHAR(30),
@@ -212,25 +212,11 @@ create table `Order`(
 	foreign key (Member_ID) references `Member`(Member_ID) on update cascade On delete cascade,
 	foreign key (Coupon_ID) references `Coupon`(Coupon_ID) on update cascade on delete cascade
 );
-insert into `Order`(Order_ID, Member_ID, Coupon_ID, Payment_method, Payment_Date, Deliver_method
-, Total_price, Discounted_price, Order_date, Order_status,Last_name,First_name,Phone,Email,Deliver_address)
-value
-(1, 2, 3, '匯款', '2021-12-29', '郵寄', 1560, 1460, '2021-12-29', 2,'Mori','Calliope','0912484809','Calliope@gmail.com','台北市大安區忠孝東路三段1號'),
-(2, 2, 2, '匯款', '2022-01-05', '郵寄', 490 , 440 , '2022-01-05', 1,'Gawr','Gura','0952517868','Gura@gmail.com','台北市大安區忠孝東路三段1號'),
-(3, 2, 1, '匯款', '2022-01-09', '郵寄', 3460 ,3435, '2022-01-09', 0,'Watson','Amelia','0925677690','Amelia@gmail.com','台北市大安區忠孝東路三段1號');
-
 
 create table `Order_product`(
-	Order_ID int not null AUTO_INCREMENT, 
+	Order_ID int not null, 
 	Product_ID int not null,
 	Product_amount INT not null,
 	foreign key (Order_ID) references `Order`(Order_ID) on update cascade On delete cascade,
 	foreign key (Product_ID) references `Product`(Product_ID) on update cascade on delete cascade
 );
-insert into Order_product(Order_ID, Product_ID,Product_amount)
-value
-(1, 1,1),
-(1, 2,1),
-(2, 4,1),
-(3, 17,2),
-(3, 19,3);
