@@ -31,9 +31,9 @@
         $data = mysqli_fetch_array($result);
         mysqli_free_result($result);
         $txt = '<div class="col-12 col-sm-6 col-md-3 ">
-                <div href="#" class="card mb-3">
+                <div href="#" class="card h-100 mb-3">
                     <!-- <img class="card-img-top" src='.$data["Image_path"].' alt="LTG-BY-0001"> -->
-                    <img class="card-img-top" src='.$data["Image_path"].' alt="LTG-BY-0001">
+                    <img class="card-img-top" src='.$data["Image_path"].' width="250" height="130" alt="LTG-BY-0001">
                     <div class="card-body">
                         <h4 class="card-title">'.$data["Product_name"].'</h4>
                         <p class="card-text">'.$data["Product_description"].'</p>
@@ -83,8 +83,8 @@
         $data = mysqli_fetch_array($result);
         mysqli_free_result($result);
         $txt = '<div class="col-12 col-sm-6 col-md-4 mb-3">
-                    <div class="card">
-                        <img class="card-img-top" src='.$data["Image_path"].' alt="LTG-BY-0001">
+                    <div class="card h-100">
+                        <img class="card-img-top" src='.$data["Image_path"].' width="250" height="130" alt="LTG-BY-0001">
                         <div class="card-body">
                         <h4 class="card-title">'.$data["Product_name"].'</h4>
                         <p class="card-text">'.$data["Product_description"].'</p>
@@ -125,12 +125,38 @@
 
         return $txt;
     }
-    
-    function getSortedProductByPriceASC($page){ 
+
+    function getTotalProductDisplayed($page, $category)
+    {
         $link = create_connection();  
-        $sql = 'SELECT P.Product_ID
+        if($category != 'all')
+        {
+            $sql = 'SELECT count(*)
+                    FROM `category` as P
+                    WHERE Category_name = "'.$category.'";';
+        }
+        else
+        {
+            $sql = 'SELECT count(*)
+                    FROM `category` as P;';
+        }
+    }
+    
+    function getSortedProductByPriceASC($page, $category){ 
+        $link = create_connection();
+        if ($category == 'all')
+        {
+            $sql = 'SELECT P.Product_ID
                 FROM `Product` as P 
                 order by P.Price ASC;';
+        }
+        else
+        {
+            $sql = 'SELECT P.Product_ID
+            FROM `product` as P, `category` as C
+            WHERE P.Product_ID = C.Product_ID AND C.Category_name = "'.$category.'"
+            order by P.Price ASC;';
+        }
         $result = execute_sql($link, "DBS_project", $sql);
         $full_data = array();
         while($single_data = mysqli_fetch_array($result)) {
@@ -141,7 +167,11 @@
         $txt = "";
         $product_num_each_page = 9;
         $first_index = ($page-1)*$product_num_each_page;
-        $last_index = $first_index + $product_num_each_page;
+        if($first_index + $product_num_each_page > $num){
+            $last_index = $num;
+        }else{
+            $last_index = $first_index + $product_num_each_page;
+        }
         mysqli_free_result($result);
         for($i  = $first_index;$i < $last_index;$i++){
             $txt .= createProductBoxForProductPage($full_data[$i][0]);
@@ -149,57 +179,95 @@
         return $txt;
     }
 
-    function getSortedProductByPriceDESC($page){ 
+    function getSortedProductByPriceDESC($page, $category){ 
         $link = create_connection();  
-        $sql = 'SELECT P.Product_ID
+        if ($category == 'all')
+        {
+            $sql = 'SELECT P.Product_ID
                 FROM `Product` as P 
                 order by P.Price DESC;';
-        $result = execute_sql($link, "DBS_project", $sql);
-        $full_data = array();
-        while($single_data = mysqli_fetch_array($result)) {
-            //will output all data on each loop.
-            array_push($full_data, $single_data); 
-        };
-        $num = count($full_data);
-        $txt = "";
-        $product_num_each_page = 9;
-        $first_index = ($page-1)*$product_num_each_page;
-        $last_index = $first_index + $product_num_each_page;
-        mysqli_free_result($result);
-        for($i  = $first_index;$i < $last_index;$i++){
-            $txt .= createProductBoxForProductPage($full_data[$i][0]);
-        };
-        return $txt;
-    }
-
-    function getSortedProductByPublishDateASC($page){ 
-        $link = create_connection();  
-        $sql = 'SELECT P.Product_ID
-                FROM `Product` as P
-                order by P.Publish_date ASC;';
-        $result = execute_sql($link, "DBS_project", $sql);
-        $full_data = array();
-        while($single_data = mysqli_fetch_array($result)) {
-            //will output all data on each loop.
-            array_push($full_data, $single_data); 
-        };
-        $num = count($full_data);
-        $txt = "";
-        $product_num_each_page = 9;
-        $first_index = ($page-1)*$product_num_each_page;
-        $last_index = $first_index + $product_num_each_page;
-        mysqli_free_result($result);
-        for($i  = $first_index;$i < $last_index;$i++){
-            $txt .= createProductBoxForProductPage($full_data[$i][0]);
-        };
-        return $txt;
-
-    }
-    function getSortedProductByPublishDateDESC($page){ 
-            $link = create_connection();  
+        }
+        else
+        {
             $sql = 'SELECT P.Product_ID
-                    FROM `Product` as P
+            FROM `product` as P, `category` as C
+            WHERE P.Product_ID = C.Product_ID AND C.Category_name = "'.$category.'"
+            order by P.Price DESC;';
+        }
+        $result = execute_sql($link, "DBS_project", $sql);
+        $full_data = array();
+        while($single_data = mysqli_fetch_array($result)) {
+            //will output all data on each loop.
+            array_push($full_data, $single_data); 
+        };
+        $num = count($full_data);
+        $txt = "";
+        $product_num_each_page = 9;
+        $first_index = ($page-1)*$product_num_each_page;
+        if($first_index + $product_num_each_page > $num){
+            $last_index = $num;
+        }else{
+            $last_index = $first_index + $product_num_each_page;
+        }
+        mysqli_free_result($result);
+        for($i  = $first_index;$i < $last_index;$i++){
+            $txt .= createProductBoxForProductPage($full_data[$i][0]);
+        };
+        return $txt;
+    }
+
+    function getSortedProductByPublishDateASC($page, $category){ 
+        $link = create_connection();  
+        if ($category == 'all')
+        {
+            $sql = 'SELECT P.Product_ID
+                FROM `Product` as P 
+                order by P.Publish_date ASC;';
+        }
+        else
+        {
+            $sql = 'SELECT P.Product_ID
+            FROM `product` as P, `category` as C
+            WHERE P.Product_ID = C.Product_ID AND C.Category_name = "'.$category.'"
+            order by P.Publish_date ASC;';
+        }
+        $result = execute_sql($link, "DBS_project", $sql);
+        $full_data = array();
+        while($single_data = mysqli_fetch_array($result)) {
+            //will output all data on each loop.
+            array_push($full_data, $single_data); 
+        };
+        $num = count($full_data);
+        $txt = "";
+        $product_num_each_page = 9;
+        $first_index = ($page-1)*$product_num_each_page;
+        if($first_index + $product_num_each_page > $num){
+            $last_index = $num;
+        }else{
+            $last_index = $first_index + $product_num_each_page;
+        }
+        mysqli_free_result($result);
+        for($i  = $first_index;$i < $last_index;$i++){
+            $txt .= createProductBoxForProductPage($full_data[$i][0]);
+        };
+        return $txt;
+
+    }
+    function getSortedProductByPublishDateDESC($page, $category){ 
+            $link = create_connection();  
+            if ($category == 'all')
+            {
+                $sql = 'SELECT P.Product_ID
+                    FROM `Product` as P 
                     order by P.Publish_date DESC;';
+            }
+            else
+            {
+                $sql = 'SELECT P.Product_ID
+                FROM `product` as P, `category` as C
+                WHERE P.Product_ID = C.Product_ID AND C.Category_name = "'.$category.'"
+                order by P.Publish_date DESC;';
+            }
             $result = execute_sql($link, "DBS_project", $sql);
             $full_data = array();
             while($single_data = mysqli_fetch_array($result)) {
@@ -210,7 +278,11 @@
             $txt = "";
             $product_num_each_page = 9;
             $first_index = ($page-1)*$product_num_each_page;
-            $last_index = $first_index + $product_num_each_page;
+            if($first_index + $product_num_each_page > $num){
+                $last_index = $num;
+            }else{
+                $last_index = $first_index + $product_num_each_page;
+            }
             mysqli_free_result($result);
             for($i  = $first_index;$i < $last_index;$i++){
                 $txt .= createProductBoxForProductPage($full_data[$i][0]);
@@ -233,7 +305,11 @@
         $txt = "";
         $product_num_each_page = 9;
         $first_index = ($page-1)*$product_num_each_page;
-        $last_index = $first_index + $product_num_each_page;
+        if($first_index + $product_num_each_page > $num){
+            $last_index = $num;
+        }else{
+            $last_index = $first_index + $product_num_each_page;
+        }
         mysqli_free_result($result);
         for($i  = $first_index;$i < $last_index;$i++){
             $txt .= createProductBoxForProductPage($full_data[$i][0]);
@@ -252,13 +328,21 @@
             //will output all data on each loop.
             array_push($full_data, $single_data);
         };
+
+        if($page == null){
+            $page = 1;
+        }
         $num = count($full_data);
         $txt = "";
         $product_num_each_page = 9;
         $first_index = ($page-1)*$product_num_each_page;
-        $last_index = $first_index + $product_num_each_page;
+        if($first_index + $product_num_each_page > $num){
+            $last_index = $num;
+        }else{
+            $last_index = $first_index + $product_num_each_page;
+        }
         mysqli_free_result($result);
-        for($i  = $first_index;$i < $last_index;$i++){
+        for($i = $first_index;$i < $last_index;$i++){
             if($full_data[$i][0] != null){
                 $txt .= createProductList($full_data[$i][0]);
             }
@@ -278,8 +362,8 @@
         if ($MemberID == "guest") 
         {           
             $txt = '<div class="col-4">
-                        <div class="card mb-3">
-                            <img class="card-img-top" src='.$data["Image_Path"].' alt="TG-B-0001" class="img-fluid">
+                        <div class="card h-100 mb-3">
+                            <img class="card-img-top" src='.$data["Image_Path"].'width="250" height="130" alt="TG-B-0001" class="img-fluid">
                             <div class="card-body">
                                 <h4 class="card-title">'.$data["Coupon_Name"].'</h4>
                                 <p class="card-text text-danger">領取期限 :' .$data["ED"].'</p>
@@ -300,8 +384,8 @@
             if ($data2 && $data2["Member_ID"]==$MemberID and $data2["Coupon_ID"]==$CouponID)
             {
                 $txt = '<div class="col-4">
-                            <div class="card mb-3">
-                                <img class="card-img-top" src='.$data["Image_Path"].' alt="TG-B-0001" class="img-fluid">
+                            <div class="card h-100 mb-3">
+                                <img class="card-img-top" src='.$data["Image_Path"].' width="250" height="130" alt="TG-B-0001" class="img-fluid">
                                 <div class="card-body">
                                     <h4 class="card-title">'.$data["Coupon_Name"].'</h4>
                                     <p class="card-text text-danger">領取期限 :' .$data["ED"].'</p>
@@ -314,8 +398,8 @@
             else
             {
                 $txt = '<div class="col-4">
-                            <div class="card mb-3">
-                                <img class="card-img-top" src='.$data["Image_Path"].' alt="TG-B-0001" class="img-fluid">
+                            <div class="card h-100 mb-3">
+                                <img class="card-img-top" src='.$data["Image_Path"].' alt="TG-B-0001" width="250" height="130" class="img-fluid">
                                 <div class="card-body">
                                     <h4 class="card-title">'.$data["Coupon_Name"].'</h4>
                                     <p class="card-text text-danger">領取期限 :' .$data["ED"].'</p>
@@ -378,6 +462,137 @@
                      </form>';
         }
         echo $txt;
+    }
+
+    function getNumberOfProduct($page, $category){
+        $link = create_connection();
+        if ($category == 'all')
+        {
+            $sql = 'SELECT COUNT(*) as Num
+                    FROM `Product` as P';
+        }
+        else
+        {
+            $sql = 'SELECT COUNT(*) as Num
+                    FROM `category` as P
+                    WHERE Category_name = "'.$category.'";';
+        }
+        $result = execute_sql($link, "DBS_project", $sql);
+        $data = mysqli_fetch_array($result);
+        //釋放 $result 佔用的記憶體
+        mysqli_free_result($result);
+        //關閉資料連接	
+        mysqli_close($link);
+        $num = $data[0];
+        $product_num_each_page = 9;
+        $num_of_pages = intval(ceil($num/$product_num_each_page));
+        $first_index = ($page-1)*$product_num_each_page;
+        if($first_index + $product_num_each_page > $num){
+            $last_index = $num;
+        }else{
+            $last_index = $first_index + $product_num_each_page;
+        }
+        $num_of_data =
+            '共'.$num_of_pages.'頁&nbsp;&nbsp;&nbsp;&nbsp;顯示'.$num.'筆結果中的'.($first_index+1).'-'.$last_index.'筆';
+        echo $num_of_data;
+    }
+
+    function getPageLink($page, $category){
+        $link = create_connection();
+        if ($category == 'all')
+        {
+            $sql = 'SELECT COUNT(*) as Num
+                    FROM `Product` as P';
+        }
+        else
+        {
+            $sql = 'SELECT COUNT(*) as Num
+                    FROM `category` as P
+                    WHERE Category_name = "'.$category.'";';
+        }
+        $result = execute_sql($link, "DBS_project", $sql);
+        $data = mysqli_fetch_array($result);
+        //釋放 $result 佔用的記憶體
+        mysqli_free_result($result);
+        //關閉資料連接	
+        mysqli_close($link);
+        $num = $data[0];
+        $product_num_each_page = 9;
+        $num_of_pages = intval(ceil($num/$product_num_each_page));
+        if ($page == 1){
+            $first_page = $page;
+            $second_page = $page + 1;
+            $third_page = $page + 2;
+        }elseif ($page == $num_of_pages) {
+            $first_page = $page - 2;
+            $second_page = $page - 1;
+            $third_page = $page;
+        }else{
+            $first_page = $page - 1;
+            $second_page = $page;
+            $third_page = $page + 1;
+        }
+        $page_link =
+            '<div class="col-12 mt-3 mb-5">
+                <nav aria-label="Page navigation product">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href=?page=1 aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                            </a>
+                        </li>';
+        if ($first_page > 1)
+        {
+            $page_link .=
+                '<li class="page-item">
+                    <p class="page-link" href="#">...</p>
+                </li>';
+        }
+
+        if($first_page > 0 && $first_page <= $num_of_pages)
+        {
+            $page_link .=
+                '<li class="page-item">
+                    <a class="page-link" href=?page='.$first_page.'>'.$first_page.'</a>
+                </li>';
+        }
+
+        if($second_page > 0 && $second_page <= $num_of_pages)
+        {
+            $page_link .=
+                '<li class="page-item">
+                    <a class="page-link" href=?page='.$second_page.'>'.$second_page.'</a>
+                </li>';
+        }
+
+        if($third_page > 0 && $third_page <= $num_of_pages)
+        {
+            $page_link .=
+                '<li class="page-item">
+                    <a class="page-link" href=?page='.$third_page.'>'.$third_page.'</a>
+                </li>';
+        }
+
+        if($third_page < $num_of_pages)
+        {
+            $page_link .=
+                '<li class="page-item">
+                    <p class="page-link" href="#">...</p>
+                </li>';
+        }
+
+        $page_link .=
+                        '<li class="page-item">
+                            <a class="page-link" href=?page='.$num_of_pages.' aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>';
+        echo $page_link;
     }
 
 ?>

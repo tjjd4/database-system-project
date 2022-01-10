@@ -19,7 +19,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HOLO商城</title>
+    <title>北科大商城</title>
     <link rel="shortcut icon" type="image/png" href="./images/logo.png"/>
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -85,17 +85,17 @@
                 <div class="row">
                     <?php
                         include_once("function.php");
-                        $data = getCoupon('1', $_COOKIE["id"]); 
+                        $data = getCoupon('1', $id); 
                     ?>   
                     
                     <?php
                         include_once("function.php");
-                        $data = getCoupon('2', $_COOKIE["id"]); 
+                        $data = getCoupon('2', $id); 
                     ?>                                
 
                     <?php
                         include_once("function.php");
-                        $data = getCoupon('3', $_COOKIE["id"]); 
+                        $data = getCoupon('3', $id); 
                     ?>                                
                 </div>
             </div>

@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HOLO商城</title>
+    <title>北科大商城</title>
     <link rel="shortcut icon" type="image/png" href="./images/logo.png"/>
     <!-- CSS文件載入 -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -96,15 +96,28 @@
                             <tbody>
                               <?php
                                 include_once("function.php");
-                                getSortedProductListByIdASC(1);
+                                if (isset($_GET["page"])){
+                                    $page = $_GET["page"];
+                                }else{
+                                    $page = 1;
+                                }
+                                getSortedProductListByIdASC($page, 'all');
                               ?>
                             </tbody>
                           </table>
                     </div>
-                    
                 </div>
                 <div class="col-0 col-md-3"></div>
                 <!-- 商品table/end -->
+                <!-- 分頁/start -->
+                <?php
+                include_once("function.php");
+                echo('<p class="col-12 mt-3 mb-3 d-inline-block">');
+                getNumberOfProduct($page, 'all');
+                echo('</p>');
+                getPageLink($page, 'all');
+                ?>
+                <!-- 分頁/end -->
             </div>
         </div>
 
@@ -119,53 +132,55 @@
                     </div>
                     <!-- Modal Header/end -->
                 
-                    <!-- Modal body/start -->
-                    <div class="modal-body">
-                        <form action="" method="post" name="myForm">
+                    <form action="addProduct.php" method="post" name="myForm" role="form">
+                        <!-- Modal body/start -->
+                        <div class="modal-body">
                             <div class="form-group">
                                 <label for="Product_name">商品名稱
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="Product_name" type="text" class="form-control" placeholder="必填，商品名稱" required>
+                                <input name="Product_name" type="text" required="required" class="form-control" placeholder="必填，商品名稱" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="Product_description">敘述
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input name="Product_description" type="text" required="required" class="form-control" placeholder="必填，敘述" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="price">價格
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="price" type="text" class="form-control" placeholder="必填，價格" required>
+                                <input name="price" type="text" class="form-control" required="required" placeholder="必填，價格" required>
                             </div>
                             
                             <div class="form-group">
                                 <label for="Stock">存貨
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="Stock" type="text" class="form-control" placeholder="必填，存貨" required>
+                                <input name="Stock" type="text" class="form-control" required="required" placeholder="必填，存貨" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="Product_description">敘述
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input name="Product_description" type="text" class="form-control" placeholder="必填，敘述" required>
+                                <label for="Product_detail">詳細資訊</label>
+                                <input name="Product_description" type="text" class="form-control" placeholder="詳細資訊" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="Standerd">standerd
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input name="Standerd" type="text" class="form-control" placeholder="必填，standerd" required>
+                                <label for="Product_standerd">standerd</label>
+                                <input name="Standerd" type="text" class="form-control" placeholder="standerd" required>
                             </div>
-                        </form>
-                    </div>
-                    <!-- Modal body/end -->
-                
-                    <!-- Modal footer/start -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">新增</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">關閉</button>
-                    </div>
-                    <!-- Modal footer/end -->
+                        </div>
+                        <!-- Modal body/end -->
+                        <!-- Modal footer/start -->
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-info" data-dismiss="modal" value="新增">
+                            <input type="button" class="btn btn-danger" data-dismiss="modal" value="關閉">
+                        </div>
+                        <!-- Modal footer/end -->
+                    </form>
                 </div>
             </div>
         </div>
@@ -189,35 +204,43 @@
                                 <label for="Product_name">商品名稱
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="Product_name" type="text" class="form-control" placeholder="必填，商品名稱" required>
+                                <input name="Product_name" type="text" required="required" class="form-control" placeholder="必填，商品名稱" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="Product_description">敘述
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input name="Product_description" type="text" required="required" class="form-control" placeholder="必填，敘述" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="price">價格
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="price" type="text" class="form-control" placeholder="必填，價格" required>
+                                <input name="price" type="text" class="form-control" required="required" placeholder="必填，價格" required>
                             </div>
                             
                             <div class="form-group">
                                 <label for="Stock">存貨
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input name="Stock" type="text" class="form-control" placeholder="必填，存貨" required>
+                                <input name="Stock" type="text" class="form-control" required="required" placeholder="必填，存貨" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="Product_description">敘述
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input name="Product_description" type="text" class="form-control" placeholder="必填，敘述" required>
+                                <label for="Product_detail">詳細資訊</label>
+                                <input name="Product_description" type="text" class="form-control" placeholder="詳細資訊" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="Standerd">standerd
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input name="Standerd" type="text" class="form-control" placeholder="必填，standerd" required>
+                                <label for="Product_standerd">standerd</label>
+                                <input name="Standerd" type="text" class="form-control" placeholder="standerd" required>
+                            </div>
+
+                            <div class="modal-footer">
+                                <input type="submit" class="btn btn-info" data-dismiss="modal" value="新增">
+                                <input type="submit" class="btn btn-danger" data-dismiss="modal" value="關閉">
                             </div>
                         </form>
                     </div>

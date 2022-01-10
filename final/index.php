@@ -60,7 +60,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HOLO商城</title>
+    <title>北科大商城</title>
     <link rel="shortcut icon" type="image/png" href="./images/logo.png"/>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/color.css">
@@ -167,23 +167,6 @@
         </div>
     </section>
     <!-- 廣告/end -->
-
-    <!-- 領取優惠券/start -->
-    <section class="container mt-5">
-        <div class="row">
-            <div class="col-4">
-                <div class="card-deck mt-1 product-categories" style="height:100px;">
-                    <a href="coupon.php" class="card" style="height:10px;">
-                        <div class="card-body bg-success">
-                            <h4 class="card-title text-white text-center">點我領取優惠券</h4>
-                        </div>
-                    </a>              
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- 領取優惠券/end -->
-
     <!-- 產品分類/start -->
     <section class="container mt-5">
         <div class="row">
@@ -254,6 +237,31 @@
             
         </div>
     </section>
+
+    <!-- 領取優惠券/start -->
+    <section class="container mt-5">
+        <div class="row">
+            <div class="col-4">
+                <div class="card-deck mt-1 product-categories" style="height:100px;">
+                    <a href="shop.php" class="card" style="height:10px;">
+                        <div class="card-body bg-primary">
+                            <h4 class="card-title text-white text-center">開始買囉</h4>
+                        </div>
+                    </a>              
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card-deck mt-1 product-categories" style="height:100px;">
+                    <a href="coupon.php" class="card" style="height:10px;">
+                        <div class="card-body bg-success">
+                            <h4 class="card-title text-white text-center">點我領取優惠券</h4>
+                        </div>
+                    </a>              
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 領取優惠券/end -->
     
     <section class="container mt-5">
         <div class="row">
