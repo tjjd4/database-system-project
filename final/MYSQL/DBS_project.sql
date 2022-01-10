@@ -195,7 +195,6 @@ create table CouponList(
 create table `Order`(
 	Order_ID int not null AUTO_INCREMENT, 
 	Member_ID int not null,
-	Coupon_ID int,
 	Payment_method VARCHAR(20),
 	Payment_Date TIMESTAMP,
 	Deliver_method VARCHAR(20),
@@ -209,8 +208,7 @@ create table `Order`(
 	Email VARCHAR(30),
 	Deliver_address VARCHAR(100),
 	primary key (Order_ID),
-	foreign key (Member_ID) references `Member`(Member_ID) on update cascade On delete cascade,
-	foreign key (Coupon_ID) references `Coupon`(Coupon_ID) on update cascade on delete cascade
+	foreign key (Member_ID) references `Member`(Member_ID) on update cascade On delete cascade
 );
 
 create table `Order_product`(
