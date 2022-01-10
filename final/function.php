@@ -190,19 +190,41 @@ function getSortedProductByPriceASC($page, $category)
     return $txt;
 }
 
-function getSortedProductByPriceDESC($page, $category)
-{
-    $link = create_connection();
-    if ($category == 'all') {
+function getSortedProductByPriceDESC($page, $category){ 
+    $link = create_connection();  
+    if ($category == 'all')
+    {
         $sql = 'SELECT P.Product_ID
-                FROM `Product` as P 
-                order by P.Price DESC;';
-    } else {
-        $sql = 'SELECT P.Product_ID
-            FROM `product` as P, `category` as C
-            WHERE P.Product_ID = C.Product_ID AND C.Category_name = "' . $category . '"
+            FROM `Product` as P 
             order by P.Price DESC;';
     }
+    else
+    {
+        $sql = 'SELECT P.Product_ID
+        FROM `product` as P, `category` as C
+        WHERE P.Product_ID = C.Product_ID AND C.Category_name = "'.$category.'"
+        order by P.Price DESC;';
+    }
+    $result = execute_sql($link, "DBS_project", $sql);
+    $full_data = array();
+    while($single_data = mysqli_fetch_array($result)) {
+        //will output all data on each loop.
+        array_push($full_data, $single_data); 
+    };
+    $num = count($full_data);
+    $txt = "";
+    $product_num_each_page = 9;
+    $first_index = ($page-1)*$product_num_each_page;
+    if($first_index + $product_num_each_page > $num){
+        $last_index = $num;
+    }else{
+        $last_index = $first_index + $product_num_each_page;
+    }
+    mysqli_free_result($result);
+    for($i  = $first_index;$i < $last_index;$i++){
+        $txt .= createProductBoxForProductPage($full_data[$i][0]);
+    };
+    return $txt;
 }
     function SearchToGetSortedProductByPriceASC($search_product, $page)
     {
@@ -965,5 +987,79 @@ function getSortedProductByPriceDESC($page, $category)
             }
         };
         return $txt;
+    }
+
+    function dropDownSelect($sortSelected){
+        if($sortSelected == "none"){
+            $txt = '<select id="ProductSelect" class="form-control" onchange="update()">
+                        <option value = "" selected>--</option>
+                        <option value = "?sortBy=DateASC">依上架時間:舊至新</option>
+                        <option value = "?sortBy=DateDESC">依上架時間:新至舊</option>
+                        <option value = "?sortBy=PriceASC">依價格排序:低至高</option>
+                        <option value = "?sortBy=PriceDESC">依價格排序:高至低</option>
+                    </select>';
+        }else if($sortSelected == "DateASC"){
+            $txt = '<select id="ProductSelect" class="form-control" onchange="update()">
+                        <option value = "">--</option>
+                        <option value = "?sortBy=DateASC" selected>依上架時間:舊至新</option>
+                        <option value = "?sortBy=DateDESC">依上架時間:新至舊</option>
+                        <option value = "?sortBy=PriceASC">依價格排序:低至高</option>
+                        <option value = "?sortBy=PriceDESC">依價格排序:高至低</option>
+                    </select>';
+        }else if($sortSelected == "DateDESC"){
+            $txt = '<select id="ProductSelect" class="form-control" onchange="update()">
+                        <option value = "">--</option>
+                        <option value = "?sortBy=DateASC">依上架時間:舊至新</option>
+                        <option value = "?sortBy=DateDESC" selected>依上架時間:新至舊</option>
+                        <option value = "?sortBy=PriceASC">依價格排序:低至高</option>
+                        <option value = "?sortBy=PriceDESC">依價格排序:高至低</option>
+                    </select>';
+        }else if($sortSelected == "PriceASC"){
+            $txt = '<select id="ProductSelect" class="form-control" onchange="update()">
+                        <option value = "">--</option>
+                        <option value = "?sortBy=DateASC">依上架時間:舊至新</option>
+                        <option value = "?sortBy=DateDESC">依上架時間:新至舊</option>
+                        <option value = "?sortBy=PriceASC" selected>依價格排序:低至高</option>
+                        <option value = "?sortBy=PriceDESC">依價格排序:高至低</option>
+                    </select>';
+        }else if($sortSelected == "PriceDESC"){
+            $txt = '<select id="ProductSelect" class="form-control" onchange="update()">
+                        <option value = "">--</option>
+                        <option value = "?sortBy=DateASC">依上架時間:舊至新</option>
+                        <option value = "?sortBy=DateDESC">依上架時間:新至舊</option>
+                        <option value = "?sortBy=PriceASC">依價格排序:低至高</option>
+                        <option value = "?sortBy=PriceDESC" selected>依價格排序:高至低</option>
+                    </select>';
+        }
+        
+        echo $txt;
+    }
+
+    function getSortedProduct($sortBy, $page, $category){
+        if($page==1){
+            if ($sortBy == "DateASC"){
+                $dataone= getSortedProductByPublishDateASC($page, $category);
+            }else if ($sortBy == "DateDESC"){
+                $dataone= getSortedProductByPublishDateDESC($page, $category);
+            }else if ($sortBy == "PriceASC"){
+                $dataone= getSortedProductByPriceASC($page, $category);
+            }else if ($sortBy == "PriceDESC"){
+                $dataone= getSortedProductByPriceDESC($page, $category);
+            }else{
+                $dataone = getSortedProductByPublishDateASC($page, $category);
+            }
+        }else{
+            if ($_COOKIE["sortBy"] == "DateASC"){
+                $dataone= getSortedProductByPublishDateASC($page, $category);
+            }else if ($_COOKIE["sortBy"] == "DateDESC"){
+                $dataone= getSortedProductByPublishDateDESC($page, $category);
+            }else if ($_COOKIE["sortBy"] == "PriceASC"){
+                $dataone= getSortedProductByPriceASC($page, $category);
+            }else if ($_COOKIE["sortBy"] == "PriceDESC"){
+                $dataone= getSortedProductByPriceDESC($page, $category);
+            }else{
+                $dataone = getSortedProductByPublishDateASC($page, $category);
+            }
+        }
     }
 
