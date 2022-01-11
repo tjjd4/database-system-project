@@ -73,7 +73,7 @@
         </div>
         <div class="row ">
             <div class="col-12 col-md12">
-                <img class="f1001"src="./images/logout.png">
+                <img class="f1001"src="./images/Logout.png">
             </div>
         </div>
         

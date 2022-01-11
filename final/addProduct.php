@@ -43,16 +43,48 @@
 
   $result_product = execute_sql($link, "DBS_project", $sql_insert_product);
   $result_query = execute_sql($link, "DBS_project", $sql_query);
-  $Product_ID = $result_query["Product_ID"];
+  $ID_query = mysqli_fetch_array($result_query);
+  $Product_ID = $ID_query[0];
   mysqli_free_result($result_query);
+
+  $sql_insert_category =
+    'INSERT INTO Category(`Product_ID`, `Category_name`)
+    Values('.$Product_ID.', "'.$Category_name.'");';
+  
+  $full_image_path = "./images/addProductImages/'.$Image_path.'";
+
+  $sql_insert_image =
+    'INSERT INTO Product_Image(`Product_ID`, `Image_path`)
+    Values('.$Product_ID.', "./images/addProductImages/'.$Image_path.'");';
+  
+  $sql_delete_product =
+    'DELETE FROM Product where Product_ID = '.$Product_ID.';';
+  
   $result_image = false;
   $result_category = false;
   $result_delete = false;
+  if ($result_product){
+    $result_category = execute_sql($link, "DBS_project", $sql_insert_category);
+  }
+  if ($result_product){
+    if ($result_category){
+      if (file_exists("./images/addProductImages/$Image_path")){
+        $result_image = execute_sql($link, "DBS_project", $sql_insert_image);
+      }else{
+        $result_delete = execute_sql($link, "DBS_project", $sql_delete_product);
+      }
+    }else{
+      $result_delete = execute_sql($link, "DBS_project", $sql_delete_product);
+    }
+  }
   mysqli_close($link);
 
   echo json_encode(array(
     'result_product' => $result_product,
     'Product_ID' => $Product_ID,
+    'result_image' => $result_image,
+    'result_category' => $result_category,
+    'result_delete' => $result_delete,
     'Product_name' => $Product_name
   ));
 ?>

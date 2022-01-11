@@ -1,4 +1,3 @@
-
 <?php
 require_once("dbtools.inc.php");
 function getProuctFromId($id)

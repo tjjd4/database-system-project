@@ -174,15 +174,15 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="Product_standerd_add">standard</label>
-                                <input id="Product_standerd_add" type="text" class="form-control" placeholder="standerd">
+                                <label for="Product_standerd_add">產品規格</label>
+                                <input id="Product_standerd_add" type="text" class="form-control" placeholder="產品規格">
                             </div>
 
                             <div class="form-group">
                                 <label for="Image_path_add">圖片檔案名稱
-                                <span class="text-danger">* 必須將檔案放在 "final/added_product_images"</span>
+                                <span class="text-danger">* 必須將檔案放在 "final/added_product_images/"</span>
                                 </label>
-                                <input id="Image_path_add" type="text" class="form-control" required="required" placeholder="ex: abc.jpeg">
+                                <input id="Image_path_add" type="text" class="form-control" required="required" placeholder="必填，ex: abc.jpeg">
                             </div>
                         </div>
                         <!-- Modal body/end -->
@@ -218,9 +218,6 @@
                             Image_path: $("#Image_path_add").val()
                         },
                         success: function(data) {
-                            alert(data.result_delete);
-                            alert(data.result_category);
-                            alert(data.result_image);
                             if (data.result_product) {
                                 if (data.result_delete){
                                     alert("Product "+data.Product_name+" added failed! (image error)");
@@ -303,8 +300,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="Product_standerd">standard</label>
-                                <input id="Product_standerd" type="text" class="form-control" placeholder="standerd">
+                                <label for="Product_standerd">產品規格</label>
+                                <input id="Product_standerd" type="text" class="form-control" placeholder="產品規格">
                             </div>
 
                             <div class="form-group">
