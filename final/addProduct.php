@@ -38,7 +38,7 @@
     'INSERT INTO Product(`Product_name`, `Product_description`, `Price`, `Stock`, `Publish_date`, `Product_detail`, `Product_standerd`)
     Values("'.$Product_name.'", "'.$Product_description.'", '.$Price.', '.$Stock.', "'.date("Y-m-d").'", "'.$Product_detail.'", "'.$Product_standerd.'");';
   
-  $sql_query = 'SELECT Product_ID from Product where Product_ID = (select last_insert_id());';
+  $sql_query = 'select last_insert_id();';
 
   // $sql_insert_category =
   //   'INSERT INTO Category(`Product_ID`, `Category_name`)
