@@ -39,34 +39,15 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse " id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.php">首頁</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.php">關於我們</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="shop.php">買名產囉</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
-                    </li>
-                </ul>
-                <div class="ml-auto">
-                    <?php
-                            if ($_COOKIE["id"]=="guest")
-                            {
-                              echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
-                            }
-                            else
-                            {
-                                echo"<a href='main.php'>$NickName</a> 你好";
-                                echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
-                            }
+            <?php
+                    include_once("web_function.php");
+                    create_top_left();
                     ?>
-                    <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
-                    <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
+                <div class="ml-auto">
+                <?php include_once("web_function.php");
+                    create_title($id,$NickName);
+                
+                ?>
                 </div>
             </div>
         </nav>
@@ -182,15 +163,7 @@
                     </ul>
                 </div>
                 <!-- 選單連結/end -->
-                <!-- 訂閱/start -->
-                <!-- <div class="col-12 col-md-6 mb-3">
-                    <h6 class="text-white">留下 E-mail，訂閱hololive，可搶先獲得最新的資訊喔！</h6>
-                    <form action="addemail.php" method="post" name="myForm">
-                        <input name="email" type="email" class="form-control mt-2 mb-2" placeholder="請輸入e-mail">
-                        <button type="submit" class="btn btn-primary float-right send-btn">傳送</button>
-                    </form>
-                </div> -->
-                <!-- 訂閱/end -->
+            
                 <!-- 版權所有/start -->
                 <div class="col-12 mt-3">
                     <p class="text-white text-center">© Copyright 2021 NTUT </p>

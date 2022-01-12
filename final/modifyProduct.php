@@ -52,8 +52,8 @@
   if($result_product){
     if ($Image_path){
       if (file_exists("./images/addProductImages/$Image_path")){
-      $result_image = execute_sql($link, "DBS_project", $sql_insert_image);
-      $image_update = true;
+        $result_image = execute_sql($link, "DBS_project", $sql_insert_image);
+        $image_update = true;
       }
     }
   }

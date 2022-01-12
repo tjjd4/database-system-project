@@ -9,15 +9,9 @@ create table `Member`(
 	`Member_password` VARCHAR(50) not null,
 	`Email` VARCHAR(255) not null,
 	`Phone` int not null,
-    `Permission` int default 0,
+    `Permission` int default 0 not null,
 	primary key(Member_ID)
 );
-
-insert into Member(Member_name, Username, Member_password, Email, Phone, Permission) 
-values("administrator", "administrator", "123", "administrator@gmail.com", "0912345678", "1"), 
-("testMember", "test", "123", "test@gmail.com", "0912345678", "0"); 
-
--- select * from Member;
 
 -- describe `Member`;
 -- delete from `Member` where member_ID; -- 清空
@@ -37,9 +31,83 @@ create table Product(
 	primary key (Product_ID)
 );
 
+create table Category(
+	Product_ID int not null,
+	Category_name VARCHAR(50) not null,
+	primary key (Product_ID) ,
+	foreign key (Product_ID) references Product(Product_ID) on update cascade on delete cascade
+);
+
+create table Product_Image(
+	Image_ID int not null AUTO_INCREMENT,
+	Product_ID int not null,
+	Image_path VARCHAR(255) not null,
+	primary key (Image_ID, Product_ID),
+	foreign key (Product_ID) references Product(Product_ID) on update cascade on delete cascade
+);
+
+create table Coupon(
+	Coupon_ID int not null AUTO_INCREMENT,
+	Coupon_Name VARCHAR(50) not null,
+	DiscountCount INT not null,
+	StartDate Datetime not null,
+	EndDate Datetime not null,
+    Image_Path TEXT not null,
+ primary key (Coupon_ID)
+);
+
+create table ShoppingCart(
+	Member_ID int not null,
+    Product_ID int not null,
+	Product_amount INT not null,
+	primary key (Member_ID, Product_ID),
+	foreign key (Member_ID) references `Member`(Member_ID) on update cascade on delete cascade,
+    foreign key (Product_ID) references Product(Product_ID) on update cascade on delete cascade
+);
+
+create table CouponList(
+	Member_ID int not null,
+	Coupon_ID int not null,
+	Used VARCHAR(10) not null,
+	foreign key (Coupon_ID) references Coupon(Coupon_ID) on update cascade on delete cascade,
+	foreign key (Member_ID) references `Member`(Member_ID) on update cascade on delete cascade
+);
+
+create table `Order`(
+	Order_ID int not null AUTO_INCREMENT, 
+	Member_ID int not null,
+	Payment_method VARCHAR(20),
+	Payment_Date TIMESTAMP,
+	Deliver_method VARCHAR(20),
+	Total_price INT,
+	Discounted_price INT,
+	Order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+	Order_status INT not null,
+	Last_name VARCHAR(30),
+	First_name VARCHAR(30),
+	Phone VARCHAR(30),
+	Email VARCHAR(30),
+	Deliver_address VARCHAR(100),
+	primary key (Order_ID),
+	foreign key (Member_ID) references `Member`(Member_ID) on update cascade On delete cascade
+);
+
+
+create table `Order_product`(
+	Order_ID int not null, 
+	Product_ID int not null,
+	Product_amount INT not null,
+	foreign key (Order_ID) references `Order`(Order_ID) on update cascade On delete cascade,
+	foreign key (Product_ID) references `Product`(Product_ID) on update cascade on delete cascade
+);
+
+insert into Member(Member_name, Username, Member_password, Email, Phone, Permission) 
+values("administrator", "administrator", "123", "administrator@gmail.com", "0912345678", "1"), 
+("testMember", "test", "123", "test@gmail.com", "0912345678", "0"); 
 
 insert into Product(Product_name, Product_description, Price, Stock, Publish_date, Product_detail, Product_standerd)
-values("佳德糕餅 - 鳳梨酥","原味鳳梨酥禮盒(12入)","750", 100, '2021-12-29',"詳細資訊","我是好吃的鳳梨酥"),
+values("佳德糕餅 - 鳳梨酥","原味鳳梨酥禮盒(12入)","750", 100, '2021-12-29',"品名:原味佳德鳳梨酥<br>規格:12入<br>成分:麵粉、砂糖、進口奶油、蛋、塩、鳳梨餡、少許冬瓜餡<br>
+保存期限:40天<br>保存方式:常溫<br>貼心提醒:奶蛋素","一盒12顆，每顆約45克"),
 ("佳德糕餅 - 蔥軋餅","蔥軋餅(24片)禮盒","750", 100, '2021-12-29',"詳細資訊","我是好吃的蔥軋餅"),
 ("佳德糕餅 - 太陽餅","太陽餅(12入)","416", 100, '2021-12-29',"詳細資訊","standerd"),
 ("阿聰師 - 阿聰師的小芋仔","阿聰師的小芋仔(6入) (蛋奶素)","430", 100, '2021-12-29',"詳細資訊","standerd"),
@@ -70,16 +138,6 @@ values("佳德糕餅 - 鳳梨酥","原味鳳梨酥禮盒(12入)","750", 100, '20
 ("苗栗大湖草莓","草莓新鮮現採出貨/盒","700", 100, '2021-12-29',"詳細資訊","standerd"),
 ("九如檸檬 大斤數含運組合","檸檬(新鮮現採 當日直送)/盒","800", 100, '2021-12-29',"詳細資訊","standerd");
 
--- delete from `Product` where Product_ID;
--- alter table `Product` AUTO_INCREMENT = 1;
--- select * from Product;
-
-create table Category(
-	Product_ID int not null,
-	Category_name VARCHAR(50) not null,
-	primary key (Product_ID) ,
-	foreign key (Product_ID) references Product(Product_ID) on update cascade on delete cascade
-);
 insert into Category(Product_ID, Category_name)
 values(1,"food_dessert"),
 (2,"food_dessert"),
@@ -111,14 +169,6 @@ values(1,"food_dessert"),
 (25,"fruit"),
 (26,"fruit"),
 (27,"fruit");
-UPDATE Category SET `Category_name`="tea" where Product_ID = 27;
-create table Product_Image(
-	Image_ID int not null AUTO_INCREMENT,
-	Product_ID int not null,
-	Image_path VARCHAR(255) not null,
-	primary key (Image_ID, Product_ID),
-	foreign key (Product_ID) references Product(Product_ID) on update cascade on delete cascade
-);
 
 insert into Product_Image(Product_ID, Image_path)
 value(1,"./images/food_dessert_images/1.jpg"),
@@ -134,6 +184,9 @@ value(1,"./images/food_dessert_images/1.jpg"),
 (11,"./images/food_dessert_images/11.jpg"),
 (12,"./images/food_dessert_images/12.jpg"),
 (13,"./images/food_dessert_images/13.jpg"),
+(1,"./images/food_dessert_images/14.jpg"),
+(1,"./images/food_dessert_images/15.jpg"),
+(1,"./images/food_dessert_images/16.jpg"),
 
 (14,"./images/tea_drink_images/1.jpg"),
 (15,"./images/tea_drink_images/2.jpg"),
@@ -152,21 +205,6 @@ value(1,"./images/food_dessert_images/1.jpg"),
 (26,"./images/fruit/3.jpg"),
 (27,"./images/fruit/4.jpg");
 
--- select * from Product_image;
--- delete from `Product_image` where Product_ID;
--- alter table `Product_image` AUTO_INCREMENT = 1;
-
-
-create table Coupon(
-	Coupon_ID int not null AUTO_INCREMENT,
-	Coupon_Name VARCHAR(50) not null,
-	DiscountCount INT not null,
-	StartDate Datetime not null,
-	EndDate Datetime not null,
-    Image_Path TEXT not null,
- primary key (Coupon_ID)
-);
-
 insert into Coupon(Coupon_ID, Coupon_Name, DiscountCount, StartDate, EndDate, Image_Path)
 value
 (1, '25元折價券', 25, '2021-12-29', '2021-01-29', "./images/coupon/25.jpg"),
@@ -174,42 +212,3 @@ value
 (3, '100元折價券', 100, '2021-12-29', '2021-01-29', "./images/coupon/100.jpg");
 
 
-create table ShoppingCart(
-	Member_ID int not null,
-    Product_ID int not null,
-	Product_amount INT not null,
-	primary key (Member_ID, Product_ID),
-	foreign key (Member_ID) references `Member`(Member_ID) on update cascade on delete cascade,
-    foreign key (Product_ID) references Product(Product_ID) on update cascade on delete cascade
-);
-
-create table CouponList(
-	Member_ID int not null,
-	Coupon_ID int not null,
-	Used VARCHAR(10) not null,
-	foreign key (Coupon_ID) references Coupon(Coupon_ID) on update cascade on delete cascade,
-	foreign key (Member_ID) references `Member`(Member_ID) on update cascade on delete cascade
-);
-
-create table `Order`(
-	Order_ID int not null AUTO_INCREMENT, 
-	Member_ID int not null,
-	Payment_method VARCHAR(20),
-	Payment_Date TIMESTAMP,
-	Deliver_method VARCHAR(20),
-    Deliver_address VARCHAR(100),
-	Total_price INT,
-	Discounted_price INT,
-	Order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-	Order_status INT not null,
-	primary key (Order_ID),
-	foreign key (Member_ID) references `Member`(Member_ID) on update cascade On delete cascade
-);
-
-create table `Order_product`(
-	Order_ID int not null, 
-	Product_ID int not null,
-	Product_amount INT not null,
-	foreign key (Order_ID) references `Order`(Order_ID) on update cascade On delete cascade,
-	foreign key (Product_ID) references `Product`(Product_ID) on update cascade on delete cascade
-);

@@ -41,25 +41,15 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.php">首頁</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.php">關於我們</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="shop.php">買名產囉</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
-                    </li>
-                </ul>
+            <?php
+                    include_once("web_function.php");
+                    create_top_left();
+                    ?>
                 <div class="ml-auto">
-                    <a href='main.php'><?= $NickName?></a> 你好
-                    <a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>
-                    <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
-                    <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
+                <?php include_once("web_function.php");
+                    create_title($id,$NickName);
+                
+                ?>
                 </div>
             </div>
         </nav>
@@ -184,15 +174,15 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="Product_standerd_add">standard</label>
-                                <input id="Product_standerd_add" type="text" class="form-control" placeholder="standerd">
+                                <label for="Product_standerd_add">產品規格</label>
+                                <input id="Product_standerd_add" type="text" class="form-control" placeholder="產品規格">
                             </div>
 
                             <div class="form-group">
                                 <label for="Image_path_add">圖片檔案名稱
-                                <span class="text-danger">* 必須將檔案放在 "final/added_product_images"</span>
+                                <span class="text-danger">* 必須將檔案放在 "final/added_product_images/"</span>
                                 </label>
-                                <input id="Image_path_add" type="text" class="form-control" required="required" placeholder="ex: abc.jpeg">
+                                <input id="Image_path_add" type="text" class="form-control" required="required" placeholder="必填，ex: abc.jpeg">
                             </div>
                         </div>
                         <!-- Modal body/end -->
@@ -228,17 +218,15 @@
                             Image_path: $("#Image_path_add").val()
                         },
                         success: function(data) {
-                            alert(data.Product_ID);
-                            alert(data.Product_name);
-                            // if (data.result_product) {
-                            //     if (data.result_delete){
-                            //         alert("Product "+data.Product_name+" added failed! (image error)");
-                            //     }else {
-                            //         alert("Product and Image added successfully!");
-                            //     }
-                            // }else {
-                            //     alert("Product "+data.Product_name+" added failed!");
-                            // }
+                            if (data.result_product) {
+                                if (data.result_delete){
+                                    alert("Product "+data.Product_name+" added failed! (image error)");
+                                }else {
+                                    alert("Product and Image added successfully!");
+                                }
+                            }else {
+                                alert("Product "+data.Product_name+" added failed!");
+                            }
                         },
                         error: function() {
                             alert("Connect error!");
@@ -312,8 +300,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="Product_standerd">standard</label>
-                                <input id="Product_standerd" type="text" class="form-control" placeholder="standerd">
+                                <label for="Product_standerd">產品規格</label>
+                                <input id="Product_standerd" type="text" class="form-control" placeholder="產品規格">
                             </div>
 
                             <div class="form-group">
@@ -425,15 +413,6 @@
                     </ul>
                 </div>
                 <!-- 選單連結/end -->
-                <!-- 訂閱/start -->
-                <!-- <div class="col-12 col-md-6 mb-3">
-                    <h6 class="text-white">留下 E-mail，訂閱hololive，可搶先獲得最新的資訊喔！</h6>
-                    <form action="addemail.php" method="post" name="myForm">
-                        <input name="email" type="email" class="form-control mt-2 mb-2" placeholder="請輸入e-mail">
-                        <button type="submit" class="btn btn-primary float-right send-btn">傳送</button>
-                    </form>
-                </div> -->
-                <!-- 訂閱/end -->
                 <!-- 版權所有/start -->
                 <div class="col-12 mt-3">
                     <p class="text-white text-center">© Copyright 2021 NTUT </p>

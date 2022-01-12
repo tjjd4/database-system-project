@@ -55,39 +55,16 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.php">首頁</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.php">關於我們</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="shop.php">買名產囉</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
-                    </li>
-                    <li class="nav-item">
-                        <input name="search_product" type="text" class="form-control" id="search_product" placeholder="搜尋...">
-                    </li>
-                </ul>
+            <?php
+                    include_once("web_function.php");
+                    create_top_left();
+                    ?>
                 
                 <div class="ml-auto">
-                    <?php
-                            if ($id == "guest")
-                            {
-                              echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
-                            }
-                            else
-                            {
-                                echo"<a href='main.php'>$NickName</a> 你好";
-                                echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
-                            }
-                    ?>
-                    
-                    <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
-                    <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
+                <?php include_once("web_function.php");
+                    create_title($id,$NickName);
+                
+                ?>
                 </div>
             </div>
         </nav>
@@ -118,7 +95,7 @@
                                     $sortBy = "DateASC";
                                 }
                                 echo('<p class="d-inline-block">');
-                                getNumberOfProduct($page, 'all');
+                                getNumberOfProduct($page, 'acc');
                                 echo('</p>'); ?>
                             <form action="" class="d-inline-block float-right">
                                 <?php
@@ -135,7 +112,6 @@
                             window.onload=initForm;
                             function initForm(){
                                 var osel=document.getElementById("ProductSelect");
-                                // osel.selectedIndex=0;
                                 osel.onchange=jumpPage;
                             }
                             function jumpPage(){
@@ -156,30 +132,6 @@
                         <!-- 商品/end -->
                         <!-- 分頁/start -->
                         <?php getPageLink($page, 'acc'); ?>
-
-                        <!-- <div class="col-12 mt-3 mb-5">
-                            <nav aria-label="Page navigation product">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">1</a>
-                                    </li>
-                                   
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div> -->
-
                         <!-- 分頁/end -->
                     </div>
                 </div>
@@ -187,54 +139,12 @@
                 <!-- 側邊欄/start -->
                 <div class="col-12 col-md-3">
                     <div class="row">
-                        <!-- 搜尋/start -->
-                        <!-- <div class="col-12 mb-5">
-                            <form action="">
-                                <input type="test" class="form-control" id="PorductSearch" placeholder="搜尋...">
-                            </form>
-                        </div> -->
-                        <!-- 搜尋/end -->
-                        <!-- 購物清單/start -->
-                        <!-- <div class="col-12 mb-5">
-                            <h4 class="title-color">購物車</h4>
-                            <div class="d-block sidebar-product-list">
-                                <a class="text-white remove" data-toggle="tooltip" data-placement="top" title="是否確定要移除">X</a>
-                                <a href="z1.html" class="d-inline-block">
-                                    <img src="./images/product/eva_1.png" alt="eva1" class="productpic">
-                                    <h6 class="d-inline-block">Hololive兔田佩克拉 生日套組</h6>
-                                </a>
-                                <p class="d-block text-secondary pl-4">
-                                    <span class="text-warning">1</span>&nbsp;X&nbsp;NT$500
-                                </p>
-                            </div>
-                            <div class="d-block sidebar-product-list">
-                                <a class="text-white remove" data-toggle="tooltip" data-placement="top" title="是否確定要移除">X</a>
-                                <a href="z9.html" class="d-inline-block">
-                                    <img src="./images/product/eva_9.png" alt="eva9" class="productpic">
-                                    <h6 class="d-inline-block">潤羽るしあ 生日紀念套組</h6>
-                                </a>
-                                <p class="d-block text-secondary pl-4">
-                                    <span class="text-warning">1</span>&nbsp;X&nbsp;NT$500
-                                </p>
-                            </div>
-                            <div class="d-block mt-3 mb-3">
-                                <h5 class="text-center">小計：NT$&nbsp;1,000</h5>
-                            </div>
-                            <div class="d-block">
-                                <a href="cart.php" class="btn btn-primary btn-block text-white" role="button">查看購物車</a>
-                            </div>
-                            <div class="d-block mt-1 mb-3">
-                                <a href="checkout.php" class="btn btn-secondary btn-block text-white" role="button">結帳</a>
-                            </div>
-                        </div> -->
-                        <!-- 購物清單/end -->
                         <!-- 產品分類/start -->
                         <div class="col-12 mb-5 ml-5">
                             <h4 class="title-color">產品分類</h4>
                             <div class="card-deck mt-2 product-categories" style="overflow-y: auto; overflow-x: hidden">
                                 <div class="row">
                                     <a href="food_dessert.php" class="card">
-                                        <!-- <img class="card-img-top" src="./images/slider_1.png" alt="套組"> -->
                                         <img class="card-img-top" src="./images/product_class/3.jpg" alt="食物">
                                         <div class="card-body bg-dark card-title text-white text-center">
                                             <h5>食品/</h5>
@@ -242,7 +152,6 @@
                                         </div>
                                     </a>
                                     <a href="tea_drink.php" class="card">
-                                        <!-- <img class="card-img-top" src="./images/service_2.png" alt="卡套"> -->
                                         <img class="card-img-top" src="./images/product_class/2.jpg" alt="飲料">
                                         <div class="card-body bg-dark card-title text-white text-center">
                                             <h5>茶葉/</h5>
@@ -252,7 +161,6 @@
                                 </div>
                                 <div class="row">
                                     <a href="acc.php" class="card">
-                                        <!-- <img class="card-img-top" src="./images/service_3.png" alt="衣服"> -->
                                         <img class="card-img-top" src="./images/product_class/4.jpg" alt="裝飾">
                                         <div class="card-body bg-dark card-title text-white text-center">
                                             <h5>裝飾/</h5>
@@ -260,7 +168,6 @@
                                         </div>
                                     </a>
                                     <a href="fruit.php" class="card">
-                                        <!-- <img class="card-img-top" src="./images/service_4.png" alt="滑鼠墊"> -->
                                         <img class="card-img-top" src="./images/product_class/1.jpg" alt="水果">
                                         <div class="card-body bg-dark card-title text-white text-center">
                                             <h5>水果類</h5>

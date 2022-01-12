@@ -56,34 +56,15 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse " id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.php">首頁</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.php">關於我們</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="shop.php">買名產囉</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
-                    </li>
-                </ul>
-                <div class="ml-auto">
-                    <?php
-                            if ($_COOKIE["id"]=="guest")
-                            {
-                              echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
-                            }
-                            else
-                            {
-                                echo"<a href='main.php'>$NickName</a> 你好";
-                                echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
-                            }
+            <?php
+                    include_once("web_function.php");
+                    create_top_left();
                     ?>
-                    <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
-                    <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
+                <div class="ml-auto">
+                <?php include_once("web_function.php");
+                    create_title($id,$NickName);
+                
+                ?>
                 </div>
             </div>
         </nav>
@@ -98,14 +79,14 @@
         </div>
         <div class="row ">
             <div class="col-12 col-md12">
-                <img class="f1001"src="./images/center.png">
+                <img class="f1001"src="./images/Center.png">
             </div>
         </div>
         <?php if ($permission == 1):?>
             <div class="row mt-5">
                 <div class="col-12 col-md-4">
                     <div href="#" class="card h-100 mb-3">
-                        <img class="card-img-top" src="./images/chibiame-modify.gif" alt="LG-GP-0001">
+                        <img class="card-img-top" src="./images/modify.jpg" alt="LG-GP-0001">
                         <div class="card-body">
                         <a href="modify.php" class="btn btn-outline-secondary btn-block">修改會員資料</a>
                             
@@ -115,7 +96,7 @@
                 
                 <div class="col-12 col-md-4">
                     <div href="#" class="card h-100 mb-3">
-                        <img class="card-img-top" src="./images/chibiame-product_list.gif" alt="LG-GP-0001">
+                        <img class="card-img-top" src="./images/product_list.jpg" alt="LG-GP-0001">
                         <div class="card-body">
                             <a href="product_list.php" class="btn btn-outline-secondary btn-block">管理商品</a>                      
                         </div>
@@ -124,7 +105,7 @@
 
                 <div class="col-12 col-md-4">
                     <div href="#" class="card mb-3 h-100">
-                        <img class="card-img-top" src="./images/chibiame-index.gif" alt="LG-GP-0001">
+                        <img class="card-img-top" src="./images/to_index.jpg" alt="LG-GP-0001">
                         <div class="card-body">
                             <a href="order_list.php" class="btn btn-outline-secondary btn-block">管理訂單</a>
                         </div>
@@ -135,7 +116,7 @@
             <div class="row mt-5">
                 <div class="col-12 col-md-6">
                     <div href="#" class="card h-100 mb-3">
-                        <img class="card-img-top" src="./images/chibiame-modify.gif" alt="LG-GP-0001">
+                        <img class="card-img-top" src="./images/modify.jpg" alt="LG-GP-0001">
                         <div class="card-body">
                         <a href="modify.php" class="btn btn-outline-secondary btn-block">修改會員資料</a>
                             
@@ -145,7 +126,7 @@
 
             <div class="col-12 col-md-6">
                 <div href="#" class="card mb-3 h-100">
-                    <img class="card-img-top" src="./images/chibiame-index.gif" alt="LG-GP-0001">
+                    <img class="card-img-top" src="./images/to_index.jpg" alt="LG-GP-0001">
                     <div class="card-body">
                         <a href="order_list.php" class="btn btn-outline-secondary btn-block">查看訂單</a>
                     </div>

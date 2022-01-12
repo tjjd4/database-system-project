@@ -218,7 +218,7 @@
         $result = execute_sql($link, "DBS_project", $sql);
         if (mysqli_num_rows($result) === 0)
         {
-            return "./images/product/".$product_id.".png";
+            return "none";
         }
         $data = mysqli_fetch_array($result);
         return $data['Image_path'];

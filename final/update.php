@@ -1,6 +1,8 @@
 <?php
   //檢查 cookie 中的 passed 變數是否等於 TRUE
   $passed = $_COOKIE["passed"];
+  $id = $_COOKIE["id"]; 
+  $NickName = $_COOKIE["NickName"]; 
 	
   /* 如果 cookie 中的 passed 變數不等於 TRUE，
      表示尚未登入網站，將使用者導向首頁 index.php */
@@ -62,23 +64,10 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.php">首頁</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.php">HOLOLIVE</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="shop.php">台灣名產商城</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="job.php">人物介紹</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://schedule.hololive.tv/">直播時間與連結</a>
-                    </li>
-                </ul>
+            <?php
+                    include_once("web_function.php");
+                    create_top_left();
+                    ?>
                 <div class="ml-auto">
                     <a href="login.html" class="btn btn-outline-info text-info my-2 my-sm-0">登入</a>
                     <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
@@ -92,7 +81,7 @@
     <div class="container pt-3 pb-3 mt-5">
         <div class="row">
             <div class="col-12 col-md12 ">
-                <p align-middle><?php echo $id?>你好 會員資料更改成功!</p>
+                <p align-middle><?php echo $NickName?>你好 會員資料更改成功!</p>
             </div>
         </div>
         <div class="row ">

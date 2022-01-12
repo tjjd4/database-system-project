@@ -1,3 +1,4 @@
+
 <?php
   function create_connection()
   {
@@ -19,4 +20,5 @@
 		
     return $result;
   }
+
 ?>

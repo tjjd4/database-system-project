@@ -73,20 +73,10 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.php">首頁</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.php">關於我們</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="shop.php">買名產囉</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.ntut.edu.tw/">實體店面介紹</a>
-                    </li>
-                </ul>
+            <?php
+                    include_once("web_function.php");
+                    create_top_left();
+                    ?>
                 <div class="ml-auto">
                     <a href="login.html" class="btn btn-outline-info text-info my-2 my-sm-0">登入</a>
                     <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
@@ -106,7 +96,7 @@
 
         <div class="col-12 col-md-4">
                 <div href="#" class="card mb-3">
-                    <img class="card-img-top f1001" src="./images/chibiame.gif" alt="LTG-BY-0001">
+                    <img class="card-img-top f1001" src="./images/success.gif" alt="LTG-BY-0001">
                     <div class="card-body">
                         <h4 class="card-title"><?php echo $Member_name ?>你好</h4>
                         <!-- <p class="card-text">id:<font color="#FF0000"><?php echo $account?></font></p>

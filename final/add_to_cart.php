@@ -1,19 +1,19 @@
-<?php
-  if (empty($_COOKIE["id"]))
-  {
-    setcookie("id", "guest");	
-  }
-  else
-  {
-      $id = $_COOKIE["id"];
-  }
- 
+<?php	
+
+ if (empty($_COOKIE["id"]))
+{
+  setcookie("id", "guest");	
+}
+else
+{
     $id = $_COOKIE["id"];
-    setcookie("id", "guest");	
-    setcookie("passed", "");
+}
+  $product_amount = $_POST["quantity"];
+  $product_id = $_POST["num"];
+
     include_once("shopcart.inc.php");
-    clear_shopping_cart();
-  
+    add_shopping_cart($product_id, $product_amount)
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +50,7 @@
                     create_top_left();
                     ?>
                 <div class="ml-auto">
-                    <?php include_once("web_function.php");
+                <?php include_once("web_function.php");
                     create_title($id,$NickName);
                 
                 ?>
@@ -63,12 +63,12 @@
     <div class="container pt-3 pb-3 mt-5">
         <div class="row">
             <div class="col-12 col-md12 ">
-                <p align-middle><?php echo $id?>你好 購物車已經清除</p>
+                <p align-middle><?php echo $id?>你好 商品已加入購物車</p>
             </div>
         </div>
         <div class="row ">
             <div class="col-12 col-md12">
-                <img class="f1001"src="./images/clear.png">
+                <img class="f1001"src="./images/savecart.png">
             </div>
         </div>
         
@@ -86,28 +86,15 @@
                 <div class="col-12 col-md-6 mb-3">
                     <ul class="footer-menu">
                         <li><a href="index.php">首頁</a></li>
-                        <li><a href="about.php">HOLOLIVE</a></li>
-                        <li><a href="shop.php">HOLO商城</a></li>
-                        <li><a href="job.php">成員簡介</a></li>
-                        <li><a href="https://schedule.hololive.tv/">直播時間</a></li>
-                        <li><a href="login.html">登入</a></li>
-                        <li><a href="cart.php">購物車</a></li>
-                        <li><a href="checkout.php">結帳</a></li>
+                        <li><a href="#">客服中心</a></li>
+                        <li><a href="#">常見問題</a></li>
+                        <li><a href="#">隱私條款聲明</a></li>
                     </ul>
                 </div>
                 <!-- 選單連結/end -->
-                <!-- 訂閱/start -->
-                <div class="col-12 col-md-6 mb-3">
-                    <h6 class="text-white">留下 E-mail，訂閱hololive，可搶先獲得最新的資訊喔！</h6>
-                    <form action="addemail.php" method="post" name="myForm">
-                        <input name="email" type="email" class="form-control mt-2 mb-2" placeholder="請輸入e-mail">
-                        <button type="submit" class="btn btn-primary float-right send-btn">傳送</button>
-                    </form>
-                </div>
-                <!-- 訂閱/end -->
                 <!-- 版權所有/start -->
                 <div class="col-12 mt-3">
-                    <p class="text-white text-center">© Copyright 2021 hololive</p>
+                    <p class="text-white text-center">© Copyright 2021 NTUT </p>
                 </div>
                 <!-- 版權所有/end -->
             </div>

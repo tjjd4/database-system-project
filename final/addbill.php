@@ -96,63 +96,40 @@
     <header class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <a class="navbar-brand" href="index.php">
-                <img src="./images/logo.png" alt="logo">
+                <img id="logo1" src="./images/logo.png" alt="logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.php">首頁</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.php">HOLOLIVE</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="shop.php">台灣名產商城</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="job.php">人物介紹</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://schedule.hololive.tv/">直播時間與連結</a>
-                    </li>
-                </ul>
-                <div class="ml-auto">
-                    <?php
-                            if ($_COOKIE["id"]=="guest")
-                            {
-                                echo"<a href='login.html' class='btn btn-outline-info text-info my-2 my-sm-0'>登入</a>";	
-                            }
-                            else
-                            {
-                                echo"<a href='main.php'>$NickName</a> 你好";
-                                echo"<a href='logout.php' class='btn btn-outline-danger text-danger my-2 my-sm-0'>登出</a>";
-                            }
+            <?php
+                    include_once("web_function.php");
+                    create_top_left();
                     ?>
-                    <a href="cart.php" class="btn btn-outline-info text-info my-2 my-sm-0">購物車</a>
-                    <a href="checkout.php" class="btn btn-outline-info text-info my-2 my-sm-0">結帳</a>
+                
+                <div class="ml-auto">
+                <?php include_once("web_function.php");
+                    create_title($id,$NickName);
+                
+                ?>
                 </div>
             </div>
         </nav>
     </header>
     <!-- header/end -->
-    
-    <div class="container pt-3 pb-3">
-      <div class="row">
-        <div class="col-0 col-md-2"></div>
-        <div class="col-12 col-md-8">
-          <img class="f1001 c"src="./images/holobg.png">
+    <section class="page-content">
+        <div class="container pt-3 pb-3">
+        <div class="row">
+            <div class="col-0 col-md-2"></div>
+            <div class="col-12 col-md-8">
+            <h1 class="text-success"> 訂單已送出
+            <p>Thank you! 感謝你的訂購！</p>
+            </h1> 
+            </div>
+            <div class="col-0 col-md-2"></div>
         </div>
-        <div class="col-0 col-md-2"></div>
-      <div class="ml-auto">
-        <div class="col-12 col-md-12 c">
-            <h1 class="text-success"> 訂單已送出</h1> 
-        </div>
-      </div>
-    </div>
+    </section>
     <!-- 頁腳/start -->
     <footer class="bg-pekoradark">
         <div class="container pt-3 pb-3">
@@ -161,28 +138,15 @@
                 <div class="col-12 col-md-6 mb-3">
                     <ul class="footer-menu">
                         <li><a href="index.php">首頁</a></li>
-                        <li><a href="about.php">HOLOLIVE</a></li>
-                        <li><a href="shop.php">台灣名產商城</a></li>
-                        <li><a href="job.php">成員簡介</a></li>
-                        <li><a href="https://schedule.hololive.tv/">直播時間</a></li>
-                        <li><a href="login.html">登入</a></li>
-                        <li><a href="cart.php">購物車</a></li>
-                        <li><a href="checkout.php">結帳</a></li>
+                        <li><a href="#">客服中心</a></li>
+                        <li><a href="#">常見問題</a></li>
+                        <li><a href="#">隱私條款聲明</a></li>
                     </ul>
                 </div>
                 <!-- 選單連結/end -->
-                <!-- 訂閱/start -->
-                <div class="col-12 col-md-6 mb-3">
-                    <h6 class="text-white">留下 E-mail，訂閱hololive，可搶先獲得最新的資訊喔！</h6>
-                    <form action="">
-                        <input type="email" class="form-control mt-2 mb-2" placeholder="請輸入e-mail">
-                        <button type="submit" class="btn btn-primary float-right send-btn">傳送</button>
-                    </form>
-                </div>
-                <!-- 訂閱/end -->
                 <!-- 版權所有/start -->
                 <div class="col-12 mt-3">
-                    <p class="text-white text-center">© Copyright 2021 hololive</p>
+                    <p class="text-white text-center">© Copyright 2021 NTUT </p>
                 </div>
                 <!-- 版權所有/end -->
             </div>
