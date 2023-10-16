@@ -1,5 +1,5 @@
-# database-project
+# database-system-hw
 
-npm install
+This is a homework repository for **database system** course in NTUT.
 
-npm start
+This project is fully design by `PHP`, using **Apache XAMPP** to connect web server and `PHP`.
